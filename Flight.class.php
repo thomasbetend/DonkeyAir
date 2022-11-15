@@ -85,3 +85,5 @@ class Flight
         return $diff->format("%H:%I");
     }
 }
+
+

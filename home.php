@@ -14,21 +14,27 @@
 
         require('FlightsList.class.php');
 
-        $sql = 'SELECT DISTINCT departure_airport FROM flight';
+        $sql = 'SELECT departure_airport, arrival_airport FROM flight';
         $flightsList = new FlightsList($sql);
         $flights = $flightsList->getList();
+
+        var_dump($flights); die;
 
         ?>
 
         <form method="POST" action="home-search-results.php" class="text-center mt-2 small" id="">
             <div class="form-group index-search-form">  
+                <select name="arrival" id="index-select">
+                    <option value="">Aéroport de départ</option> 
+                    <?php foreach($flights as $flight): ?>
+                        <option value=""><?php echo $flight->getArrivalAirport(); ?></option> 
+                    <?php endforeach; ?>
+                </select>
                 <select name="departure" id="index-select">
+                    <option value="">Aéroport d'arrivée</option> 
                     <?php foreach($flights as $flight): ?>
                         <option value=""><?php echo $flight->getDepartureAirport(); ?></option> 
                     <?php endforeach; ?>
-                </select>
-                <select name="arrival" id="index-select">
-                    <option value="">Aéroport d'arrivée</option> 
                 </select>
                 <input type="date" id="departure-date" name="departure-date" class="index-search" placeholder="Date de départ" onfocus="(this.type='date')" onblur="(this.type='text')"></input>
             </div> 
