@@ -18,7 +18,7 @@
         $flightsList = new FlightsList($sql);
         $flights = $flightsList->getList();
 
-        var_dump($flights); die;
+        //var_dump($flights); die;
 
         ?>
 
