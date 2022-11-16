@@ -6,17 +6,17 @@ class Reservation
     private float $price;
     private int $nb_passengers;
 
-    public static function createdFromSqlRow (array $row): self
+    public static function createdFromSqlRow(array $row): self
     {
         $reservation = new self;
-        if(!empty($row['idreservations'])) $reservation->id = $row['idreservations'];
-        if(!empty($row['price'])) $reservation->price = $row['price'];
-        if(!empty($row['nb_passengers'])) $reservation->nb_passengers = $row['nb_passengers'];
+        if (!empty($row['idreservations'])) $reservation->id = $row['idreservations'];
+        if (!empty($row['price'])) $reservation->price = $row['price'];
+        if (!empty($row['nb_passengers'])) $reservation->nb_passengers = $row['nb_passengers'];
 
         return $reservation;
     }
 
-    public function getId(): int 
+    public function getId(): int
     {
         return $this->id;
     }
@@ -30,5 +30,4 @@ class Reservation
     {
         return $this->nb_passengers;
     }
-    
 }

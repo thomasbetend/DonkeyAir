@@ -9,7 +9,8 @@ class ReservationsList
     {
     }
 
-    public function getList(): array {
+    public function getList(): array
+    {
 
         $pdo = Connexion::getDataBase();
         $stmt = $pdo->prepare($this->sql);
@@ -17,8 +18,8 @@ class ReservationsList
 
         $reservations = [];
 
-        while($row=$stmt->fetch(PDO::FETCH_ASSOC)){
-            $reservations[] = User::createdFromSqlRow($row);
+        while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+            $reservations[] = Reservation::createdFromSqlRow($row);
         }
 
         return $reservations;
