@@ -1,8 +1,5 @@
 <?php
 
-require('Flight.class.php');
-require('Connexion.class.php');
-
 class FlightsList 
 {       
     public function __construct(public string $sql)

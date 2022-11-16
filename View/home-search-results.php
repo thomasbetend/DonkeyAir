@@ -2,8 +2,7 @@
 
 <?php 
 
-include_once('header.php');
-require('../Model/ListFlights.class.php');
+include_once('./header.php');
 
 ?>
 
@@ -34,6 +33,24 @@ require('../Model/ListFlights.class.php');
             </form>
     </div>
 </main> 
+
+<?php
+
+
+$sql = 'SELECT * FROM flight';
+
+$flightsList1 = new FlightsList($sql);
+
+$flights = $flightsList1->getList();
+
+?>
+
+<div>
+    <?php foreach($flights as $flight): ?>
+        <h3><?php echo $flight->getDuration(); ?></h3>
+    <?php endforeach; ?>
+</div>
+
 <div class="container w-75">
     <div class="card mt-4 pt-2 pb-0 each-search-result">
         <div class="card-body">

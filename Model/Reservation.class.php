@@ -1,0 +1,42 @@
+<?php
+
+class Reservation 
+{
+    private int $id;
+    private int $user_id;
+    private float $price;
+    private int $nb_passengers;
+
+    public static function createdFromSqlRow (array $row): self
+    {
+        $reservation = new self;
+        if(!empty($row['idreservation'])) $reservation->id = $row['idreservation'];
+        if(!empty($row['user_id'])) $reservation->user_id = $row['user_id'];
+        if(!empty($row['price'])) $reservation->price = $row['price'];
+        if(!empty($row['nb_passengers'])) $reservation->nb_passengers = $row['nb_passengers'];
+
+        return $reservation;
+    }
+
+    public function getId(): int 
+    {
+        return $this->id;
+    }
+
+    public function getUserId(): int 
+    {
+        return $this->user_id;
+    }
+
+    public function getPrice(): float 
+    {
+        return $this->price;
+    }
+
+    public function getNbPassengers(): int 
+    {
+        return $this->nb_passengers;
+    }
+}
+
+

@@ -15,7 +15,7 @@
     <!-- Custom styles for this template -->
     <link href="jumbotron.css" rel="stylesheet">
     <script src="https://kit.fontawesome.com/5474cfcdca.js" crossorigin="anonymous"></script>
-    <link href="styles.css" rel="stylesheet">
+    <link href="./styles.css" rel="stylesheet">
     <script src="https://kit.fontawesome.com/5474cfcdca.js" crossorigin="anonymous"></script>
 
 </head>

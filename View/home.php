@@ -1,5 +1,16 @@
 <?php include_once('header.php'); ?>
 
+<?php
+
+require('../Connexion/Connexion.class.php');
+require('../Model/Flight.class.php');
+require('../Model/FlightsList.class.php');
+require('../Model/User.class.php');
+require('../Model/UsersList.class.php');
+require('../Model/Reservation.class.php');
+require('../Model/ReservationsList.class.php');
+
+?>
 
 <main role="main" class="bg-grey-light">
     <div class="py-5 text-center container top-section">
@@ -12,17 +23,23 @@
 
         <?php
 
-        require('FlightsList.class.php');
-
+        
         $sql = 'SELECT departure_airport, arrival_airport FROM flight';
         $flightsList = new FlightsList($sql);
         $flights = $flightsList->getList();
 
-        var_dump($flights); die;
+        /* $sql join user and reservation */
+
+        $sql2 = 'SELECT firstname, lastname, nb_passengers from user Join reservations on reservations.user_id = user.iduser';
+        $usersList = new UsersList($sql2);
+        $users = $usersList->getList();
+
+        $reservationsList = new ReservationsList($sql2);
+        $reservations = $reservationsList->getList();
 
         ?>
 
-        <form method="POST" action="home-search-results.php" class="text-center mt-2 small" id="">
+        <form method="POST" action="./view/home-search-results.php" class="text-center mt-2 small" id="">
             <div class="form-group index-search-form">  
                 <select name="arrival" id="index-select">
                     <option value="">Aéroport de départ</option> 

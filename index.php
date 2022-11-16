@@ -1,2 +1,5 @@
 <?php
-require('home.php');
+
+
+
+header('location:./View/home.php');

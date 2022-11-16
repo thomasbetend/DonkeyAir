@@ -1,8 +1,5 @@
 <?php
 
-require('User.class.php');
-require('Connexion.class.php');
-
 class UsersList 
 {       
     public function __construct(public string $sql)
