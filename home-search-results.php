@@ -3,7 +3,7 @@
 <?php 
 
 include_once('header.php');
-require('../Model/ListFlights.class.php');
+require('ListFlights.class.php');
 
 ?>
 
