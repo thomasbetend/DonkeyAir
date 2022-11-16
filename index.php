@@ -1,5 +1,5 @@
 <?php
+require('./Controller/Main.class.php');
 
+Main::start();
 
-
-header('location:./View/home.php');

@@ -1,6 +1,6 @@
 <?php
 
-$mdp = 'Oneman12@';
+$mdp = 'Admin';
 
 echo password_hash($mdp, PASSWORD_DEFAULT) . "<br>";
 
