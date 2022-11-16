@@ -5,11 +5,16 @@ class Flight
     private ?int $id;
     private ?DateTime $departure_date;
     private ?DateTime $arrival_date;
-    private ?float $price;
-    private ?int $number_seats;
     private ?int $departure_airport_id;
     private ?int $arrival_airport_id;
+    private ?float $price;
+    private ?int $number_seats;
     private ?string $name;
+
+    public function __construct()
+    {
+
+    }
 
     public static function createdFromSqlRow (array $row): self
     {
@@ -17,10 +22,10 @@ class Flight
         $flight->id = $row['idflight'];
         $flight->departure_date = DateTime::createFromFormat("Y-m-d H:i:s", $row['departure_date']);
         $flight->arrival_date = DateTime::createFromFormat("Y-m-d H:i:s", $row['arrival_date']);
-        $flight->price = $row['price'];
-        $flight->number_seats = $row['number_seats'];
         $flight->departure_airport_id = $row['departure_airport_id'];
         $flight->arrival_airport_id = $row['arrival_airport_id'];
+        $flight->price = $row['price'];
+        $flight->number_seats = $row['number_seats'];
         $flight->name = $row['name'];
 
         return $flight;
@@ -67,7 +72,7 @@ class Flight
         return $diff->format("%H:%I");
     }
 
-/*  ------  */
+    /*  ------  */
 
     public function getId(): int 
     {
@@ -97,6 +102,33 @@ class Flight
     public function getName(): string 
     {
         return $this->name;
+    }
+
+    public function setInfos($id, $departure_date, $arrival_date, $departure_airport_id, $arrival_airport_id, $price, $number_seats, $name): void
+    {
+        $this->id = $id;
+        $this->name = $name;
+        $this->departure_date = $departure_date;
+        $this->arrival_date = $arrival_date;
+        $this->departure_airport_id = $departure_airport_id;
+        $this->arrival_airport_id = $arrival_airport_id;
+        $this->price = $price;
+        $this->number_seats = $number_seats;
+        $this->name = $name;
+    } 
+
+    public function toSqlArray(): array
+    {
+        return [
+            'id' => $this->id,
+            'departure_date' => $this->departure_date->format("Y-m-d H:i:s"),
+            'arrival_date' => $this->arrival_date->format("Y-m-d H:i:s"),
+            'price' => $this->price,
+            'number_seats' => $this->number_seats,
+            'departure_airport_id' => $this->departure_airport_id,
+            'arrival_airport_id' => $this->arrival_airport_id,
+            'name' => $this->name,
+        ];
     }
 
 }

@@ -27,6 +27,15 @@ require('../Model/DepartureAirportRepository.class.php');
         </div>
 
         <?php
+
+        $flight = new Flight();
+        $flight->setInfos(1, null, null, null, null, null, null, 'POUPOU');
+        $flight->toSqlArray();
+        Database::update('flight', $flight->toSqlArray(), $flight->getId());
+
+
+        
+        var_dump($flight); die;
         $totalFlightsList = FlightRepository::getList('', '', '', '', '', '', '', '');
         $departures = DepartureAirportRepository::getList('', '');
         $arrivals = ArrivalAirportRepository::getList('', '');
