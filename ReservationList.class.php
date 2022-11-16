@@ -18,7 +18,7 @@ class ReservationsList
         $reservations = [];
 
         while($row=$stmt->fetch(PDO::FETCH_ASSOC)){
-            $reservations[] = User::createdFromSqlRow($row);
+            $reservations[] = Reservation::createdFromSqlRow($row);
         }
 
         return $reservations;
