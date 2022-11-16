@@ -113,3 +113,69 @@ if (!$security->isGranted('USER')) {
 }
 
 (new ArticlesListController())->execute();
+
+
+
+
+<?php
+
+
+class Flight
+{
+    public static function createFromSqlRow(array $row): self
+    {
+    }
+
+    public function toSqlArray() : array
+    {
+        return [
+            'beginDate' => $this->beginDate->format('u'),
+        ];
+    }
+}
+
+class FlightRepository
+{
+    /**
+     * @return Flight[]
+     */
+    public static function getList(
+        ?DateTime $beginDate = null
+    ): array
+    {
+        $sql = "SELECT * 
+            FROM flights 
+            INNER JOIN airport fromAirp ON ...
+            INNER JOIN airport toAirp ON ...
+        WHERE 1 ";
+
+        if ($beginDate) {
+            $sql .= " AND beginDate = :beginDate";
+            $params['beginDate'] = $beginDate;
+        }
+        
+    }
+
+
+}
+
+FlightRepository::getList()
+
+FlightRepository::getList(
+    beginDate: new DateTime('3 month ago'),
+);
+
+Database::insert('flight', $flight->toSqlArray());
+Database::update('flight', $flight->toSqlArray(), $flight->getId());
+
+class Database 
+{
+    public static function insert($table, array $data)
+    {
+        $cols = implode(', ', array_keys($data));
+        $values = implode(', ', array_values($data));
+
+        $sql = "INSERT INTO $table ($cols) VALUES ($values)";
+
+    }
+}

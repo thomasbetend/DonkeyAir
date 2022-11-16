@@ -2,9 +2,9 @@
 
 define ('ENV', 'prod');
 
-class Connexion 
+class DataBase 
 {
-    public static function getDataBase()
+    public static function getConnexion()
     {   
         $db = 'mysql:host=localhost; dbname=donkey_air';
         $userDB = 'root';
@@ -22,5 +22,10 @@ class Connexion
         }
 
         return $pdo;
+    }
+
+    public static function insert()
+    {
+        
     }
 }

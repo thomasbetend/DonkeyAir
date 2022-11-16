@@ -1,13 +1,11 @@
 <?php
 class Session 
 {
-    public static function start()
-    {
 
-    }
-
-    public function creation()
+    public static function creation()
     {
+        session_start();
+        $_SESSION['login'];
 
     }
 

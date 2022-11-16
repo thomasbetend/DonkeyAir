@@ -2,22 +2,22 @@
 
 class User 
 {
-    private int $id;
-    private string $firstname;
-    private string $lastname;
-    private string $email;
-    private string $password;
-    private string $nationality;
+    private ?int $id;
+    private ?string $firstname;
+    private ?string $lastname;
+    private ?string $email;
+    private ?string $password;
+    private ?string $nationality;
 
     public static function createdFromSqlRow (array $row): self
     {
-        $user = new self;
-        if(!empty($row['iduser'])) $user->id = $row['iduser'];
-        if(!empty($row['firstname'])) $user->firstname = $row['firstname'];
-        if(!empty($row['lastname'])) $user->lastname = $row['lastname'];
-        if(!empty($row['email'])) $user->email = $row['email'];
-        if(!empty($row['password'])) $user->password = $row['password'];
-        if(!empty($row['nationality'])) $user->nationality = $row['nationality'];
+        $user = new self();
+        $user->id = $row['iduser'];
+        $user->firstname = $row['firstname'];
+        $user->lastname = $row['lastname'];
+        $user->email = $row['email'];
+        $user->password = $row['password'];
+        $user->nationality = $row['nationality'];
 
         return $user;
     }
