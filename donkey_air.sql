@@ -1,4 +1,4 @@
--- MySQL dump 10.13  Distrib 8.0.30, for macos10.15 (x86_64)
+-- MySQL dump 10.13  Distrib 8.0.30, for Win64 (x86_64)
 --
 -- Host: localhost    Database: donkey_air
 -- ------------------------------------------------------
@@ -7,7 +7,7 @@
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!50503 SET NAMES utf8mb4 */;
+/*!50503 SET NAMES utf8 */;
 /*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
 /*!40103 SET TIME_ZONE='+00:00' */;
 /*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
@@ -39,6 +39,54 @@ LOCK TABLES `airport` WRITE;
 UNLOCK TABLES;
 
 --
+-- Table structure for table `arrival_airport`
+--
+
+DROP TABLE IF EXISTS `arrival_airport`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `arrival_airport` (
+  `idarrival_airport` int NOT NULL AUTO_INCREMENT,
+  `arrival_airport_name` varchar(80) DEFAULT NULL,
+  PRIMARY KEY (`idarrival_airport`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `arrival_airport`
+--
+
+LOCK TABLES `arrival_airport` WRITE;
+/*!40000 ALTER TABLE `arrival_airport` DISABLE KEYS */;
+INSERT INTO `arrival_airport` VALUES (1,'Paris Charles De Gaulle'),(2,'Lyon'),(3,'Nice');
+/*!40000 ALTER TABLE `arrival_airport` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `departure_airport`
+--
+
+DROP TABLE IF EXISTS `departure_airport`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `departure_airport` (
+  `iddeparture_airport` int NOT NULL AUTO_INCREMENT,
+  `departure_airport_name` varchar(80) DEFAULT NULL,
+  PRIMARY KEY (`iddeparture_airport`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `departure_airport`
+--
+
+LOCK TABLES `departure_airport` WRITE;
+/*!40000 ALTER TABLE `departure_airport` DISABLE KEYS */;
+INSERT INTO `departure_airport` VALUES (1,'Nice'),(2,'Séville'),(3,'Paris Charles De Gaulle');
+/*!40000 ALTER TABLE `departure_airport` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `flight`
 --
 
@@ -52,9 +100,13 @@ CREATE TABLE `flight` (
   `number_seats` int DEFAULT NULL,
   `price` float DEFAULT NULL,
   `name` varchar(45) DEFAULT NULL,
-  `arrival_airport` varchar(80) DEFAULT NULL,
-  `departure_airport` varchar(80) DEFAULT NULL,
-  PRIMARY KEY (`idflight`)
+  `arrival_airport_id` int NOT NULL,
+  `departure_airport_id` int NOT NULL,
+  PRIMARY KEY (`idflight`),
+  KEY `fk_flight_arrival_airport_idx` (`arrival_airport_id`),
+  KEY `fk_flight_departure_airport_idx` (`departure_airport_id`),
+  CONSTRAINT `fk_flight_arrival_airport` FOREIGN KEY (`arrival_airport_id`) REFERENCES `arrival_airport` (`idarrival_airport`),
+  CONSTRAINT `fk_flight_departure_airport` FOREIGN KEY (`departure_airport_id`) REFERENCES `departure_airport` (`iddeparture_airport`)
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -64,7 +116,7 @@ CREATE TABLE `flight` (
 
 LOCK TABLES `flight` WRITE;
 /*!40000 ALTER TABLE `flight` DISABLE KEYS */;
-INSERT INTO `flight` VALUES (1,'2022-12-18 18:00:00','2022-12-18 19:05:00',5,145,'PN001','Paris Charles De Gaulle','Nice'),(2,'2022-11-17 09:00:00','2022-11-17 11:30:00',4,320,'LS001','Lyon','Séville'),(3,'2022-11-17 17:00:00','2022-11-17 19:30:00',4,335,'LS002','Lyon','Séville'),(4,'2022-12-18 18:00:00','2022-12-18 19:05:00',5,155,'NP001','Nice','Paris Charles De Gaulle');
+INSERT INTO `flight` VALUES (1,'2022-12-18 18:00:00','2022-12-18 19:05:00',5,145,'PN001',1,1),(2,'2022-11-17 09:00:00','2022-11-17 11:30:00',4,320,'LS001',2,2),(3,'2022-11-17 17:00:00','2022-11-17 19:30:00',4,335,'LS002',2,2),(4,'2022-12-18 18:00:00','2022-12-18 19:05:00',5,155,'NP001',3,3);
 /*!40000 ALTER TABLE `flight` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -186,4 +238,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-11-15 11:45:33
+-- Dump completed on 2022-11-16 23:53:58
