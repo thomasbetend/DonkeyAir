@@ -1,11 +1,11 @@
 <?php
 
-class ReservationsRepository
+class ReservationRepository
 {   
     public static function getList( $id, $user_id, $price, $nb_passengers): array 
     {
         $sql = 'SELECT *
-                FROM reservations
+                FROM reservation
                 WHERE 1';
 
         $params = [];

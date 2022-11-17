@@ -2,7 +2,7 @@
 
 class FlightRepository 
 {   
-    public static function getList( $id, $departure_date, $arrival_date, $departure_airport_id, $arrival_airport_id, $price, $number_seats, $name): array 
+    public static function getList($id, $departure_date, $arrival_date, $departure_airport_id, $arrival_airport_id, $price, $nb_seats, $name): array 
     {
         $sql = 'SELECT *
                 FROM flight f
@@ -32,9 +32,9 @@ class FlightRepository
             $params[':price'] = $price;  
         }
 
-        if($number_seats){
+        if($nb_seats){
             $sql .= ' AND number_seats = :number_seats';
-            $params[':number_seats'] = $number_seats;  
+            $params[':number_seats'] = $nb_seats;  
         }
 
         if($departure_airport_id){

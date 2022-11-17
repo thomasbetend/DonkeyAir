@@ -17,16 +17,21 @@ session_start();
       <li class="nav-item active">
         <a class="nav-link" href="./reservations.php">Réservations</a>
       </li>
+      <?php if(!empty($_SESSION['admin'])): ?>
+        <li class="nav-item text-black">
+          <a class="nav-link text-black" href="./add-plane.php">Ajouter un vol</a>
+        </li>
+      <?php endif ?>
       <?php if(!empty($_SESSION['login'])): ?>
         <li class="nav-item text-white">
           <a class="nav-link" href="./logout.php">Déconnexion</a>
         </li>
-        <li class="nav-item text-white">
-          <p>Bienvenue <?php echo $_SESSION['login']; ?></p>
+        <li class="nav-item text-white welcome-nav-bar">
+          <p class="pt-4">Bienvenue <?php echo ucwords($_SESSION['login']); ?></p>
         </li>
       <?php else: ?>
         <li class="nav-item text-white">
-          <a class="nav-link" href="./login.php">connexion</a>
+          <a class="nav-link" href="./login.php">Connexion</a>
         </li>
       <?php endif; ?>
     </ul>

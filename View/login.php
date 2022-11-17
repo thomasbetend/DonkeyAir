@@ -15,9 +15,7 @@ require('../Model/UserRepository.class.php');
 <?php if($_POST): ?>
     <?php
         $users = UserRepository::getList('', '', '', '', '', ''); 
-
-        var_dump($users); die;
-
+        
         $errorMessage = [];
 
         if(empty($_POST['user_email']) || empty($_POST['user_password'])){
@@ -26,6 +24,9 @@ require('../Model/UserRepository.class.php');
             foreach($users as $user){
                 if(($user->getEmail() === $_POST['user_email']) && (password_verify($_POST['user_password'], $user->getPassword()))){
                     $_SESSION['login'] = $user->getFirstname() . " " . $user->getLastname();
+                    if($_POST['user_email'] = 'admin@gmail.com'){
+                        $_SESSION['admin'] = "Admin";
+                    }
                     header('location:home.php');
                 } else {
                     $errorMessage['incorrect'] = "Renseignements incorrects";
@@ -66,7 +67,7 @@ require('../Model/UserRepository.class.php');
 
                     </div>
                     <div>
-                        <button type="submit" class="btn btn-primary mt-2">connection</button>
+                        <button type="submit" class="btn btn-primary mt-2">Connexion</button>
                     </div>
                 </form>
             </div>

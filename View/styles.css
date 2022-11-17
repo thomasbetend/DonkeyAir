@@ -45,6 +45,14 @@ h4 {
     opacity: 70%;;
 }
 
+.welcome-nav-bar{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    max-height: 32px;
+    padding-left: 10px;
+}
+
 /* index */
 
 .bg-grey-light {

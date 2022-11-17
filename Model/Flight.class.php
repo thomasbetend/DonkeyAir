@@ -8,7 +8,7 @@ class Flight
     private ?int $departure_airport_id;
     private ?int $arrival_airport_id;
     private ?float $price;
-    private ?int $number_seats;
+    private ?int $nb_seats;
     private ?string $name;
 
     public function __construct()
@@ -25,7 +25,7 @@ class Flight
         $flight->departure_airport_id = $row['departure_airport_id'];
         $flight->arrival_airport_id = $row['arrival_airport_id'];
         $flight->price = $row['price'];
-        $flight->number_seats = $row['number_seats'];
+        $flight->nb_seats = $row['nb_seats'];
         $flight->name = $row['name'];
 
         return $flight;
@@ -84,7 +84,7 @@ class Flight
         return $this->price;
     }
 
-    public function getNumberSeats(): int 
+    public function getNbSeats(): int 
     {
         return $this->number_seats;
     }
@@ -111,7 +111,7 @@ class Flight
             'departure_date' => $this->departure_date->format("Y-m-d H:i:s"),
             'arrival_date' => $this->arrival_date->format("Y-m-d H:i:s"),
             'price' => $this->price,
-            'number_seats' => $this->number_seats,
+            'nb_seats' => $this->number_seats,
             'departure_airport_id' => $this->departure_airport_id,
             'arrival_airport_id' => $this->arrival_airport_id,
             'name' => $this->name,

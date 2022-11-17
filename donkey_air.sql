@@ -97,7 +97,7 @@ CREATE TABLE `flight` (
   `id` int NOT NULL AUTO_INCREMENT,
   `departure_date` datetime DEFAULT NULL,
   `arrival_date` datetime DEFAULT NULL,
-  `number_seats` int DEFAULT NULL,
+  `nb_seats` int DEFAULT NULL,
   `price` float DEFAULT NULL,
   `name` varchar(45) DEFAULT NULL,
   `departure_airport_id` int DEFAULT NULL,
@@ -121,13 +121,13 @@ INSERT INTO `flight` VALUES (1,'2022-12-18 18:00:00','2022-12-18 19:05:00',5,145
 UNLOCK TABLES;
 
 --
--- Table structure for table `reservations`
+-- Table structure for table `reservation`
 --
 
-DROP TABLE IF EXISTS `reservations`;
+DROP TABLE IF EXISTS `reservation`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `reservations` (
+CREATE TABLE `reservation` (
   `id` int NOT NULL AUTO_INCREMENT,
   `user_id` int DEFAULT NULL,
   `price` float DEFAULT NULL,
@@ -135,45 +135,46 @@ CREATE TABLE `reservations` (
   PRIMARY KEY (`id`),
   KEY `fk_reservations_user` (`user_id`),
   CONSTRAINT `fk_reservations_user` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `reservations`
+-- Dumping data for table `reservation`
 --
 
-LOCK TABLES `reservations` WRITE;
-/*!40000 ALTER TABLE `reservations` DISABLE KEYS */;
-INSERT INTO `reservations` VALUES (1,1,235,4);
-/*!40000 ALTER TABLE `reservations` ENABLE KEYS */;
+LOCK TABLES `reservation` WRITE;
+/*!40000 ALTER TABLE `reservation` DISABLE KEYS */;
+INSERT INTO `reservation` VALUES (1,1,435,3),(2,2,345,3),(3,3,235,1),(4,1,430,1);
+/*!40000 ALTER TABLE `reservation` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
--- Table structure for table `reservations_flight`
+-- Table structure for table `reservation_flight`
 --
 
-DROP TABLE IF EXISTS `reservations_flight`;
+DROP TABLE IF EXISTS `reservation_flight`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `reservations_flight` (
+CREATE TABLE `reservation_flight` (
   `id` int NOT NULL AUTO_INCREMENT,
   `flight_id` int DEFAULT NULL,
   `reservations_id` int DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `fk_flight_reservations_idx` (`reservations_id`),
   KEY `fk_reservations_flight_idx` (`flight_id`),
-  CONSTRAINT `fk_flight_reservations` FOREIGN KEY (`reservations_id`) REFERENCES `reservations` (`id`),
+  CONSTRAINT `fk_flight_reservations` FOREIGN KEY (`reservations_id`) REFERENCES `reservation` (`id`),
   CONSTRAINT `fk_reservations_flight` FOREIGN KEY (`flight_id`) REFERENCES `flight` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `reservations_flight`
+-- Dumping data for table `reservation_flight`
 --
 
-LOCK TABLES `reservations_flight` WRITE;
-/*!40000 ALTER TABLE `reservations_flight` DISABLE KEYS */;
-/*!40000 ALTER TABLE `reservations_flight` ENABLE KEYS */;
+LOCK TABLES `reservation_flight` WRITE;
+/*!40000 ALTER TABLE `reservation_flight` DISABLE KEYS */;
+INSERT INTO `reservation_flight` VALUES (1,1,1);
+/*!40000 ALTER TABLE `reservation_flight` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -220,7 +221,7 @@ CREATE TABLE `user_flight` (
   KEY `fk_user_flight_idx` (`user_id`),
   CONSTRAINT `fk_flight_user` FOREIGN KEY (`flight_id`) REFERENCES `flight` (`id`),
   CONSTRAINT `fk_user_flight` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -229,6 +230,7 @@ CREATE TABLE `user_flight` (
 
 LOCK TABLES `user_flight` WRITE;
 /*!40000 ALTER TABLE `user_flight` DISABLE KEYS */;
+INSERT INTO `user_flight` VALUES (1,1,1);
 /*!40000 ALTER TABLE `user_flight` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -241,4 +243,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-11-17 11:34:56
+-- Dump completed on 2022-11-17 12:17:23
