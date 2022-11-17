@@ -10,7 +10,7 @@ class Reservation
     public static function createdFromSqlRow (array $row): self
     {
         $reservation = new self();
-        $reservation->id = $row['idreservation'];
+        $reservation->id = $row['id'];
         $reservation->user_id = $row['user_id'];
         $reservation->price = $row['price'];
         $reservation->nb_passengers = $row['nb_passengers'];

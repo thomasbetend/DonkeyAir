@@ -6,7 +6,7 @@ define ('ENV', 'prod');
 
 class DataBase 
 {
-    public static function getConnexion()
+    public static function getConnection()
     {   
         $db = 'mysql:host=localhost; dbname=donkey_air';
         $userDB = 'root';
@@ -33,7 +33,8 @@ class DataBase
 
         $sql = "INSERT INTO " . $table . " (" . $cols . ") VALUES (". $values . ")";
 
-        $stmt = (Database::getConnexion())->prepare($sql);
+        $stmt = (Database::getConnection())->prepare($sql);
+
         $stmt -> execute();
     }
 
@@ -48,7 +49,7 @@ class DataBase
 
         $sql = "UPDATE " . $table . " " . $cols . " WHERE id = :id";
 
-        $stmt = (Database::getConnexion())->prepare($sql);
+        $stmt = (Database::getConnection())->prepare($sql);
         $stmt->bindValue(':id', $id, PDO::PARAM_INT);
         $stmt->execute();
     }

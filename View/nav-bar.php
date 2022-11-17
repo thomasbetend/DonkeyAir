@@ -1,5 +1,6 @@
 <?php 
 
+session_start();
 
 ?>
 
@@ -16,9 +17,18 @@
       <li class="nav-item active">
         <a class="nav-link" href="./reservations.php">Réservations</a>
       </li>
-      <li class="nav-item text-white">
-        <a class="nav-link" href="./connexion.php">Connexion</a>
-      </li>
+      <?php if(!empty($_SESSION['login'])): ?>
+        <li class="nav-item text-white">
+          <a class="nav-link" href="./logout.php">Déconnexion</a>
+        </li>
+        <li class="nav-item text-white">
+          <p>Bienvenue <?php echo $_SESSION['login']; ?></p>
+        </li>
+      <?php else: ?>
+        <li class="nav-item text-white">
+          <a class="nav-link" href="./login.php">connexion</a>
+        </li>
+      <?php endif; ?>
     </ul>
   </div>
 </nav>

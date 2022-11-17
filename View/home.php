@@ -2,8 +2,8 @@
 
 <?php
 
-require('../Connexion/Session.class.php');
-require('../Connexion/Database.class.php');
+require('../Connection/Session.class.php');
+require('../Connection/Database.class.php');
 require('../Model/Flight.class.php');
 require('../Model/FlightRepository.class.php');
 require('../Model/User.class.php');
@@ -27,23 +27,16 @@ require('../Model/DepartureAirportRepository.class.php');
         </div>
 
         <?php
-
-        $flight = new Flight();
-        $flight->setInfos(1, null, null, null, null, null, null, 'POUPOU');
-        $flight->toSqlArray();
-        Database::update('flight', $flight->toSqlArray(), $flight->getId());
-
-
-        
-        var_dump($flight); die;
-        $totalFlightsList = FlightRepository::getList('', '', '', '', '', '', '', '');
-        $departures = DepartureAirportRepository::getList('', '');
-        $arrivals = ArrivalAirportRepository::getList('', '');
+        $departures = DepartureAirportRepository::getList('', '');/*  SELECT * FROM departure_airport */
+        $arrivals = ArrivalAirportRepository::getList('', ''); /* SELECT * FROM arrival_airport */
         ?>
 
         <?php 
         if($_POST){
-            $searchFlightsList = FlightRepository::getList('', '', '', intval($_POST['departure']), intval($_POST['arrival']), '' , '', '');
+            $searchFlightsList = FlightRepository::getList('', '', '', intval($_POST['departure']), intval($_POST['arrival']), '' , '', ''); /* SELECT * FROM flight INNER JOIN departure_airport ... INNER JOIN arrival_airport... AND departure_airport_id = $_POST['departure'] AND arrival_airport_id = $_POST['arrival'] */
+            $_SESSION['searchFlightsList'] = $searchFlightsList;
+            $date = $_POST['date'];
+            $dt = DateTime::createFromFormat("Y-m-d", $date);
         }
         ?>
 
@@ -52,16 +45,20 @@ require('../Model/DepartureAirportRepository.class.php');
                 <select name="departure" id="index-select">
                     <option value="">Aéroport de départ</option> 
                     <?php foreach($departures as $departure): ?>
-                        <option value="<?php echo $departure->getId(); ?>" <?php if(!empty($_POST['departure']) && $_POST['departure'] == $departure->getId()) echo "selected"; ?>><?php echo $departure->getName(); ?></option> 
+                        <option value="<?php echo $departure->getId(); ?>" <?php if(!empty($_POST['departure']) && $_POST['departure'] == $departure->getId()) echo "selected"; ?>>
+                            <?php echo $departure->getName(); ?>
+                        </option> 
                     <?php endforeach; ?>
                 </select>
                 <select name="arrival" id="index-select">
                     <option value="">Aéroport d'arrivée</option> 
                     <?php foreach($arrivals as $arrival): ?>
-                        <option value="<?php echo $arrival->getId(); ?>" <?php if(!empty($_POST['arrival']) && $_POST['arrival'] == $arrival->getId()){ echo "selected"; }?>><?php echo $arrival->getName(); ?></option> 
+                        <option value="<?php echo $arrival->getId(); ?>" <?php if(!empty($_POST['arrival']) && $_POST['arrival'] == $arrival->getId()) echo "selected"; ?>>
+                            <?php echo $arrival->getName(); ?>
+                        </option> 
                     <?php endforeach; ?>
                 </select>
-                <input type="date" id="departure-date" name="date" class="index-search" placeholder="<?php if(!empty($_POST['date'])) {echo $_POST['date'];} else { echo "Date de départ";} ?>" onfocus="(this.type='date')" onblur="(this.type='text')"></input>
+                <input type="date" id="departure-date" name="date" class="index-search" placeholder="<?php if(!empty($_POST['date'])) {echo $dt->format("d/m/Y");} else {echo "Date de départ";} ?>" onfocus="(this.type='date')" onblur="(this.type='text')"></input>
             </div> 
             <div class="button-search">
                 <button type="submit" class="btn btn-primary small mt-3 mb-3 pl-4" id="buttonSearch">Recherchez un vol</button>
@@ -72,10 +69,7 @@ require('../Model/DepartureAirportRepository.class.php');
 </main> 
 
 
-
-
-
-<?php if(empty($searchFlightsList)): ?>
+<?php if(empty($_POST) || (($_POST['arrival'] === '') && ($_POST['departure'] === '') && ($_POST['date'] === ''))): ?>
     <div class="album py-5 bg-light">
         <div class="container">
             <div class="row">
@@ -126,6 +120,9 @@ require('../Model/DepartureAirportRepository.class.php');
     </div>
 
 <?php else : ?>
+    <?php if(empty($_SESSION['searchFlightsList'])): ?>
+        <p class="mt-4 text-center text-secondary"><?php echo "Pas de résultats pour votre recherche" ?></p>
+    <?php endif; ?>
     <?php foreach ($searchFlightsList as $searchFlight): ?>
         <?php
         $searchDepartureAirport = DepartureAirportRepository::getList($searchFlight->getDepartureAirportId(), '');
@@ -137,7 +134,7 @@ require('../Model/DepartureAirportRepository.class.php');
                     <div class="d-flex flex-row justify-content-between">
                         <div class="d-flex flex-column justify-content-between">
                             <h4 class="hours-search-results">
-                                <?php echo $searchFlight->getDepartureHour()?> - <?php echo $searchFlight->getArrivalHour()?>
+                                <?php echo $searchFlight->getDepartureAirportId()?> - <?php echo $searchFlight->getArrivalHour()?>
                             </h4>
                             <p class="destination-search-result"><?php echo $searchDepartureAirport[0]->getName() . " -> " . $searchArrivalAirport[0]->getName(); ?></p>
                             <p class="text-secondary"><?php echo $searchFlight->getDepartureDate(); ?></p>

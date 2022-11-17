@@ -1,9 +1,9 @@
 <?php
 
-class UsersRepository 
+class UserRepository 
 
 {   
-    public static function getList( $id, $firstname, $lastname, $email, $password, $nationality): array 
+    public static function getList($id, $firstname, $lastname, $email, $password, $nationality): array 
     {
         $sql = 'SELECT *
                 FROM user
@@ -26,6 +26,11 @@ class UsersRepository
             $params[':lastname'] = $lastname;  
         }
 
+        if($email){
+            $sql .= ' AND email = :email';
+            $params[':email'] = $email;  
+        }
+
         if($password){
             $sql .= ' AND password = :password';
             $params[':password'] = $password;  
@@ -36,7 +41,7 @@ class UsersRepository
             $params[':nationality'] = $nationality;  
         }
 
-        $pdo = Database::getConnexion();
+        $pdo = Database::getConnection();
         $stmt = $pdo->prepare($sql);
         foreach($params as $key=>$param){
             $stmt->bindValue($key, $param, PDO::PARAM_STR);

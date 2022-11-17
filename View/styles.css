@@ -109,9 +109,9 @@ input[type="date"] {
     font-weight: 600;
 }
 
-/* connexion-user.php */
+/* connection-user.php */
 
-.connexion-field {
+.connection-field {
     border: none;
     border-radius: 5px;
     padding: 15px;

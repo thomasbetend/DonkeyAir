@@ -19,7 +19,7 @@ class Flight
     public static function createdFromSqlRow (array $row): self
     {
         $flight = new self();
-        $flight->id = $row['idflight'];
+        $flight->id = $row['id'];
         $flight->departure_date = DateTime::createFromFormat("Y-m-d H:i:s", $row['departure_date']);
         $flight->arrival_date = DateTime::createFromFormat("Y-m-d H:i:s", $row['arrival_date']);
         $flight->departure_airport_id = $row['departure_airport_id'];
@@ -103,19 +103,6 @@ class Flight
     {
         return $this->name;
     }
-
-    public function setInfos($id, $departure_date, $arrival_date, $departure_airport_id, $arrival_airport_id, $price, $number_seats, $name): void
-    {
-        $this->id = $id;
-        $this->name = $name;
-        $this->departure_date = $departure_date;
-        $this->arrival_date = $arrival_date;
-        $this->departure_airport_id = $departure_airport_id;
-        $this->arrival_airport_id = $arrival_airport_id;
-        $this->price = $price;
-        $this->number_seats = $number_seats;
-        $this->name = $name;
-    } 
 
     public function toSqlArray(): array
     {

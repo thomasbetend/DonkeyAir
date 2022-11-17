@@ -2,7 +2,7 @@
 
 class ArrivalAirportRepository 
 {       
-    public static function getList( $id, $arrival_airport_name): array 
+    public static function getList($id, $arrival_airport_name): array 
     {
         $sql = 'SELECT *
                 FROM arrival_airport
@@ -20,7 +20,7 @@ class ArrivalAirportRepository
             $params[':arrival_airport_name'] = $arrival_airport_name;  
         }
 
-        $pdo = Database::getConnexion();
+        $pdo = Database::getConnection();
         $stmt = $pdo->prepare($sql);
         foreach($params as $key=>$param){
             $stmt->bindValue($key, $param, PDO::PARAM_STR);

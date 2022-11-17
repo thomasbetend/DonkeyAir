@@ -20,7 +20,7 @@ class DepartureAirportRepository
             $params[':departure_airport_name'] = $departure_airport_name;  
         }
 
-        $pdo = Database::getConnexion();
+        $pdo = Database::getConnection();
         $stmt = $pdo->prepare($sql);
         foreach($params as $key=>$param){
             $stmt->bindValue($key, $param, PDO::PARAM_STR);
