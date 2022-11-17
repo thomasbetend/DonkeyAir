@@ -32,9 +32,9 @@ require('../Model/UserRepository.class.php');
         } else {
             foreach($users as $user){
                 if(($user->getEmail() === $_POST['user_email']) && (password_verify($_POST['user_password'], $user->getPassword()))){
-                    $_SESSION['login'] = $user->getFirstname() . " " . $user->getLastname();
+                    Session::login($user);
                     if($_POST['user_email'] = 'admin@gmail.com'){
-                        $_SESSION['admin'] = "Admin";
+                        Session::loginAdmin($user);
                     }
                     header('location:home.php');
                 } else {

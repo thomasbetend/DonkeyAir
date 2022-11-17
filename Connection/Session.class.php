@@ -9,6 +9,13 @@ class Session
 
     public static function login(User $user) {
         $_SESSION['login'] = $user->getFirstname() . " " . $user->getLastname();
+        $_SESSION['id'] = $user->getId();
+    }
+
+    public static function loginAdmin(User $admin) {
+        $_SESSION['login'] = $admin->getFirstname() . " " . $admin->getLastname();
+        $_SESSION['admin'] = "Admin";
+        $_SESSION['id'] = $admin->getId();
     }
 
     public static function destroy()
@@ -16,7 +23,7 @@ class Session
         $_SESSION = array();
         session_destroy();
         unset($_SESSION);
-        header('location: index.php');
+        header('location: home.php');
     }
 
 }

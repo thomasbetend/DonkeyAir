@@ -12,6 +12,7 @@ class ReservationRepository
     {
         $sql = 'SELECT *
                 FROM reservation
+                INNER JOIN user ON reservation.user_id=user.id
                 WHERE 1';
 
         $params = [];

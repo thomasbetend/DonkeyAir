@@ -4,21 +4,35 @@
 
 <?php
 
+if(empty($_SESSION)){
+    header('location:../index.php');
+}
+
 require('../Model/ReservationRepository.class.php');
 require('../Model/Reservation.class.php');
 require('../Connection/Database.class.php');
 
+ReservationRepository::getList(
+    [
+        "id" => '', 
+        "user_id" => $_SESSION['id'], 
+        "price" => '', 
+        "nb_passengers" => '',
+    ]
+);
 
-$dataBindSqlReservation = [
-    "id" => '', 
-    "user_id" => '', 
-    "price" => '', 
-    "nb_passengers" => '',
-];
-
-ReservationRepository::getList($dataBindSqlReservation);
+var_dump(ReservationRepository::getList(
+    [
+        "id" => '', 
+        "user_id" => $_SESSION['id'], 
+        "price" => '', 
+        "nb_passengers" => '',
+    ]
+)
+    ); die;
 
 ?>
+
 <main role="main" class="bg-grey-light">
     <div class="py-5 text-center container top-section">
         <div class="row py-lg-1">
