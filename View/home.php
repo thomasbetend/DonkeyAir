@@ -27,13 +27,37 @@ require('../Model/DepartureAirportRepository.class.php');
         </div>
 
         <?php
-        $departures = DepartureAirportRepository::getList('', '');/*  SELECT * FROM departure_airport */
-        $arrivals = ArrivalAirportRepository::getList('', ''); /* SELECT * FROM arrival_airport */
+
+        $departures = DepartureAirportRepository::getList(
+            [
+                "id" => '', 
+                "departure_airport_name" => '',
+            ]
+        );
+
+        $arrivals = ArrivalAirportRepository::getList(
+            [
+                "id" => '', 
+                "arrival_airport_name" => '',
+            ]
+        ); 
+        
         ?>
 
         <?php 
         if($_POST){
-            $searchFlightsList = FlightRepository::getList('', '', '', intval($_POST['departure']), intval($_POST['arrival']), '' , '', ''); /* SELECT * FROM flight INNER JOIN departure_airport ... INNER JOIN arrival_airport... AND departure_airport_id = $_POST['departure'] AND arrival_airport_id = $_POST['arrival'] */
+            $searchFlightsList = FlightRepository::getList(
+                [
+                    "id" => '', 
+                    "departure_date" => '', 
+                    "arrival_date" => '', 
+                    "departure_airport_id" => intval($_POST['departure']),
+                    "arrival_airport_id" => intval($_POST['arrival']),
+                    "price" => '',
+                    "nb_seats" => '',
+                    "name" => '',
+                ]
+            );
             $_SESSION['searchFlightsList'] = $searchFlightsList;
             $date = $_POST['date'];
             $dt = DateTime::createFromFormat("Y-m-d", $date);
@@ -125,8 +149,18 @@ require('../Model/DepartureAirportRepository.class.php');
     <?php endif; ?>
     <?php foreach ($searchFlightsList as $searchFlight): ?>
         <?php
-        $searchDepartureAirport = DepartureAirportRepository::getList($searchFlight->getDepartureAirportId(), '');
-        $searchArrivalAirport = ArrivalAirportRepository::getList($searchFlight->getArrivalAirportId(), '');
+        $searchDepartureAirport = DepartureAirportRepository::getList(
+            [
+            "id" => $searchFlight->getDepartureAirportId(), 
+            "departure_airport_name" => '',
+            ]
+        );
+        $searchArrivalAirport = ArrivalAirportRepository::getList(
+            [
+            "id" => $searchFlight->getArrivalAirportId(), 
+            "arrival_airport_name" => '',
+            ]
+        );
         ?>
         <div class="container w-75">
             <div class="card mt-4 pt-2 pb-0 each-search-result">
@@ -134,7 +168,7 @@ require('../Model/DepartureAirportRepository.class.php');
                     <div class="d-flex flex-row justify-content-between">
                         <div class="d-flex flex-column justify-content-between">
                             <h4 class="hours-search-results">
-                                <?php echo $searchFlight->getDepartureAirportId()?> - <?php echo $searchFlight->getArrivalHour()?>
+                                <?php echo $searchFlight->getDepartureHour()?> - <?php echo $searchFlight->getArrivalHour()?>
                             </h4>
                             <p class="destination-search-result"><?php echo $searchDepartureAirport[0]->getName() . " -> " . $searchArrivalAirport[0]->getName(); ?></p>
                             <p class="text-secondary"><?php echo $searchFlight->getDepartureDate(); ?></p>

@@ -14,8 +14,17 @@ require('../Model/UserRepository.class.php');
 
 <?php if($_POST): ?>
     <?php
-        $users = UserRepository::getList('', '', '', '', '', ''); 
-        
+        $users = UserRepository::getList(
+            [
+                "id" => '', 
+                "firstname" => '', 
+                "lastname" => '', 
+                "email" => '',
+                "password" => '',
+                "nationality" => '',
+            ]
+        ); 
+
         $errorMessage = [];
 
         if(empty($_POST['user_email']) || empty($_POST['user_password'])){

@@ -2,7 +2,11 @@
 
 class DepartureAirportRepository 
 {       
-    public static function getList( $id, $departure_airport_name): array 
+    public static function getList(
+        $data = [
+            "id" => '', 
+            "departure_airport_name" => '',
+        ]): array
     {
         $sql = 'SELECT *
                 FROM departure_airport
@@ -10,14 +14,14 @@ class DepartureAirportRepository
 
         $params = [];
 
-        if($id){
+        if($data['id']){
             $sql .= ' AND id = :id';
-            $params[':id'] = $id; 
+            $params[':id'] = $data['id']; 
         }
 
-        if($departure_airport_name){
+        if($data['departure_airport_name']){
             $sql .= ' AND departure_airport_name = :departure_airport_name';
-            $params[':departure_airport_name'] = $departure_airport_name;  
+            $params[':departure_airport_name'] = $data['departure_airport_name'];  
         }
 
         $pdo = Database::getConnection();

@@ -3,7 +3,15 @@
 class UserRepository 
 
 {   
-    public static function getList($id, $firstname, $lastname, $email, $password, $nationality): array 
+    public static function getList(
+        $data = [
+            "id" => '', 
+            "firstname" => '', 
+            "lastname" => '', 
+            "email" => '',
+            "password" => '',
+            "nationality" => '',
+        ]): array 
     {
         $sql = 'SELECT *
                 FROM user
@@ -11,34 +19,34 @@ class UserRepository
 
         $params = [];
 
-        if($id){
+        if($data['id']){
             $sql .= ' AND id = :id';
-            $params[':id'] = $id; 
+            $params[':id'] = $data['id']; 
         }
 
-        if($firstname){
+        if($data['firstname']){
             $sql .= ' AND firstname = :firstname';
-            $params[':firstname'] = $firstname;  
+            $params[':firstname'] = $data['firstname'];  
         }
 
-        if($lastname){
+        if($data['lastname']){
             $sql .= ' AND lastname = :lastname';
-            $params[':lastname'] = $lastname;  
+            $params[':lastname'] = $data['lastname'];  
         }
 
-        if($email){
+        if($data['email']){
             $sql .= ' AND email = :email';
-            $params[':email'] = $email;  
+            $params[':email'] = $data['email'];  
         }
 
-        if($password){
+        if($data['password']){
             $sql .= ' AND password = :password';
-            $params[':password'] = $password;  
+            $params[':password'] = $data['password'];  
         }
 
-        if($nationality){
+        if($data['nationality']){
             $sql .= ' AND nationality = :nationality';
-            $params[':nationality'] = $nationality;  
+            $params[':nationality'] = $data['nationality'];  
         }
 
         $pdo = Database::getConnection();

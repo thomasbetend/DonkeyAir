@@ -2,7 +2,17 @@
 
 class FlightRepository 
 {   
-    public static function getList($id, $departure_date, $arrival_date, $departure_airport_id, $arrival_airport_id, $price, $nb_seats, $name): array 
+    public static function getList(
+        $data = [
+            "id" => '', 
+            "departure_date" => '', 
+            "arrival_date" => '', 
+            "departure_airport_id" => '',
+            "arrival_airport_id" => '',
+            "price" => '',
+            "nb_seats" => '',
+            "name" => '',
+        ]): array
     {
         $sql = 'SELECT *
                 FROM flight f
@@ -12,44 +22,44 @@ class FlightRepository
 
         $params = [];
 
-        if($id){
+        if($data['id']){
             $sql .= ' AND id = :id';
-            $params[':id'] = $id; 
+            $params[':id'] = $data['id']; 
         }
 
-        if($departure_date){
+        if($data['departure_date']){
             $sql .= ' AND departure_date = :departure_date';
-            $params[':departure_date'] = $departure_date;  
+            $params[':departure_date'] = $data['departure_date'];  
         }
 
-        if($arrival_date){
+        if($data['arrival_date']){
             $sql .= ' AND arrival_date = :arrival_date';
-            $params[':arrival_date'] = $arrival_date;  
+            $params[':arrival_date'] = $data['arrival_date'];  
         }
 
-        if($price){
+        if($data['price']){
             $sql .= ' AND price = :price';
-            $params[':price'] = $price;  
+            $params[':price'] = $data['price'];  
         }
 
-        if($nb_seats){
-            $sql .= ' AND number_seats = :number_seats';
-            $params[':number_seats'] = $nb_seats;  
+        if($data['nb_seats']){
+            $sql .= ' AND nb_seats = :nb_seats';
+            $params[':nb_seats'] = $data['nb_seats'];  
         }
 
-        if($departure_airport_id){
+        if($data['departure_airport_id']){
             $sql .= ' AND departure_airport_id = :departure_airport_id';
-            $params[':departure_airport_id'] = $departure_airport_id;  
+            $params[':departure_airport_id'] = $data['departure_airport_id'];  
         }
         
-        if($arrival_airport_id){
+        if($data['arrival_airport_id']){
             $sql .= ' AND arrival_airport_id = :arrival_airport_id';
-            $params[':arrival_airport_id'] = $arrival_airport_id;  
+            $params[':arrival_airport_id'] = $data['arrival_airport_id'];  
         }
 
-        if($name){
+        if($data['name']){
             $sql .= ' AND name = :name';
-            $params[':name'] = $name;  
+            $params[':name'] = $data['name'];  
         }
 
         $pdo = Database::getConnection();

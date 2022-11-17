@@ -2,7 +2,13 @@
 
 class ReservationRepository
 {   
-    public static function getList( $id, $user_id, $price, $nb_passengers): array 
+    public static function getList(
+        $data = [
+            "id" => '', 
+            "user_id" => '', 
+            "price" => '', 
+            "nb_passengers" => '',
+        ]): array 
     {
         $sql = 'SELECT *
                 FROM reservation
@@ -10,24 +16,24 @@ class ReservationRepository
 
         $params = [];
 
-        if($id){
+        if($data["id"]){
             $sql .= ' AND id = :id';
-            $params[':id'] = $id; 
+            $params[':id'] = $data["id"]; 
         }
 
-        if($user_id){
+        if($data["user_id"]){
             $sql .= ' AND user_id = :user_id';
-            $params[':user_id'] = $user_id;  
+            $params[':user_id'] = $data["user_id"];  
         }
 
-        if($price){
+        if($data["price"]){
             $sql .= ' AND price = :price';
-            $params[':price'] = $price;  
+            $params[':price'] = $data["price"];  
         }
 
-        if($nb_passengers){
+        if($data["nb_passengers"]){
             $sql .= ' AND nb_passengers = :nb_passengers';
-            $params[':nb_passengers'] = $nb_passengers;  
+            $params[':nb_passengers'] = $data["nb_passengers"];  
         }
 
         $pdo = Database::getConnection();
