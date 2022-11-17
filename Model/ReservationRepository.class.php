@@ -3,7 +3,7 @@
 class ReservationRepository
 {   
     public static function getList(
-        $data = [
+        array $data = [
             "id" => '', 
             "user_id" => '', 
             "price" => '', 
@@ -11,14 +11,14 @@ class ReservationRepository
         ]): array 
     {
         $sql = 'SELECT *
-                FROM reservation
-                INNER JOIN user ON reservation.user_id=user.id
+                FROM reservation r
+                INNER JOIN user ON r.user_id=user.id_user
                 WHERE 1';
 
         $params = [];
 
         if($data["id"]){
-            $sql .= ' AND id = :id';
+            $sql .= ' AND id_reservation = :id';
             $params[':id'] = $data["id"]; 
         }
 

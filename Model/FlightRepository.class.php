@@ -3,10 +3,10 @@
 class FlightRepository 
 {   
     public static function getList(
-        $data = [
+        array $data = [
             "id" => '', 
-            "departure_date" => '', 
-            "arrival_date" => '', 
+            "min_date" => '', 
+            "max_date" => '', 
             "departure_airport_id" => '',
             "arrival_airport_id" => '',
             "price" => '',
@@ -16,25 +16,25 @@ class FlightRepository
     {
         $sql = 'SELECT *
                 FROM flight f
-                INNER JOIN departure_airport da ON f.departure_airport_id = da.id
-                INNER JOIN arrival_airport aa ON f.arrival_airport_id = aa.id
+                INNER JOIN departure_airport da ON f.departure_airport_id = da.id_departure_airport
+                INNER JOIN arrival_airport aa ON f.arrival_airport_id = aa.id_arrival_airport
                 WHERE 1';
 
         $params = [];
 
         if($data['id']){
-            $sql .= ' AND id = :id';
+            $sql .= ' AND id_flight = :id';
             $params[':id'] = $data['id']; 
         }
 
-        if($data['departure_date']){
-            $sql .= ' AND departure_date = :departure_date';
-            $params[':departure_date'] = $data['departure_date'];  
+        if($data['min_date']){
+            $sql .= ' AND departure_date > :min_date';
+            $params[':min_date'] = $data['min_date'];  
         }
 
-        if($data['arrival_date']){
-            $sql .= ' AND arrival_date = :arrival_date';
-            $params[':arrival_date'] = $data['arrival_date'];  
+        if($data['max_date']){
+            $sql .= ' AND arrival_date < :max_date';
+            $params[':max_date'] = $data['max_date'];  
         }
 
         if($data['price']){

@@ -19,7 +19,7 @@ class Flight
     public static function createdFromSqlRow (array $row): self
     {
         $flight = new self();
-        $flight->id = $row['id'];
+        $flight->id = $row['id_flight'];
         $flight->departure_date = DateTime::createFromFormat("Y-m-d H:i:s", $row['departure_date']);
         $flight->arrival_date = DateTime::createFromFormat("Y-m-d H:i:s", $row['arrival_date']);
         $flight->departure_airport_id = $row['departure_airport_id'];

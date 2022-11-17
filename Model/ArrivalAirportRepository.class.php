@@ -3,7 +3,7 @@
 class ArrivalAirportRepository 
 {       
     public static function getList(
-        $data = [
+        array $data = [
             "id" => '', 
             "arrival_airport_name" => '',
         ]): array 
@@ -15,7 +15,7 @@ class ArrivalAirportRepository
         $params = [];
 
         if($data["id"]){
-            $sql .= ' AND id = :id';
+            $sql .= ' AND id_arrival_airport = :id';
             $params[':id'] = $data["id"]; 
         }
 

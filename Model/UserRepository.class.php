@@ -4,7 +4,7 @@ class UserRepository
 
 {   
     public static function getList(
-        $data = [
+        array $data = [
             "id" => '', 
             "firstname" => '', 
             "lastname" => '', 
@@ -20,7 +20,7 @@ class UserRepository
         $params = [];
 
         if($data['id']){
-            $sql .= ' AND id = :id';
+            $sql .= ' AND id_user = :id';
             $params[':id'] = $data['id']; 
         }
 

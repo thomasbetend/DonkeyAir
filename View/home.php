@@ -46,11 +46,12 @@ require('../Model/DepartureAirportRepository.class.php');
 
         <?php 
         if($_POST){
+
             $searchFlightsList = FlightRepository::getList(
                 [
                     "id" => '', 
-                    "departure_date" => '', 
-                    "arrival_date" => '', 
+                    "min_date" => $_POST['min_date'], 
+                    "max_date" => $_POST['max_date'],
                     "departure_airport_id" => intval($_POST['departure']),
                     "arrival_airport_id" => intval($_POST['arrival']),
                     "price" => '',
@@ -58,9 +59,17 @@ require('../Model/DepartureAirportRepository.class.php');
                     "name" => '',
                 ]
             );
+
             $_SESSION['searchFlightsList'] = $searchFlightsList;
-            $date = $_POST['date'];
-            $dt = DateTime::createFromFormat("Y-m-d", $date);
+
+            if(!empty($_POST['min_date'])){
+                $minDate = $_POST['min_date'];
+                $mindt = (DateTime::createFromFormat("Y-m-d", $minDate))->format("d/m/Y");
+            }
+            if(!empty($_POST['max_date'])){
+                $maxDate = $_POST['max_date'];
+                $maxdt = (DateTime::createFromFormat("Y-m-d", $maxDate))->format("d/m/Y");
+            }
         }
         ?>
 
@@ -82,7 +91,9 @@ require('../Model/DepartureAirportRepository.class.php');
                         </option> 
                     <?php endforeach; ?>
                 </select>
-                <input type="date" id="departure-date" name="date" class="index-search" placeholder="<?php if(!empty($_POST['date'])) {echo $dt->format("d/m/Y");} else {echo "Date de départ";} ?>" onfocus="(this.type='date')" onblur="(this.type='text')"></input>
+                <span class="between-dates"> Période <span>
+                <input type="date" id="min_date" name="min_date" class="index-search-date" value="<?php if(!empty($_POST['min_date'])) {echo $_POST['min_date'];} ?>" placeholder="<?php if(!empty($_POST['min_date'])) {echo $mindt;} else {echo "Du";} ?>" onfocus="(this.type='date')" onblur="(this.type='text')"></input>
+                <input type="date" id="max_date" name="max_date" class="index-search-date" value="<?php if(!empty($_POST['max_date'])) {echo $_POST['max_date'];} ?>" placeholder="<?php if(!empty($_POST['max_date'])) {echo $maxdt;} else {echo "Au";} ?>" onfocus="(this.type='date')" onblur="(this.type='text')"></input>
             </div> 
             <div class="button-search">
                 <button type="submit" class="btn btn-primary small mt-3 mb-3 pl-4" id="buttonSearch">Recherchez un vol</button>
@@ -93,7 +104,7 @@ require('../Model/DepartureAirportRepository.class.php');
 </main> 
 
 
-<?php if(empty($_POST) || (($_POST['arrival'] === '') && ($_POST['departure'] === '') && ($_POST['date'] === ''))): ?>
+<?php if(empty($_POST) || (($_POST['arrival'] === '') && ($_POST['departure'] === '') && ($_POST['min_date'] === '') && ($_POST['max_date'] === ''))): ?>
     <div class="album py-5 bg-light">
         <div class="container">
             <div class="row">
@@ -161,6 +172,7 @@ require('../Model/DepartureAirportRepository.class.php');
             "arrival_airport_name" => '',
             ]
         );
+
         ?>
         <div class="container w-75">
             <div class="card mt-4 pt-2 pb-0 each-search-result">
@@ -182,7 +194,7 @@ require('../Model/DepartureAirportRepository.class.php');
                         <div class="d-flex flex-column justify-content-start text-right align-items-center">
                             <h4 class="hours-search-results"><?php echo $searchFlight->getPrice(); ?></h4>
                             <div class="btn-group">
-                                <button type="button" class="btn btn-sm btn-primary">Réservez</button>
+                                <a type="button" class="btn btn-sm btn-primary detail-reservation" href="reservation-access.php?id=<?php echo $searchFlight->getId(); ?>">Réservez</a>
                             </div>
                         </div>
                     </div>
@@ -197,7 +209,8 @@ require('../Model/DepartureAirportRepository.class.php');
 
 <script type="text/javascript">
     window.onload = () => {
-        document.getElementById('departure-date').type = "text";
+        document.getElementById('min_date').type = "text";
+        document.getElementById('max_date').type = "text";
     };
 
 </script>

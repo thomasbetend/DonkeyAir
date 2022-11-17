@@ -12,7 +12,7 @@ class User
     public static function createdFromSqlRow (array $row): self
     {
         $user = new self();
-        $user->id = $row['id'];
+        $user->id = $row['id_user'];
         $user->firstname = $row['firstname'];
         $user->lastname = $row['lastname'];
         $user->email = $row['email'];

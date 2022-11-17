@@ -8,7 +8,7 @@ class DepartureAirport
     public static function createdFromSqlRow (array $row): self
     {
         $departureAirport = new self();
-        $departureAirport->id = $row['id'];
+        $departureAirport->id = $row['id_departure_airport'];
         $departureAirport->departure_airport_name = $row['departure_airport_name'];
 
         return $departureAirport;

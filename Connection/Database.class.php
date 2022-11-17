@@ -2,7 +2,7 @@
 
 use Database as GlobalDatabase;
 
-define ('ENV', 'prod');
+define ('ENV', 'test');
 
 class DataBase 
 {
@@ -26,15 +26,21 @@ class DataBase
         return $pdo;
     }
 
-    public static function insert(string $table, array $data): void
+    public static function insertReservation(
+        string $table, 
+        array $data = [
+            "user_id" => "",
+            "price" => "",
+        ]): void
     {
         $cols = implode(", ", array_keys($data));
-        $values = implode(", ", array_values($data));
 
-        $sql = "INSERT INTO " . $table . " (" . $cols . ") VALUES (". $values . ")";
+        $sql = "INSERT INTO " . $table . " (" . $cols . ") VALUES (:user_id, :price)";
 
         $stmt = (Database::getConnection())->prepare($sql);
-
+        foreach($data as $key=>$param){
+            $stmt->bindValue($key, $param, PDO::PARAM_STR);
+        }
         $stmt -> execute();
     }
 

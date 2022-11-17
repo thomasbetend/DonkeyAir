@@ -39,13 +39,13 @@ h4 {
     padding-left: 4.5%;
 }
 
-.navbar-DonkeyAir .navbar-brand{
+.navbar-DonkeyAir .navbar-brand {
     font-family: var(--font1);
     font-size: 1.1rem;
     opacity: 70%;;
 }
 
-.welcome-nav-bar{
+.welcome-nav-bar {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -63,18 +63,31 @@ h4 {
     border: none;
     border-radius: 5px;
     padding: 15px;
-    width: 25%;
+    width: 20%;
     height: 40px;
     margin: 1%;
 }
 
-.index-search::placeholder {
+.index-search-date {
+    border: none;
+    border-radius: 5px;
+    padding: 15px;
+    width: 15%;
+    height: 40px;
+    margin: 1%;
+}
+
+.index-search::placeholder, .index-search-date::placeholder {
     color: grey;
 }
 
 input[type="date"] {
     padding: 15px;
     color: grey;
+}
+
+.between-dates {
+    padding-left: 10px;
 }
 
 ::-webkit-calendar-picker-indicator {
@@ -134,6 +147,12 @@ input[type="date"] {
 
 .title-reservations-2 {
     font-size: 2rem;
+}
+
+.detail-reservation {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
 /* footer */

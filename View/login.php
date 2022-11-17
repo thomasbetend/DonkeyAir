@@ -33,7 +33,7 @@ require('../Model/UserRepository.class.php');
             foreach($users as $user){
                 if(($user->getEmail() === $_POST['user_email']) && (password_verify($_POST['user_password'], $user->getPassword()))){
                     Session::login($user);
-                    if($_POST['user_email'] = 'admin@gmail.com'){
+                    if($_POST['user_email'] === 'admin@gmail.com'){
                         Session::loginAdmin($user);
                     }
                     header('location:home.php');
@@ -61,11 +61,11 @@ require('../Model/UserRepository.class.php');
                 <form action="" method="post" class="">
                     <div class="form-group">
                         <label for="user_email"></label>
-                        <input type="email" id="email" name="user_email" class="form-control connection-field" placeholder="Email *" value="<?php ?>">
+                        <input type="email" id="email" name="user_email" class="form-control connection-field" placeholder="Email *" value="<?php if(!empty($_POST['user_email'])) echo $_POST['user_email']; ?>">
                     </div>
                     <div class="form-group mb-2 mt-1">
                         <label for="user_password"></label>
-                        <input type="password" id="password" name="user_password" class="form-control connection-field" placeholder="Mot de passe *" value="<?php ?>">
+                        <input type="password" id="password" name="user_password" class="form-control connection-field" placeholder="Mot de passe *" value="<?php if(!empty($_POST['user_password'])) echo $_POST['user_password']; ?>">
                     </div>
                     <div class="errorMessage">
                         <?php ?>
