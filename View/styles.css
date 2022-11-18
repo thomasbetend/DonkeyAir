@@ -32,6 +32,18 @@ h4 {
     background-color: rgb(215, 64, 9);
 }
 
+/* add-flight */
+
+#add-flight-select {
+    border: none;
+    border-radius: 5px;
+    padding-left: 15px;
+    min-width: 40%;
+    height: 40px;
+    margin: 1%;
+    color: grey;
+}
+
 /* navbar */
 
 .navbar-DonkeyAir {
