@@ -139,6 +139,23 @@ input[type="date"] {
     height: 40px;
 }
 
+/* reservation-validation */
+
+.reservation-fields {
+    border: none;
+    border-radius: 5px;
+    padding: 15px;
+    height: 40px;
+    width: 30%;
+}
+
+.form-center {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
 /* reservations */
 
 .title-reservations-1 {

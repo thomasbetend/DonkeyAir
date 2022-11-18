@@ -7,7 +7,6 @@ class User
     private ?string $lastname;
     private ?string $email;
     private ?string $password;
-    private ?string $nationality;
 
     public static function createdFromSqlRow (array $row): self
     {
@@ -17,7 +16,6 @@ class User
         $user->lastname = $row['lastname'];
         $user->email = $row['email'];
         $user->password = $row['password'];
-        $user->nationality = $row['nationality'];
 
         return $user;
     }
@@ -45,11 +43,6 @@ class User
     public function getPassword(): string 
     {
         return $this->password;
-    }
-
-    public function getNationality(): string 
-    {
-        return $this->nationality;
     }
 }
 

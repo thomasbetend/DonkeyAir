@@ -86,7 +86,7 @@ class Flight
 
     public function getNbSeats(): int 
     {
-        return $this->number_seats;
+        return $this->nb_seats;
     }
 
     public function getDepartureAirportId(): int 

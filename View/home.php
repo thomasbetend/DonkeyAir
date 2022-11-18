@@ -172,7 +172,6 @@ require('../Model/DepartureAirportRepository.class.php');
             "arrival_airport_name" => '',
             ]
         );
-
         ?>
         <div class="container w-75">
             <div class="card mt-4 pt-2 pb-0 each-search-result">
@@ -194,7 +193,7 @@ require('../Model/DepartureAirportRepository.class.php');
                         <div class="d-flex flex-column justify-content-start text-right align-items-center">
                             <h4 class="hours-search-results"><?php echo $searchFlight->getPrice(); ?></h4>
                             <div class="btn-group">
-                                <a type="button" class="btn btn-sm btn-primary detail-reservation" href="reservation-access.php?id=<?php echo $searchFlight->getId(); ?>">Réservez</a>
+                                <a type="button" class="btn btn-sm btn-primary detail-reservation" href="reservation-validation.php?id=<?php echo $searchFlight->getId(); ?>">Réservez</a>
                             </div>
                         </div>
                     </div>

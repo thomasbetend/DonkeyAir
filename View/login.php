@@ -21,7 +21,6 @@ require('../Model/UserRepository.class.php');
                 "lastname" => '', 
                 "email" => '',
                 "password" => '',
-                "nationality" => '',
             ]
         ); 
 
@@ -78,6 +77,7 @@ require('../Model/UserRepository.class.php');
                     <div>
                         <button type="submit" class="btn btn-primary mt-2">Connexion</button>
                     </div>
+                    <p class="mt-4 text-secondary"><a href="signup.php">Pas encore inscrit ? Créez un compte.</a></p>
                 </form>
             </div>
         </div>

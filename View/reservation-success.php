@@ -41,14 +41,6 @@ $searchFlight = FlightRepository::getList(
 
                     <?php
 
-                    Database::insertReservation(
-                        'reservation', 
-                        [
-                        "user_id" => $_SESSION['id'],
-                        "price" => $searchFlight[0]->getPrice(),
-                        ]
-                    );
-
                     $reservationList = ReservationRepository::getList(
                         [
                             "id" => "",
@@ -84,7 +76,7 @@ $searchFlight = FlightRepository::getList(
                     <div class="d-flex flex-column justify-content-start text-right align-items-center">
                         <h4 class="hours-search-results"> <?php echo $lastReservation->getPrice(); ?> €</h4>
                         <div class="btn-group">
-                            <a type="button" class="btn btn-sm btn-primary detail-reservation" href="reservation-info.php?id=<?php echo $lastReservation->getId(); ?>">
+                            <a type="button" class="btn btn-sm btn-primary detail-reservation" href="reservation-details.php?id=<?php echo $lastReservation->getId(); ?>">
                                 Détails
                             </a>
                         </div>

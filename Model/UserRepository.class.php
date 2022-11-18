@@ -10,7 +10,6 @@ class UserRepository
             "lastname" => '', 
             "email" => '',
             "password" => '',
-            "nationality" => '',
         ]): array 
     {
         $sql = 'SELECT *
@@ -42,11 +41,6 @@ class UserRepository
         if($data['password']){
             $sql .= ' AND password = :password';
             $params[':password'] = $data['password'];  
-        }
-
-        if($data['nationality']){
-            $sql .= ' AND nationality = :nationality';
-            $params[':nationality'] = $data['nationality'];  
         }
 
         $pdo = Database::getConnection();

@@ -8,9 +8,9 @@ if(empty($_SESSION)){
     header('location:../index.php');
 }
 
+require('../Connection/Database.class.php');
 require('../Model/ReservationRepository.class.php');
 require('../Model/Reservation.class.php');
-require('../Connection/Database.class.php');
 
 $searchReservations = ReservationRepository::getList(
     [
@@ -48,7 +48,7 @@ $searchReservations = ReservationRepository::getList(
                     <div class="d-flex flex-column justify-content-start text-right align-items-center">
                         <h4 class="hours-search-results"><?php echo $searchReservation->getPrice(); ?> €</h4>
                         <div class="btn-group">
-                            <a type="button" class="btn btn-sm btn-primary detail-reservation" href="reservation-info.php?id=<?php echo $searchReservation->getId(); ?>">
+                            <a type="button" class="btn btn-sm btn-primary detail-reservation" href="reservation-details.php?id=<?php echo $searchReservation->getId(); ?>">
                                 Détails
                             </a>
                         </div>

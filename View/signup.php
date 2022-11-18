@@ -1,5 +1,7 @@
 <?php include_once('header.php'); ?>
 
+<?php if($_POST) ?>
+
 <main role="main" class="bg-grey-light">
     <div class="py-5 text-center container top-section">
         <div class="row py-lg-1">
@@ -32,9 +34,10 @@
                         <?php ?>
                     </div>
                     <div>
-                        <button type="submit" class="btn btn-primary mt-2">connection</button>
+                        <button type="submit" class="btn btn-primary mt-2">Connexion</button>
                     </div>
                 </form>
+                <p class="mt-4 text-secondary"><a href="login.php">Déjà inscrit ? Connectez-vous.</a></p>
             </div>
         </div>
     </div>
