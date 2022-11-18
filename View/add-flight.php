@@ -1,8 +1,19 @@
 <?php include_once('header.php'); ?>
 
-<?php if(empty($_SESSION['admin'])): ?>
-    <?php header('location:home.php'); ?>
-<?php endif; ?>
+<?php 
+
+require('../Security/Security.class.php');
+require('../Connection/Database.class.php');
+require('../Model/User.class.php');
+require('../Model/UserRepository.class.php');
+
+Security::isloggedIn($_SESSION);
+
+if($_POST) {
+
+
+}
+?>
 
 <main role="main" class="bg-grey-light">
     <div class="py-5 text-center container top-section">

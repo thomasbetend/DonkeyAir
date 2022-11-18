@@ -1,16 +1,13 @@
 <?php include_once('header.php'); ?>
 
-
-
 <?php
-
-if(empty($_SESSION)){
-    header('location:../index.php');
-}
 
 require('../Connection/Database.class.php');
 require('../Model/ReservationRepository.class.php');
 require('../Model/Reservation.class.php');
+require('../Security/Security.class.php');
+
+Security::isloggedIn($_SESSION);
 
 $searchReservations = ReservationRepository::getList(
     [
@@ -28,7 +25,7 @@ $searchReservations = ReservationRepository::getList(
         <div class="row py-lg-1">
             <div class="col-lg-6 col-md-8 mx-auto">
                 <h3 class="title-reservations-1">DonkeyAir</h3>
-                <h4 class="title-reservations-2">Réservations</h4>
+                <h4 class="title-reservations-2">Historique de vos réservations</h4>
             </div>
         </div>
     </div>

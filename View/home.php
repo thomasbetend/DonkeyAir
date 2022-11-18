@@ -2,7 +2,6 @@
 
 <?php
 
-require('../Connection/Session.class.php');
 require('../Connection/Database.class.php');
 require('../Model/Flight.class.php');
 require('../Model/FlightRepository.class.php');
@@ -15,6 +14,44 @@ require('../Model/ArrivalAirportRepository.class.php');
 require('../Model/DepartureAirport.class.php');
 require('../Model/DepartureAirportRepository.class.php');
 
+$departures = DepartureAirportRepository::getList(
+    [
+        "id" => '', 
+        "departure_airport_name" => '',
+    ]
+);
+
+$arrivals = ArrivalAirportRepository::getList(
+    [
+        "id" => '', 
+        "arrival_airport_name" => '',
+    ]
+); 
+
+if($_POST){
+
+    $searchFlightsList = FlightRepository::getList(
+        [
+            "id" => '', 
+            "min_date" => $_POST['min_date'], 
+            "max_date" => $_POST['max_date'],
+            "departure_airport_id" => intval($_POST['departure']),
+            "arrival_airport_id" => intval($_POST['arrival']),
+            "price" => '',
+            "nb_seats" => '',
+            "name" => '',
+        ]
+    );
+
+    if(!empty($_POST['min_date'])){
+        $minDate = $_POST['min_date'];
+        $mindt = (DateTime::createFromFormat("Y-m-d", $minDate))->format("d/m/Y");
+    }
+    if(!empty($_POST['max_date'])){
+        $maxDate = $_POST['max_date'];
+        $maxdt = (DateTime::createFromFormat("Y-m-d", $maxDate))->format("d/m/Y");
+    }
+}
 ?>
 
 <main role="main" class="bg-grey-light">
@@ -25,53 +62,6 @@ require('../Model/DepartureAirportRepository.class.php');
                 <h4 class="text-center mt-2 mb6">Évadez-vous dans les airs</h4>
             </div>
         </div>
-
-        <?php
-
-        $departures = DepartureAirportRepository::getList(
-            [
-                "id" => '', 
-                "departure_airport_name" => '',
-            ]
-        );
-
-        $arrivals = ArrivalAirportRepository::getList(
-            [
-                "id" => '', 
-                "arrival_airport_name" => '',
-            ]
-        ); 
-        
-        ?>
-
-        <?php 
-        if($_POST){
-
-            $searchFlightsList = FlightRepository::getList(
-                [
-                    "id" => '', 
-                    "min_date" => $_POST['min_date'], 
-                    "max_date" => $_POST['max_date'],
-                    "departure_airport_id" => intval($_POST['departure']),
-                    "arrival_airport_id" => intval($_POST['arrival']),
-                    "price" => '',
-                    "nb_seats" => '',
-                    "name" => '',
-                ]
-            );
-
-            $_SESSION['searchFlightsList'] = $searchFlightsList;
-
-            if(!empty($_POST['min_date'])){
-                $minDate = $_POST['min_date'];
-                $mindt = (DateTime::createFromFormat("Y-m-d", $minDate))->format("d/m/Y");
-            }
-            if(!empty($_POST['max_date'])){
-                $maxDate = $_POST['max_date'];
-                $maxdt = (DateTime::createFromFormat("Y-m-d", $maxDate))->format("d/m/Y");
-            }
-        }
-        ?>
 
         <form method="POST" class="text-center mt-2 small" id="">
             <div class="form-group index-search-form">  
@@ -92,13 +82,12 @@ require('../Model/DepartureAirportRepository.class.php');
                     <?php endforeach; ?>
                 </select>
                 <span class="between-dates"> Période <span>
-                <input type="date" id="min_date" name="min_date" class="index-search-date" value="<?php if(!empty($_POST['min_date'])) {echo $_POST['min_date'];} ?>" placeholder="<?php if(!empty($_POST['min_date'])) {echo $mindt;} else {echo "Du";} ?>" onfocus="(this.type='date')" onblur="(this.type='text')"></input>
-                <input type="date" id="max_date" name="max_date" class="index-search-date" value="<?php if(!empty($_POST['max_date'])) {echo $_POST['max_date'];} ?>" placeholder="<?php if(!empty($_POST['max_date'])) {echo $maxdt;} else {echo "Au";} ?>" onfocus="(this.type='date')" onblur="(this.type='text')"></input>
+                <input type="datetime-local" id="min_date" name="min_date" class="index-search-date" value="<?php if(!empty($_POST['min_date'])) {echo $mindt;} ?>" placeholder="<?php if(!empty($_POST['min_date'])) {echo $mindt;} else {echo "Du";} ?>" onfocus="(this.type='date')" onblur="(this.type='text')"></input>
+                <input type="datetime-local" id="max_date" name="max_date" class="index-search-date" value="<?php if(!empty($_POST['max_date'])) {echo $maxdt;} ?>" placeholder="<?php if(!empty($_POST['max_date'])) {echo $maxdt;} else {echo "Au";} ?>" onfocus="(this.type='date')" onblur="(this.type='text')"></input>
             </div> 
             <div class="button-search">
                 <button type="submit" class="btn btn-primary small mt-3 mb-3 pl-4" id="buttonSearch">Recherchez un vol</button>
             </div>
-
         </form>
     </div>
 </main> 
@@ -153,10 +142,10 @@ require('../Model/DepartureAirportRepository.class.php');
             </div>
         </div>
     </div>
-
 <?php else : ?>
-    <?php if(empty($_SESSION['searchFlightsList'])): ?>
+    <?php if(empty($searchFlightsList)): ?>
         <p class="mt-4 text-center text-secondary"><?php echo "Pas de résultats pour votre recherche" ?></p>
+        <a href="home.php" id="initSearch" class="text-center">Réinitialisez la recherche</a><br/>
     <?php endif; ?>
     <?php foreach ($searchFlightsList as $searchFlight): ?>
         <?php

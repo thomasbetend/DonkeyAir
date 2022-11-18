@@ -2,7 +2,6 @@
 
 <?php
 
-require('../Connection/Session.class.php');
 require('../Connection/Database.class.php');
 require('../Model/Reservation.class.php');
 require('../Model/ReservationRepository.class.php');

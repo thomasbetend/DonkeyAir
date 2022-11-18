@@ -2,10 +2,7 @@
 
 <?php
 
-require('../Connection/Session.class.php');
 require('../Connection/Database.class.php');
-require('../Model/Flight.class.php');
-require('../Model/FlightRepository.class.php');
 require('../Model/User.class.php');
 require('../Model/UserRepository.class.php');
 
@@ -36,6 +33,7 @@ require('../Model/UserRepository.class.php');
                         Session::loginAdmin($user);
                     }
                     header('location:home.php');
+                    exit;
                 } else {
                     $errorMessage['incorrect'] = "Renseignements incorrects";
                 }

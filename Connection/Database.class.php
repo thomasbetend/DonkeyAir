@@ -26,8 +26,16 @@ class DataBase
         return $pdo;
     }
 
+    public static function bind(string $sql, array $data):void 
+    {
+        $stmt = (Database::getConnection())->prepare($sql);
+        foreach($data as $key=>$param){
+            $stmt->bindValue($key, $param, PDO::PARAM_STR);
+        }
+        $stmt -> execute();
+    }
+
     public static function insertReservation(
-        string $table, 
         array $data = [
             "user_id" => "",
             "price" => "",
@@ -36,17 +44,12 @@ class DataBase
     {
         $cols = implode(", ", array_keys($data));
 
-        $sql = "INSERT INTO " . $table . " (" . $cols . ") VALUES (:user_id, :price, :nb_passengers)";
+        $sql = "INSERT INTO reservation (" . $cols . ") VALUES (:user_id, :price, :nb_passengers)";
 
-        $stmt = (Database::getConnection())->prepare($sql);
-        foreach($data as $key=>$param){
-            $stmt->bindValue($key, $param, PDO::PARAM_STR);
-        }
-        $stmt -> execute();
+        Database::bind($sql, $data);
     }
 
     public static function insertUser(
-        string $table, 
         array $data = [
             "firstname" => "",
             "lastname" => "",
@@ -56,19 +59,35 @@ class DataBase
     {
         $cols = implode(", ", array_keys($data));
 
-        $sql = "INSERT INTO " . $table . " (" . $cols . ") VALUES (:user_id, :price)";
+        $sql = "INSERT INTO user (" . $cols . ") VALUES (:firstname, :lastname, :email, :password)";
 
-        $stmt = (Database::getConnection())->prepare($sql);
-        foreach($data as $key=>$param){
-            $stmt->bindValue($key, $param, PDO::PARAM_STR);
-        }
-        $stmt -> execute();
+        Database::bind($sql, $data);
+    }
+
+    public static function insertFlight(
+        array $data = [
+            "departure_date" => "", 
+            "arrival_date" => "", 
+            "departure_airport_id" => "",
+            "arrival_airport_id" => "",
+            "price" => "",
+            "nb_seats" => "",
+            "name" => "",
+        ]): void
+    {
+        $cols = implode(", ", array_keys($data));
+
+        $sql = "INSERT INTO flight (" . $cols . ") VALUES (:departure_date, :arrival_date, :departure_airport_id, :arrival_airport_id, :price, :nb_seats, name)";
+
+        Database::bind($sql, $data);
     }
 
     public static function update(string $table, array $data, int $id): void 
     {   
         foreach($data as $key=>$values){
-            if($values){
+            if(is_null($values)){
+                $newData[] = $key . " = ' ' ";
+            } else {
                 $newData[] = $key . " = '" . $values . "'";
             }
         }

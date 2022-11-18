@@ -1,6 +1,7 @@
 <?php 
 
-session_start();
+require('../Connection/Session.class.php');
+Session::creation();
 
 ?>
 
@@ -14,15 +15,15 @@ session_start();
 
   <div class="collapse navbar-collapse" id="navbarsExampleDefault">
     <ul class="navbar-nav mr-auto">
-      <li class="nav-item active">
-        <a class="nav-link" href="./reservations.php">Réservations</a>
-      </li>
       <?php if(!empty($_SESSION['admin'])): ?>
         <li class="nav-item text-black">
           <a class="nav-link text-black" href="./add-flight.php">Ajouter un vol</a>
         </li>
       <?php endif ?>
       <?php if(!empty($_SESSION['login'])): ?>
+        <li class="nav-item active">
+          <a class="nav-link" href="./reservations.php">Réservations</a>
+        </li>
         <li class="nav-item text-white">
           <a class="nav-link" href="./logout.php">Déconnexion</a>
         </li>
