@@ -17,7 +17,7 @@ Session::creation();
     <ul class="navbar-nav mr-auto">
       <?php if(!empty($_SESSION['admin'])): ?>
         <li class="nav-item text-black">
-          <a class="nav-link text-black" href="./add-flight.php">Ajouter un vol</a>
+          <a class="nav-link text-black" href="./add-flight.php">Ajoutez un vol</a>
         </li>
       <?php endif ?>
       <?php if(!empty($_SESSION['login'])): ?>

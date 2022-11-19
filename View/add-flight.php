@@ -10,6 +10,8 @@ require('../Model/ArrivalAirport.class.php');
 require('../Model/ArrivalAirportRepository.class.php');
 require('../Model/DepartureAirport.class.php');
 require('../Model/DepartureAirportRepository.class.php');
+require('../Model/Flight.class.php');
+require('../Model/FlightRepository.class.php');
 
 Security::isloggedIn($_SESSION);
 
@@ -33,13 +35,31 @@ Database::insertFlight(
     [
         "departure_date" => $_POST['departure_date'] . ' ' . $_POST['departure_hour']. ':00',
         "arrival_date" => $_POST['arrival_date'] . ' ' . $_POST['arrival_hour']. ':00', 
-        "departure_airport_id" => $_POST['departure_airport_id'],
-        "arrival_airport_id" => $_POST['arrival_airport_id'],
+        "departure_airport_id" => intval($_POST['departure_airport_id']),
+        "arrival_airport_id" => intval($_POST['arrival_airport_id']),
         "price" => $_POST['price'],
-        "nb_seats" => $_POST['nb_seats'],
+        "nb_seats" => intval($_POST['nb_seats']),
         "name" => $_POST['flight_name'],
     ]
 );
+
+$totlaFlightsList = FlightRepository::getList(
+    [
+        "id" => '', 
+        "min_date" => '', 
+        "max_date" => '',
+        "departure_airport_id" => '',
+        "arrival_airport_id" => '',
+        "price" => '',
+        "nb_seats" => '',
+        "name" => '',
+    ]
+    );
+
+$lastAddedFlight = end($totlaFlightsList);
+
+header('location:add-flight-success.php?id=' . $lastAddedFlight->getId());
+exit();
 
 }
 ?>
@@ -84,7 +104,7 @@ Database::insertFlight(
                     </div>
                     <div class="form-group mb-2">
                         <label for="departure_date" class="text-secondary"></label>
-                        <input type="date" id="departure_date" name="departure_date" class="form-control connection-field" placeholder="<?php if(!empty($_POST['departure_date'])) {echo $dt->format("d/m/Y");} else {echo "Date de départ *";} ?>" onfocus="(this.type='date')" onblur="(this.type='text')">
+                        <input type="date" id="departure_date" name="departure_date" class="form-control connection-field" placeholder="<?php if(!empty($_POST['departure_date'])) {echo $_POST['departure_date'];} else {echo "Date de départ *";} ?>" onfocus="(this.type='date')" onblur="(this.type='text')">
                     </div>
                     <div class="form-group mb-2">
                         <label for="departure_hour" class="text-secondary"></label>
@@ -92,7 +112,7 @@ Database::insertFlight(
                     </div>
                     <div class="form-group mb-2">
                         <label for="arrival_date" class="text-secondary"></label>
-                        <input type="date" id="arrival_date" name="arrival_date" class="form-control connection-field" placeholder="<?php if(!empty($_POST['arrival_date'])) {echo $dt->format("d/m/Y");} else {echo "Date d'arrivée *";} ?>" onfocus="(this.type='date')" onblur="(this.type='text')">
+                        <input type="date" id="arrival_date" name="arrival_date" class="form-control connection-field" placeholder="<?php if(!empty($_POST['arrival_date'])) {echo $_POST['departure_date'];} else {echo "Date d'arrivée *";} ?>" onfocus="(this.type='date')" onblur="(this.type='text')">
                     </div>
                     <div class="form-group mb-2">
                         <label for="arrival_hour" class="text-secondary"></label>

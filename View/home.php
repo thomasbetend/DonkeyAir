@@ -13,6 +13,8 @@ require('../Model/ArrivalAirport.class.php');
 require('../Model/ArrivalAirportRepository.class.php');
 require('../Model/DepartureAirport.class.php');
 require('../Model/DepartureAirportRepository.class.php');
+require('FlightsListView.class.php');
+require('PromosListView.class.php');
 
 $departures = DepartureAirportRepository::getList(
     [
@@ -30,7 +32,7 @@ $arrivals = ArrivalAirportRepository::getList(
 
 if($_POST){
 
-    $searchFlightsList = FlightRepository::getList(
+    $flights = FlightRepository::getList(
         [
             "id" => '', 
             "min_date" => $_POST['min_date'], 
@@ -97,100 +99,26 @@ if($_POST){
     <div class="album py-5 bg-light">
         <div class="container">
             <div class="row">
-                <div class="col-md-4">
-                    <div class="card mb-4 box-shadow">
-                        <img class="card-img-top" alt="Thumbnail [100%x225]" src="/_medias/ny01.webp" data-holder-rendered="true" style="height: 225px; width: 100%; display: block;">
-                        <div class="card-body">
-                            <h4>Visitez New York pour seulement 399 euros</h4>
-                            <p class="card-text"></p>
-                            <div class="d-flex justify-content-between align-items-center">
-                                <div class="btn-group">
-                                    <button type="button" class="btn btn-sm btn-primary">Réservez</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="card mb-4 box-shadow">
-                        <img class="card-img-top" alt="Thumbnail [100%x225]" src="/_medias/ny01.webp" data-holder-rendered="true" style="height: 225px; width: 100%; display: block;">
-                        <div class="card-body">
-                            <h4>Visitez New York pour seulement 399 euros</h4>
-                            <p class="card-text"></p>
-                            <div class="d-flex justify-content-between align-items-center">
-                                <div class="btn-group">
-                                    <button type="button" class="btn btn-sm btn-primary">Réservez</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="card mb-4 box-shadow">
-                        <img class="card-img-top" alt="Thumbnail [100%x225]" src="/_medias/ny01.webp" data-holder-rendered="true" style="height: 225px; width: 100%; display: block;">
-                        <div class="card-body">
-                            <h4>Visitez New York pour seulement 399 euros</h4>
-                            <p class="card-text"></p>
-                            <div class="d-flex justify-content-between align-items-center">
-                                <div class="btn-group">
-                                    <button type="button" class="btn btn-sm btn-primary">Réservez</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                <?php
+
+                $promos = [$promo1 = "", $promo2 = "", $promo3 = ""];
+
+                PromosListView::render($promos);
+
+                ?>
             </div>
         </div>
     </div>
 <?php else : ?>
-    <?php if(empty($searchFlightsList)): ?>
+    <?php if(empty($flights)): ?>
         <p class="mt-4 text-center text-secondary"><?php echo "Pas de résultats pour votre recherche" ?></p>
         <a href="home.php" id="initSearch" class="text-center">Réinitialisez la recherche</a><br/>
     <?php endif; ?>
-    <?php foreach ($searchFlightsList as $searchFlight): ?>
-        <?php
-        $searchDepartureAirport = DepartureAirportRepository::getList(
-            [
-            "id" => $searchFlight->getDepartureAirportId(), 
-            "departure_airport_name" => '',
-            ]
-        );
-        $searchArrivalAirport = ArrivalAirportRepository::getList(
-            [
-            "id" => $searchFlight->getArrivalAirportId(), 
-            "arrival_airport_name" => '',
-            ]
-        );
-        ?>
-        <div class="container w-75">
-            <div class="card mt-4 pt-2 pb-0 each-search-result">
-                <div class="card-body">
-                    <div class="d-flex flex-row justify-content-between">
-                        <div class="d-flex flex-column justify-content-between">
-                            <h4 class="hours-search-results">
-                                <?php echo $searchFlight->getDepartureHour()?> - <?php echo $searchFlight->getArrivalHour()?>
-                            </h4>
-                            <p class="destination-search-result"><?php echo $searchDepartureAirport[0]->getName() . " -> " . $searchArrivalAirport[0]->getName(); ?></p>
-                            <p class="text-secondary"><?php echo $searchFlight->getDepartureDate(); ?></p>
-                        </div>
-                        <div class="d-flex flex-column justify-content-between">
-                            <h6 class="text-secondary"><i class="fa-solid fa-clock"></i> 
-                            
-                                <?php echo $searchFlight->getDuration(); ?>
-                            </h6>
-                        </div>
-                        <div class="d-flex flex-column justify-content-start text-right align-items-center">
-                            <h4 class="hours-search-results"><?php echo $searchFlight->getPrice(); ?></h4>
-                            <div class="btn-group">
-                                <a type="button" class="btn btn-sm btn-primary detail-reservation" href="reservation-validation.php?id=<?php echo $searchFlight->getId(); ?>">Réservez</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    <?php endforeach; ?>
+    <?php
+    
+    FlightsListView::render($flights);
 
+    ?>
 <?php endif; ?>
 
 <?php include_once('footer.php'); ?>

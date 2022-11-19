@@ -77,7 +77,7 @@ class DataBase
     {
         $cols = implode(", ", array_keys($data));
 
-        $sql = "INSERT INTO flight (" . $cols . ") VALUES (:departure_date, :arrival_date, :departure_airport_id, :arrival_airport_id, :price, :nb_seats, name)";
+        $sql = "INSERT INTO flight (" . $cols . ") VALUES (:departure_date, :arrival_date, :departure_airport_id, :arrival_airport_id, :price, :nb_seats, :name)";
 
         Database::bind($sql, $data);
     }
