@@ -13,6 +13,7 @@ require('../Model/DepartureAirport.class.php');
 require('../Model/DepartureAirportRepository.class.php');
 require('../Security/Security.class.php');
 require('../Security/ErrorRepository.class.php');
+require('FlightsListView.class.php');
 
 $searchFlight = FlightRepository::getList(
     [
@@ -152,31 +153,10 @@ if($_POST){
     </div>
 </main> 
 
+<?php
 
-<div class="container w-75">
-    <div class="card mt-4 pt-2 pb-0 each-search-result">
-        <div class="card-body">
-            <div class="d-flex flex-row justify-content-between">
-                <div class="d-flex flex-column justify-content-between">
-                    <h4 class="hours-search-results">
-                        <?php echo $searchFlight[0]->getDepartureHour()?> - <?php echo $searchFlight[0]->getArrivalHour()?>
-                    </h4>
-                    <p class="destination-search-result"><?php echo $searchDepartureAirport[0]->getName() . " -> " . $searchArrivalAirport[0]->getName(); ?></p>
-                    <p class="text-secondary"><?php echo $searchFlight[0]->getDepartureDate(); ?></p>
-                </div>
-                <div class="d-flex flex-column justify-content-between">
-                    <h6 class="text-secondary"><i class="fa-solid fa-clock"></i> 
-                    
-                        <?php echo $searchFlight[0]->getDuration(); ?>
-                    </h6>
-                </div>
-                <div class="d-flex flex-column justify-content-start text-right align-items-center">
-                    <h4 class="hours-search-results"><?php echo $searchFlight[0]->getPrice(); ?> €</h4>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+FlightsListView::render($searchFlight);
 
+?>
 
 <?php include_once('footer.php'); ?>

@@ -1,8 +1,8 @@
 <?php
 
-class Input 
+class TestInput 
 {
-    public static function test(array $data)
+    public static function test($data)
     {
         $data= trim($data);
         $data= stripslashes($data);
