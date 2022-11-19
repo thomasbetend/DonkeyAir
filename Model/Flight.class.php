@@ -11,11 +11,6 @@ class Flight
     private ?int $nb_seats;
     private ?string $name;
 
-    public function __construct()
-    {
-
-    }
-
     public static function createdFromSqlRow (array $row): self
     {
         $flight = new self();

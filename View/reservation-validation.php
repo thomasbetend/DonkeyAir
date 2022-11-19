@@ -70,6 +70,9 @@ if($_POST){
     }
 
     if(count($errorMessage) === 0){
+
+        /* insert into table reservation */
+
         Database::insertReservation(
             [
             "user_id" => $_SESSION['id'],
@@ -77,6 +80,28 @@ if($_POST){
             "nb_passengers" =>intval($_POST['nb_passengers'])
             ]
         );
+
+        /* insert into table reservation_flight */
+
+        $reservations = ReservationRepository::getList(
+            [
+                "id" => '', 
+                "user_id" => $_SESSION['id'], 
+                "price" => '', 
+                "nb_passengers" => '',
+            ]
+        );
+
+        $lastreservation = end($reservations);
+
+        Database::insertReservationFlight(
+            [
+                "flight_id" => $searchFlight[0]->getId(),
+                "reservation_id" => $lastreservation->getId(),
+            ]
+        );
+
+        /* update table flight */
     
         Database::update(
             'flight',

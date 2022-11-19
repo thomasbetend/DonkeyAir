@@ -49,6 +49,19 @@ class DataBase
         Database::bind($sql, $data);
     }
 
+    public static function insertReservationFlight(
+        array $data = [
+            "flight_id" => "",
+            "reservation_id" => "",
+        ]): void
+    {
+        $cols = implode(", ", array_keys($data));
+
+        $sql = "INSERT INTO reservation_flight (" . $cols . ") VALUES (:flight_id, :reservation_id)";
+
+        Database::bind($sql, $data);
+    }
+
     public static function insertUser(
         array $data = [
             "firstname" => "",

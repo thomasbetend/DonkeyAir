@@ -82,7 +82,8 @@ exit();
                         <label for="price" class="text-secondary"></label>
                         <input type="number" step="0.01" id="price" name="price" placeholder="Prix *" class="form-control connection-field" value="<?php if(!empty($_POST['price'])){echo $_POST['price'];}?>">
                     </div>
-                    <div class="form-group mb-1">
+                    <div class="form-group">
+                        <label for="add-flight-select"></label>
                         <select name="departure_airport_id" id="add-flight-select" class="form-group mb-1">
                             <option value="">Aéroport de départ</option> 
                             <?php foreach($departures as $departure): ?>
@@ -92,7 +93,8 @@ exit();
                             <?php endforeach; ?>
                         </select>
                     </div>
-                    <div class="form-group mb-1">
+                    <div class="form-group">
+                        <label for="add-flight-select"></label>
                         <select name="arrival_airport_id" id="add-flight-select" class="form-group mb-1">
                             <option value="">Aéroport d'arrivée</option> 
                             <?php foreach($arrivals as $arrival): ?>

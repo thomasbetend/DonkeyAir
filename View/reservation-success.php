@@ -7,6 +7,7 @@ require('../Model/Flight.class.php');
 require('../Model/FlightRepository.class.php');
 require('../Model/Reservation.class.php');
 require('../Model/ReservationRepository.class.php');
+require('ReservationsListView.class.php');
 require('../Security/Security.class.php');
 
 Security::isloggedIn($_SESSION);
@@ -20,7 +21,7 @@ $reservationList = ReservationRepository::getList(
     ]
 );
 
-$lastReservation = end($reservationList);
+$lastReservation[] = end($reservationList);
 
 ?>
 
@@ -29,13 +30,14 @@ $lastReservation = end($reservationList);
         <div class="row py-lg-1">
             <div class="col-lg-6 col-md-8 mx-auto">
                 <h3 class="title-reservations-1">DonkeyAir</h3>
-                <h4 class="title-reservations-2"><?php echo "Réservation validée"; ?></h4>
+                <h4 class="title-reservations-2">Réservation validée</h4>
             </div>
         </div>
     </div>
 </main> 
 
 <div class="container w-75">
+
     <?php
 
     ReservationsListView::render($lastReservation);

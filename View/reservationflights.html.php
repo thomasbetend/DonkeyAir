@@ -1,4 +1,4 @@
-<?php foreach ($flights as $flight): ?>
+<?php foreach ($reservationFlights as $reservationFlight): ?>
     <?php
     $searchDepartureAirport = DepartureAirportRepository::getList(
         [
@@ -6,12 +6,14 @@
         "departure_airport_name" => '',
         ]
     );
+
     $searchArrivalAirport = ArrivalAirportRepository::getList(
         [
         "id" => $flight->getArrivalAirportId(), 
         "arrival_airport_name" => '',
         ]
     );
+
     ?>
     <div class="container w-75">
         <div class="card mt-4 pt-2 pb-0 each-search-result">
@@ -31,14 +33,8 @@
                         </h6>
                     </div>
                     <div class="d-flex flex-column justify-content-start text-right align-items-center">
-                        <h4 class="hours-search-results"><?php echo $flight->getPrice(); ?> €</h4>
-                        <?php if($flight->getNbSeats() < 1): ?>
-                            <p>VOL COMPLET</p>
-                        <?php else: ?>
-                            <div class="btn-group">
-                                <a type="button" class="btn btn-sm btn-primary detail-reservation" href="reservation-validation.php?id=<?php echo $flight->getId(); ?>">Réservez</a>
-                            </div>
-                        <?php endif; ?>
+                        <h5> Prix du vol :  <?php echo $flight->getPrice(); ?> €</h5>
+                        <p> Nombre de passagers : <?php echo $reservation->getNbPassengers(); ?></p>
                     </div>
                 </div>
             </div>

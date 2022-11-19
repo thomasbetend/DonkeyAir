@@ -38,6 +38,7 @@ $searchReservations= ReservationRepository::getList(
     ReservationsListView::render($searchReservations);
 
     ?>
+    
 </div>
 
 <?php include_once('footer.php'); ?>

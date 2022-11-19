@@ -94,7 +94,6 @@ if($_POST){
     </div>
 </main> 
 
-
 <?php if(empty($_POST) || (($_POST['arrival'] === '') && ($_POST['departure'] === '') && ($_POST['min_date'] === '') && ($_POST['max_date'] === ''))): ?>
     <div class="album py-5 bg-light">
         <div class="container">
@@ -102,7 +101,6 @@ if($_POST){
                 <?php
 
                 $promos = [$promo1 = "", $promo2 = "", $promo3 = ""];
-
                 PromosListView::render($promos);
 
                 ?>
