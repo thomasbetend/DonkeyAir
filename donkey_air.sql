@@ -23,10 +23,10 @@ DROP TABLE IF EXISTS `airport`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `airport` (
-  `idairport` int NOT NULL AUTO_INCREMENT,
-  `name` varchar(80) DEFAULT NULL,
-  PRIMARY KEY (`idairport`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  `id_airport` int NOT NULL AUTO_INCREMENT,
+  `airport_name` varchar(80) DEFAULT NULL,
+  PRIMARY KEY (`id_airport`)
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -35,6 +35,7 @@ CREATE TABLE `airport` (
 
 LOCK TABLES `airport` WRITE;
 /*!40000 ALTER TABLE `airport` DISABLE KEYS */;
+INSERT INTO `airport` VALUES (1,'Paris CDG'),(2,'Lyon'),(3,'Nice'),(4,'Bordeaux'),(5,'Lille'),(6,'Biarritz'),(7,'Strasbourg'),(8,'Paris Orly'),(9,'New York'),(10,'Londres'),(11,'Berlin');
 /*!40000 ALTER TABLE `airport` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -103,10 +104,10 @@ CREATE TABLE `flight` (
   `departure_airport_id` int DEFAULT NULL,
   `arrival_airport_id` int DEFAULT NULL,
   PRIMARY KEY (`id_flight`),
-  KEY `fk_flight_departure_airport` (`departure_airport_id`),
-  KEY `fk_flight_arrival_airport` (`arrival_airport_id`),
-  CONSTRAINT `fk_flight_arrival_airport` FOREIGN KEY (`arrival_airport_id`) REFERENCES `arrival_airport` (`id_arrival_airport`),
-  CONSTRAINT `fk_flight_departure_airport` FOREIGN KEY (`departure_airport_id`) REFERENCES `departure_airport` (`id_departure_airport`)
+  KEY `fk_arrival_airport_id` (`arrival_airport_id`),
+  KEY `fk_departure_airport_id` (`departure_airport_id`),
+  CONSTRAINT `fk_arrival_airport_id` FOREIGN KEY (`arrival_airport_id`) REFERENCES `airport` (`id_airport`),
+  CONSTRAINT `fk_departure_airport_id` FOREIGN KEY (`departure_airport_id`) REFERENCES `airport` (`id_airport`)
 ) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -116,7 +117,7 @@ CREATE TABLE `flight` (
 
 LOCK TABLES `flight` WRITE;
 /*!40000 ALTER TABLE `flight` DISABLE KEYS */;
-INSERT INTO `flight` VALUES (1,'2022-12-18 18:00:00','2022-12-18 19:05:00',0,145,'PN001',1,3),(2,'2022-11-17 09:00:00','2022-11-17 11:30:00',0,320,'LS001',3,2),(3,'2022-11-17 17:00:00','2022-11-17 19:30:00',3,335,'LS002',4,2),(4,'2022-12-18 18:00:00','2022-12-18 19:05:00',5,155,'NP001',2,1),(5,'2022-11-20 11:10:00','2022-11-20 12:30:00',4,295,'NL445',4,10),(7,'2022-11-27 15:20:00','2022-11-27 16:40:00',7,300,'BoLo446',4,10),(8,'2022-12-07 10:00:00','2022-12-07 11:15:00',4,210,'StBe543',7,11),(10,'2022-12-10 15:30:00','2022-12-10 16:30:00',9,550,'PaNe335',1,9);
+INSERT INTO `flight` VALUES (1,'2022-12-18 18:00:00','2022-12-18 19:05:00',0,145,'PN001',1,3),(2,'2022-11-17 09:00:00','2022-11-17 11:30:00',0,320,'LS001',3,2),(3,'2022-11-17 17:00:00','2022-11-17 19:30:00',2,335,'LS002',4,2),(4,'2022-12-18 18:00:00','2022-12-18 19:05:00',0,155,'NP001',2,1),(5,'2022-11-20 11:10:00','2022-11-20 12:30:00',0,295,'NL445',4,10),(7,'2022-11-27 15:20:00','2022-11-27 16:40:00',7,300,'BoLo446',4,10),(8,'2022-12-07 10:00:00','2022-12-07 11:15:00',4,210,'StBe543',7,11),(10,'2022-12-10 15:30:00','2022-12-10 16:30:00',5,550,'PaNe335',1,9);
 /*!40000 ALTER TABLE `flight` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -135,7 +136,7 @@ CREATE TABLE `reservation` (
   PRIMARY KEY (`id_reservation`),
   KEY `fk_reservations_user` (`user_id`),
   CONSTRAINT `fk_reservations_user` FOREIGN KEY (`user_id`) REFERENCES `user` (`id_user`)
-) ENGINE=InnoDB AUTO_INCREMENT=78 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=85 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -144,7 +145,7 @@ CREATE TABLE `reservation` (
 
 LOCK TABLES `reservation` WRITE;
 /*!40000 ALTER TABLE `reservation` DISABLE KEYS */;
-INSERT INTO `reservation` VALUES (1,1,435,3),(2,2,345,3),(3,3,235,1),(5,1,430,1),(6,1,430,2),(45,1,155,3),(46,1,155,3),(47,1,155,3),(48,1,155,3),(49,1,155,3),(50,1,155,3),(51,1,155,3),(52,1,155,3),(53,1,155,3),(54,1,155,2),(55,1,155,1),(56,1,155,1),(57,1,320,2),(58,1,320,2),(59,1,155,0),(60,1,155,0),(61,1,155,1),(62,1,155,1),(63,1,155,5),(64,1,465,3),(65,1,0,0),(66,1,0,0),(67,1,640,2),(68,1,310,2),(69,12,725,5),(70,1,465,3),(71,1,465,3),(72,1,465,3),(73,1,310,2),(74,1,335,1),(75,1,335,1),(76,1,295,1),(77,1,550,1);
+INSERT INTO `reservation` VALUES (1,1,435,3),(2,2,345,3),(3,3,235,1),(5,1,430,1),(6,1,430,2),(45,1,155,3),(46,1,155,3),(47,1,155,3),(48,1,155,3),(49,1,155,3),(50,1,155,3),(51,1,155,3),(52,1,155,3),(53,1,155,3),(54,1,155,2),(55,1,155,1),(56,1,155,1),(57,1,320,2),(58,1,320,2),(59,1,155,0),(60,1,155,0),(61,1,155,1),(62,1,155,1),(63,1,155,5),(64,1,465,3),(65,1,0,0),(66,1,0,0),(67,1,640,2),(68,1,310,2),(69,12,725,5),(70,1,465,3),(71,1,465,3),(72,1,465,3),(73,1,310,2),(74,1,335,1),(75,1,335,1),(76,1,295,1),(77,1,550,1),(78,1,1180,4),(79,1,310,2),(80,1,155,1),(81,1,155,1),(82,1,155,1),(83,1,2200,4),(84,1,335,1);
 /*!40000 ALTER TABLE `reservation` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -159,12 +160,14 @@ CREATE TABLE `reservation_flight` (
   `id_reservation_flight` int NOT NULL AUTO_INCREMENT,
   `flight_id` int DEFAULT NULL,
   `reservation_id` int DEFAULT NULL,
+  `nb_passengers` int DEFAULT NULL,
+  `price` float DEFAULT NULL,
   PRIMARY KEY (`id_reservation_flight`),
   KEY `fk_flight_reservations_idx` (`reservation_id`),
   KEY `fk_reservations_flight_idx` (`flight_id`),
   CONSTRAINT `fk_flight_reservations` FOREIGN KEY (`reservation_id`) REFERENCES `reservation` (`id_reservation`),
   CONSTRAINT `fk_reservations_flight` FOREIGN KEY (`flight_id`) REFERENCES `flight` (`id_flight`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -173,7 +176,7 @@ CREATE TABLE `reservation_flight` (
 
 LOCK TABLES `reservation_flight` WRITE;
 /*!40000 ALTER TABLE `reservation_flight` DISABLE KEYS */;
-INSERT INTO `reservation_flight` VALUES (1,1,1),(3,3,75),(4,5,76),(5,10,77);
+INSERT INTO `reservation_flight` VALUES (1,1,1,NULL,NULL),(3,3,75,NULL,NULL),(4,5,76,NULL,NULL),(5,10,77,NULL,NULL),(6,5,1,NULL,NULL),(7,4,1,NULL,NULL),(8,4,1,NULL,NULL),(9,4,1,NULL,NULL),(10,4,1,NULL,NULL),(11,10,83,NULL,NULL),(12,3,84,NULL,NULL);
 /*!40000 ALTER TABLE `reservation_flight` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -242,4 +245,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-11-19 19:46:21
+-- Dump completed on 2022-11-21 12:08:57
