@@ -1,38 +1,17 @@
-<?php foreach ($reservationFlights as $reservationFlight): ?>
+<?php foreach ($flights as $flight): ?>
     <?php
-
-    if(!empty($reservationFlight)){
-    $idflight = $reservationFlight->getFlightId();
-    } else {
-    $idflight = "";
-    }
-
-    $flight = FlightRepository::getList(
-        [
-            "id" => $idflight, 
-            "final_date" => '', 
-            "departure_airport_id" => '',
-            "arrival_airport_id" => '',
-            "price" => '',
-            "nb_seats" => '',
-            "name" => '',
-        ]
-    );
-    
     $searchDepartureAirport = AirportRepository::getList(
         [
-        "id" => $flight[0]->getDepartureAirportId(), 
+        "id" => $flight->getDepartureAirportId(), 
         "airport_name" => '',
         ]
     );
-
     $searchArrivalAirport = AirportRepository::getList(
         [
-        "id" => $flight[0]->getArrivalAirportId(), 
+        "id" => $flight->getArrivalAirportId(), 
         "airport_name" => '',
         ]
     );
-
     ?>
     <div class="container w-75">
         <div class="card mt-4 pt-2 pb-0 each-search-result">
@@ -40,20 +19,27 @@
                 <div class="d-flex flex-row justify-content-between">
                     <div class="d-flex flex-column justify-content-between">
                         <h4 class="hours-search-results">
-                            <?php echo $flight[0]->getDepartureHour()?> - <?php echo $flight[0]->getArrivalHour()?>
+                            <?php echo $flight->getDepartureHour()?> - <?php echo $flight->getArrivalHour()?>
                         </h4>
                         <p class="destination-search-result"><?php echo $searchDepartureAirport[0]->getName() . " -> " . $searchArrivalAirport[0]->getName(); ?></p>
-                        <p class="text-secondary"><?php echo $flight[0]->getDepartureDate(); ?></p>
+                        <p class="text-secondary"><?php echo $flight->getDepartureDate(); ?></p>
                     </div>
                     <div class="d-flex flex-column justify-content-between">
                         <h6 class="text-secondary"><i class="fa-solid fa-clock"></i> 
                         
-                            <?php echo $flight[0]->getDuration(); ?>
+                            <?php echo $flight->getDuration(); ?>
                         </h6>
                     </div>
                     <div class="d-flex flex-column justify-content-start text-right align-items-center">
-                        <h6 class = "text-secondary"> Prix du vol :  <?php echo $reservationFlight->getPrice(); ?> €</h6>
-                        <p> Nombre de passagers : <?php echo $reservationFlight->getNbPassengers(); ?></p>
+                        <h4 class="hours-search-results"><?php echo $flight->getPrice(); ?> €</h4>
+                        <?php if($flight->getNbSeats() < 1): ?>
+                            <p>VOL COMPLET</p>
+                        <?php else: ?>
+                            <p><?php echo $flight->getNbSeats(); ?> places disponibles</p>
+                            <div class="btn-group">
+                                <a type="button" class="btn btn-sm btn-primary detail-reservation" href="reservation-validation.php?id=<?php echo $flight->getId(); ?>">Réservez</a>
+                            </div>
+                        <?php endif; ?>
                     </div>
                 </div>
             </div>

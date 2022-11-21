@@ -31,9 +31,6 @@ Session::creation();
         <li class="nav-item text-white cart">
           <a class="nav-link cart" href="./cart.php"><i class="fa-solid fa-cart-shopping"></i></a>
         </li>
-        <li class="nav-item text-white welcome-nav-bar">
-        <a class="nav-link" href="./cart.php">Panier</a>
-        </li>
       <?php else: ?>
         <li class="nav-item text-white">
           <a class="nav-link" href="./login.php">Connexion</a>
@@ -41,6 +38,7 @@ Session::creation();
       <?php endif; ?>
     </ul>
   </div>
+  
 </nav>
 
 
