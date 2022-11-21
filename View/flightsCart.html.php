@@ -32,14 +32,10 @@
                     </div>
                     <div class="d-flex flex-column justify-content-start text-right align-items-center">
                         <h4 class="hours-search-results"><?php echo $flight->getPrice(); ?> €</h4>
-                        <?php if($flight->getNbSeats() < 1): ?>
-                            <p>VOL COMPLET</p>
-                        <?php else: ?>
-                            <p><?php echo $flight->getNbSeats(); ?> places disponibles</p>
+                            <p><?php echo $flight->getNbSeats(); ?> passagers</p>
                             <div class="btn-group">
-                                <a type="button" class="btn btn-sm btn-primary detail-reservation" href="reservation-validation.php?id=<?php echo $flight->getId(); ?>">Réservez</a>
+                                <a type="button" class="btn btn-sm btn-primary detail-reservation" href="reservation-validation.php?id=<?php echo $flight->getId(); ?>">Supprimez ce vol</a>
                             </div>
-                        <?php endif; ?>
                     </div>
                 </div>
             </div>

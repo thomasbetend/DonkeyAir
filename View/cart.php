@@ -10,10 +10,8 @@ require('../Model/Flight.class.php');
 require('../Model/FlightRepository.class.php');
 require('../Model/ReservationFlight.class.php');
 require('../Model/ReservationFlightRepository.class.php');
-require('../Model/ArrivalAirport.class.php');
-require('../Model/ArrivalAirportRepository.class.php');
-require('../Model/DepartureAirport.class.php');
-require('../Model/DepartureAirportRepository.class.php');
+require('../Model/Airport.class.php');
+require('../Model/AirportRepository.class.php');
 require('FlightsListView.class.php');
 require('ReservationFlightsListView.class.php');
 
@@ -30,4 +28,27 @@ require('ReservationFlightsListView.class.php');
     </div>
 </main>
 
+
+
+<?php
+
+foreach($_SESSION['cart']['flight'] as $element){
+
+        $flight = FlightRepository::getList([
+            "id" => $element, 
+            "final_date" => '',
+            "departure_airport_id" => '',
+            "arrival_airport_id" => '',
+            "price" => '',
+            "nb_seats" => '',
+            "name" => '',
+        ]);
+
+        FlightsListView::renderCart($flight);
+
+}
+
+?>
+
+<?php include_once('footer.php'); ?>
 

@@ -11,15 +11,10 @@ class Session
         $_SESSION['login'] = $user->getFirstname() . " " . $user->getLastname();
         $_SESSION['id'] = $user->getId();
 
-        $_SESSION['cart']['reservation'] = array(); 
+        $_SESSION['cart'] = array(); 
         $_SESSION['cart']['flight'] = array(); 
-        $_SESSION['cart']['price_total'] = array();
-
-        for($i=0; $i<10000; $i++){
-            $_SESSION['cart']['flight'][$i]=0;
-            $_SESSION['cart']['price_total'][$i]=0;
-        }
-
+        $_SESSION['cart']['nb_passengers'] = array();
+        $_SESSION['cart']['price'] = array();
     }
 
     public static function loginAdmin(User $admin) {
