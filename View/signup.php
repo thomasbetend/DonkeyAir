@@ -3,6 +3,8 @@
 <?php
 
 require('../Connection/Database.class.php');
+require('../Security/ErrorRepository.class.php');
+
 require('../Model/User.class.php');
 require('../Model/UserRepository.class.php');
 
@@ -24,7 +26,7 @@ if($_POST){
 
     if(!empty($_POST['user_email']) && !empty($user)){
 
-        $errorMessage['mail'] = 'Mail déjà utilisé';
+        $errorMessage['mail_used'] = true;
 
     }
 
@@ -32,7 +34,7 @@ if($_POST){
 
     if((!empty($_POST['user_email'])) && (filter_var($_POST['user_email'], FILTER_VALIDATE_EMAIL) === false)){
 
-        $errorMessage['mail'] = 'Mail incorrect';
+        $errorMessage['mail_incorrect'] = true;
 
     }
 
@@ -40,7 +42,7 @@ if($_POST){
 
     if(empty($_POST['user_lastname']) || empty($_POST['user_firstname']) || empty($_POST['user_email']) || empty($_POST['user_password'])){
 
-        $errorMessage['fields']  = 'Remplissez tous les champs';
+        $errorMessage['fields']  = true;
 
     }
 
@@ -108,9 +110,11 @@ if($_POST){
                         <input type="password" id="password" name="user_password" class="form-control connection-field" placeholder="Mot de passe *" value="<?php if($_POST){echo $_POST['user_password'];} ?>">
                     </div>
                     <div class="errorMessage text-danger">
-                        <?php if(!empty($errorMessage)): ?>
-                            <?php echo implode(' & ', $errorMessage);?>
-                        <?php endif; ?>
+                        <?php 
+                            if(!empty($errorMessage)){
+                                ErrorRepository::formError($errorMessage);
+                            }
+                        ?>
                     </div>
                     <div>
                         <button type="submit" class="btn btn-primary mt-2">Connexion</button>

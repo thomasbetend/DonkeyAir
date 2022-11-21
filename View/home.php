@@ -13,6 +13,7 @@ require('../Model/Airport.class.php');
 require('../Model/AirportRepository.class.php');
 require('FlightsListView.class.php');
 require('PromosListView.class.php');
+require('../Security/ErrorRepository.class.php');
 
 $airports = AirportRepository::getList(
     [
@@ -35,14 +36,27 @@ if($_POST){
         ]
     );
 
-    if(!empty($_POST['min_date'])){
-        $minDate = $_POST['min_date'];
-        $mindt = (DateTime::createFromFormat("Y-m-d", $minDate))->format("d/m/Y");
+    /* checking if airport chosen in selects are in database */
+
+    $airportSelectExisting = [
+        AirportRepository::getList(
+            [
+                "id" => intval($_POST['departure']),
+                "airport_name" => "",
+            ]
+        ),
+        AirportRepository::getList(
+            [
+                "id" => intval($_POST['arrival']),
+                "airport_name" => "",
+            ]
+            ),
+    ];
+
+    if(empty($airportSelectExisting)){
+        ErrorRepository::toErrorPage();
     }
-    if(!empty($_POST['max_date'])){
-        $maxDate = $_POST['max_date'];
-        $maxdt = (DateTime::createFromFormat("Y-m-d", $maxDate))->format("d/m/Y");
-    }
+
 }
 ?>
 
@@ -74,7 +88,7 @@ if($_POST){
                     <?php endforeach; ?>
                 </select>
                 <span class="between-dates"><span>
-                <input type="date" id="final_date" name="final_date" class="index-search-date" value="" placeholder="Date de départ" onfocus="(this.type='date')" onblur="(this.type='date')"></input>
+                <input type="date" id="final_date" name="final_date" class="index-search-date" value="<?php if(!empty($_POST['final_date'])){echo $_POST['final_date'];} ?>" placeholder="Date de départ" onfocus="(this.type='date')" onblur="(this.type='date')"></input>
             </div> 
             <div class="button-search">
                 <button type="submit" class="btn btn-primary small mt-3 mb-3 pl-4" id="buttonSearch">Recherchez un vol</button>

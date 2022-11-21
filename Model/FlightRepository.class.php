@@ -63,14 +63,8 @@ class FlightRepository
         $pdo = Database::getConnection();
         $stmt = $pdo->prepare($sql);
         foreach($params as $key=>$param){
-
-                $stmt->bindValue($key, $param, PDO::PARAM_STR);
-            
+            $stmt->bindValue($key, $param, PDO::PARAM_STR);
         }
-
-
-        //$stmt->debugDumpParams(); die;
-        
         $stmt->execute();
 
         $flights = [];

@@ -32,8 +32,7 @@ if(!empty($reservationFlight)){
 $flight = FlightRepository::getList(
     [
         "id" => $idflight, 
-        "min_date" => '', 
-        "max_date" => '', 
+        "final_date" => '', 
         "departure_airport_id" => '',
         "arrival_airport_id" => '',
         "price" => '',

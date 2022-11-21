@@ -16,8 +16,7 @@ require('FlightsListView.class.php');
 $searchFlight = FlightRepository::getList(
     [
         "id" => $_GET['id'], 
-        "min_date" => '', 
-        "max_date" => '',
+        "final_date" => '', 
         "departure_airport_id" => '',
         "arrival_airport_id" => '',
         "price" => '',
