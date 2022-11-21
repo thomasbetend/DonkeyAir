@@ -10,7 +10,7 @@ class FlightsListView
         include('flightsWithoutReservationButton.html.php');
     }
 
-    public static function renderCart($flights): void {
+    public static function renderCart($flights, $price, $nb_passengers): void {
         include('flightsCart.html.php');
     }
 }

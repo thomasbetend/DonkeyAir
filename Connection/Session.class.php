@@ -12,9 +12,6 @@ class Session
         $_SESSION['id'] = $user->getId();
 
         $_SESSION['cart'] = array(); 
-        $_SESSION['cart']['flight'] = array(); 
-        $_SESSION['cart']['nb_passengers'] = array();
-        $_SESSION['cart']['price'] = array();
     }
 
     public static function loginAdmin(User $admin) {

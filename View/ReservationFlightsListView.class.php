@@ -2,7 +2,7 @@
 
 class ReservationFlightsListView
 {
-    public static function render($reservationFlights, $flight, $reservation): void {
+    public static function render($reservationFlights): void {
         include('reservationflights.html.php');
     }
 }

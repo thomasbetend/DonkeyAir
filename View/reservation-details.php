@@ -17,27 +17,11 @@ require('ReservationFlightsListView.class.php');
 
 $reservationFlight = ReservationFlightRepository::getList(
     [
-        "id"=>'',
-        "flight_id" => '',
+        "id"=>"",
+        "flight_id" => "",
         "reservation_id" => $_GET['id'],
-    ]
-);
-
-if(!empty($reservationFlight)){
-    $idflight = $reservationFlight[0]->getFlightId();
-} else {
-    $idflight = '';
-}
-
-$flight = FlightRepository::getList(
-    [
-        "id" => $idflight, 
-        "final_date" => '', 
-        "departure_airport_id" => '',
-        "arrival_airport_id" => '',
-        "price" => '',
-        "nb_seats" => '',
-        "name" => '',
+        "price" => "",
+        "nb_passengers" => "",
     ]
 );
 
@@ -46,7 +30,7 @@ $searchRightsToAccess = ReservationRepository::getList(
             "id" => $_GET['id'],
             "user_id" => $_SESSION['id'],
             "price" =>"",
-            "nb_passengers" => "",
+            "date" => "",
     ]
 );
 
@@ -60,7 +44,6 @@ Security::isloggedIn($searchRightsToAccess);
             <div class="col-lg-6 col-md-8 mx-auto">
                 <h3 class="title-reservations-1">DonkeyAir</h3>
                 <h4 class="title-reservations-2"> Réservation n° <?php echo $_GET['id']; ?></h4>
-                <p>Nombre de passagers : <?php echo $searchRightsToAccess[0]->getNbPassengers(); ?></p>
                 <h5>Prix total : <?php echo $searchRightsToAccess[0]->getPrice(); ?> €</h5>
             </div>
         </div>
@@ -69,7 +52,7 @@ Security::isloggedIn($searchRightsToAccess);
 
 <?php
 
-ReservationFlightsListView::render($reservationFlight, $flight[0], $searchRightsToAccess[0]);
+ReservationFlightsListView::render($reservationFlight);
 
 ?>
 

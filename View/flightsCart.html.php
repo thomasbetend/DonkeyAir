@@ -31,10 +31,10 @@
                         </h6>
                     </div>
                     <div class="d-flex flex-column justify-content-start text-right align-items-center">
-                        <h4 class="hours-search-results"><?php echo $flight->getPrice(); ?> €</h4>
-                            <p><?php echo $flight->getNbSeats(); ?> passagers</p>
+                        <h4 class="hours-search-results"><?php echo $price; ?> €</h4>
+                            <p><?php echo $nb_passengers; ?> passagers</p>
                             <div class="btn-group">
-                                <a type="button" class="btn btn-sm btn-primary detail-reservation" href="reservation-validation.php?id=<?php echo $flight->getId(); ?>">Supprimez ce vol</a>
+                                <a type="button" class="btn btn-sm btn-secondary detail-reservation" href="cart-supp.php?id=<?php echo $flight->getId(); ?>">Supprimez ce vol</a>
                             </div>
                     </div>
                 </div>

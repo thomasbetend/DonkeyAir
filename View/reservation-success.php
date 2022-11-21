@@ -17,7 +17,7 @@ $reservationList = ReservationRepository::getList(
         "id" => "",
         "user_id" => $_SESSION['id'],
         "price" =>"",
-        "nb_passengers" => "",
+        "date" => "",
     ]
 );
 

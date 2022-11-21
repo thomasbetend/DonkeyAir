@@ -69,50 +69,16 @@ if($_POST){
 
     if(count($errorMessage) === 0){
 
-        /* insert into table reservation */
-
-       /*  Database::insertReservation(
-            [
-            "user_id" => $_SESSION['id'],
-            "price" => $searchFlight[0]->getPrice() * intval($_POST['nb_passengers']),
-            "nb_passengers" =>intval($_POST['nb_passengers'])
-            ]
-        );
- */
-        /* insert into table reservation_flight */
-
-       /*  $reservations = ReservationRepository::getList(
-            [
-                "id" => '', 
-                "user_id" => $_SESSION['id'], 
-                "price" => '', 
-                "nb_passengers" => '',
-            ]
-        ); */
-
-        /* $lastreservation = $reservations[0];
-
-        Database::insertReservationFlight(
-            [
-                "flight_id" => $searchFlight[0]->getId(),
-                "reservation_id" => $lastreservation->getId(),
-            ]
-        ); */
-
-        /* update table flight */
-    
-       /*  Database::update(
-            'flight',
-            [
-                "nb_seats" => $searchFlight[0]->getNbSeats() - intval($_POST['nb_passengers']),
-            ],
-            intval($_GET['id']),
-            ); */
-
         /* incrementing cart */
-        $_SESSION['cart']['flight'][0] = intval($_GET['id']);
-        $_SESSION['cart']['nb_passengers'][] = intval($_POST['nb_passengers']);
-        $_SESSION['cart']['price'][] = $searchFlight[0]->getPrice() * intval($_POST['nb_passengers']);
+
+        $_SESSION['cart'][] = [
+            'flight' => intval($_GET['id']),
+            'nb_passengers' => intval($_POST['nb_passengers']),
+            'price' => $searchFlight[0]->getPrice() * intval($_POST['nb_passengers']),
+        ];
+
+        $_SESSION['cart_price'] += $searchFlight[0]->getPrice() * intval($_POST['nb_passengers']);
+
 
         header('location:cart.php');
         exit;

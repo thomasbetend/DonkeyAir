@@ -5,7 +5,8 @@ class Reservation
     private ?int $id;
     private ?int $user_id;
     private ?float $price;
-    private ?int $nb_passengers;
+    private ?DateTime $date;
+
 
     public static function createdFromSqlRow (array $row): self
     {
@@ -13,10 +14,11 @@ class Reservation
         $reservation->id = $row['id_reservation'];
         $reservation->user_id = $row['user_id'];
         $reservation->price = $row['price'];
-        $reservation->nb_passengers = $row['nb_passengers'];
+        $reservation->date = DateTime::createFromFormat("Y-m-d H:i:s", $row['date']);
 
         return $reservation;
     }
+
 
     public function getId(): int 
     {
@@ -33,9 +35,9 @@ class Reservation
         return $this->price;
     }
 
-    public function getNbPassengers(): int 
+    public function getDDate(): string 
     {
-        return $this->nb_passengers;
+        return $this->date->format("d/m/Y");
     }
 }
 

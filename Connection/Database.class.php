@@ -39,12 +39,12 @@ class DataBase
         array $data = [
             "user_id" => "",
             "price" => "",
-            "nb_passengers" =>"",
+            "date" =>"",
         ]): void
     {
         $cols = implode(", ", array_keys($data));
 
-        $sql = "INSERT INTO reservation (" . $cols . ") VALUES (:user_id, :price, :nb_passengers)";
+        $sql = "INSERT INTO reservation (" . $cols . ") VALUES (:user_id, :price, :date)";
 
         Database::bind($sql, $data);
     }
@@ -53,11 +53,13 @@ class DataBase
         array $data = [
             "flight_id" => "",
             "reservation_id" => "",
+            "nb_passengers" => "",
+            "price" => "",
         ]): void
     {
         $cols = implode(", ", array_keys($data));
 
-        $sql = "INSERT INTO reservation_flight (" . $cols . ") VALUES (:flight_id, :reservation_id)";
+        $sql = "INSERT INTO reservation_flight (" . $cols . ") VALUES (:flight_id, :reservation_id, :price, :nb_passengers)";
 
         Database::bind($sql, $data);
     }

@@ -7,7 +7,7 @@ class ReservationRepository
             "id" => '', 
             "user_id" => '', 
             "price" => '', 
-            "nb_passengers" => '',
+            "date" => '',
         ]): array 
     {
         $sql = 'SELECT *
@@ -32,9 +32,9 @@ class ReservationRepository
             $params[':price'] = $data["price"];  
         }
 
-        if($data["nb_passengers"]){
-            $sql .= ' AND nb_passengers = :nb_passengers';
-            $params[':nb_passengers'] = $data["nb_passengers"];  
+        if($data["date"]){
+            $sql .= ' AND date = :date';
+            $params[':date'] = $data["date"];  
         }
 
         $sql .= ' ORDER BY id_reservation DESC';
@@ -48,6 +48,7 @@ class ReservationRepository
 
         $reservations = [];
         while($row=$stmt->fetch(PDO::FETCH_ASSOC)){
+
             $reservations[] = Reservation::createdFromSqlRow($row);
         }
 
