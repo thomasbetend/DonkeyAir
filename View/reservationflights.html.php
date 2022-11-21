@@ -1,16 +1,16 @@
 <?php foreach ($reservationFlights as $reservationFlight): ?>
     <?php
-    $searchDepartureAirport = DepartureAirportRepository::getList(
+    $searchDepartureAirport = AirportRepository::getList(
         [
         "id" => $flight->getDepartureAirportId(), 
-        "departure_airport_name" => '',
+        "airport_name" => '',
         ]
     );
 
-    $searchArrivalAirport = ArrivalAirportRepository::getList(
+    $searchArrivalAirport = AirportRepository::getList(
         [
         "id" => $flight->getArrivalAirportId(), 
-        "arrival_airport_name" => '',
+        "airport_name" => '',
         ]
     );
 
@@ -33,7 +33,7 @@
                         </h6>
                     </div>
                     <div class="d-flex flex-column justify-content-start text-right align-items-center">
-                        <h5> Prix du vol :  <?php echo $flight->getPrice(); ?> €</h5>
+                        <h6 class = "text-secondary"> Prix du vol :  <?php echo $flight->getPrice(); ?> €</h6>
                         <p> Nombre de passagers : <?php echo $reservation->getNbPassengers(); ?></p>
                     </div>
                 </div>

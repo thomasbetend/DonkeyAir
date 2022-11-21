@@ -5,8 +5,7 @@ class FlightRepository
     public static function getList(
         array $data = [
             "id" => '', 
-            "min_date" => '', 
-            "max_date" => '', 
+            "final_date" => '',
             "departure_airport_id" => '',
             "arrival_airport_id" => '',
             "price" => '',
@@ -27,14 +26,13 @@ class FlightRepository
             $params[':id'] = $data['id']; 
         }
 
-        if($data['min_date']){
-            $sql .= ' AND departure_date > :min_date';
-            $params[':min_date'] = $data['min_date'];  
-        }
+        if($data['final_date']){
+            $min_date = date('Y-m-d', strtotime($data['final_date']. ' - 2 days'));
+            $max_date = date('Y-m-d', strtotime($data['final_date']. ' + 2 days'));
 
-        if($data['max_date']){
-            $sql .= ' AND arrival_date < :max_date';
-            $params[':max_date'] = $data['max_date'];  
+            $sql .= ' AND departure_date BETWEEN :min_date AND :max_date';
+            $params[':min_date'] = $min_date;  
+            $params[':max_date'] = $max_date;  
         }
 
         if($data['price']){
@@ -65,8 +63,14 @@ class FlightRepository
         $pdo = Database::getConnection();
         $stmt = $pdo->prepare($sql);
         foreach($params as $key=>$param){
-            $stmt->bindValue($key, $param, PDO::PARAM_STR);
+
+                $stmt->bindValue($key, $param, PDO::PARAM_STR);
+            
         }
+
+
+        //$stmt->debugDumpParams(); die;
+        
         $stmt->execute();
 
         $flights = [];

@@ -9,34 +9,24 @@ require('../Model/User.class.php');
 require('../Model/UserRepository.class.php');
 require('../Model/Reservation.class.php');
 require('../Model/ReservationRepository.class.php');
-require('../Model/ArrivalAirport.class.php');
-require('../Model/ArrivalAirportRepository.class.php');
-require('../Model/DepartureAirport.class.php');
-require('../Model/DepartureAirportRepository.class.php');
+require('../Model/Airport.class.php');
+require('../Model/AirportRepository.class.php');
 require('FlightsListView.class.php');
 require('PromosListView.class.php');
 
-$departures = DepartureAirportRepository::getList(
+$airports = AirportRepository::getList(
     [
         "id" => '', 
-        "departure_airport_name" => '',
+        "airport_name" => '',
     ]
 );
-
-$arrivals = ArrivalAirportRepository::getList(
-    [
-        "id" => '', 
-        "arrival_airport_name" => '',
-    ]
-); 
 
 if($_POST){
 
     $flights = FlightRepository::getList(
         [
             "id" => '', 
-            "min_date" => $_POST['min_date'], 
-            "max_date" => $_POST['max_date'],
+            "final_date" => $_POST['final_date'], 
             "departure_airport_id" => intval($_POST['departure']),
             "arrival_airport_id" => intval($_POST['arrival']),
             "price" => '',
@@ -69,23 +59,22 @@ if($_POST){
             <div class="form-group index-search-form">  
                 <select name="departure" id="index-select">
                     <option value="">Aéroport de départ</option> 
-                    <?php foreach($departures as $departure): ?>
-                        <option value="<?php echo $departure->getId(); ?>" <?php if(!empty($_POST['departure']) && $_POST['departure'] == $departure->getId()) echo "selected"; ?>>
-                            <?php echo $departure->getName(); ?>
+                    <?php foreach($airports as $airport): ?>
+                        <option value="<?php echo $airport->getId(); ?>" <?php if(!empty($_POST['departure']) && $_POST['departure'] == $airport->getId()) echo "selected"; ?>>
+                            <?php echo $airport->getName(); ?>
                         </option> 
                     <?php endforeach; ?>
                 </select>
                 <select name="arrival" id="index-select">
                     <option value="">Aéroport d'arrivée</option> 
-                    <?php foreach($arrivals as $arrival): ?>
-                        <option value="<?php echo $arrival->getId(); ?>" <?php if(!empty($_POST['arrival']) && $_POST['arrival'] == $arrival->getId()) echo "selected"; ?>>
-                            <?php echo $arrival->getName(); ?>
+                    <?php foreach($airports as $airport): ?>
+                        <option value="<?php echo $airport->getId(); ?>" <?php if(!empty($_POST['arrival']) && $_POST['arrival'] == $airport->getId()) echo "selected"; ?>>
+                            <?php echo $airport->getName(); ?>
                         </option> 
                     <?php endforeach; ?>
                 </select>
-                <span class="between-dates"> Période <span>
-                <input type="datetime-local" id="min_date" name="min_date" class="index-search-date" value="<?php if(!empty($_POST['min_date'])) {echo $mindt;} ?>" placeholder="<?php if(!empty($_POST['min_date'])) {echo $mindt;} else {echo "Du";} ?>" onfocus="(this.type='date')" onblur="(this.type='text')"></input>
-                <input type="datetime-local" id="max_date" name="max_date" class="index-search-date" value="<?php if(!empty($_POST['max_date'])) {echo $maxdt;} ?>" placeholder="<?php if(!empty($_POST['max_date'])) {echo $maxdt;} else {echo "Au";} ?>" onfocus="(this.type='date')" onblur="(this.type='text')"></input>
+                <span class="between-dates"><span>
+                <input type="date" id="final_date" name="final_date" class="index-search-date" value="" placeholder="Date de départ" onfocus="(this.type='date')" onblur="(this.type='date')"></input>
             </div> 
             <div class="button-search">
                 <button type="submit" class="btn btn-primary small mt-3 mb-3 pl-4" id="buttonSearch">Recherchez un vol</button>
@@ -94,7 +83,7 @@ if($_POST){
     </div>
 </main> 
 
-<?php if(empty($_POST) || (($_POST['arrival'] === '') && ($_POST['departure'] === '') && ($_POST['min_date'] === '') && ($_POST['max_date'] === ''))): ?>
+<?php if(empty($_POST) || (($_POST['arrival'] === '') && ($_POST['departure'] === '') && ($_POST['final_date'] === ''))): ?>
     <div class="album py-5 bg-light">
         <div class="container">
             <div class="row">

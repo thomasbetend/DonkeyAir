@@ -3,16 +3,15 @@
 <?php
 
 require('../Connection/Database.class.php');
+require('../Security/Security.class.php');
 require('../Model/Reservation.class.php');
 require('../Model/ReservationRepository.class.php');
 require('../Model/Flight.class.php');
 require('../Model/FlightRepository.class.php');
 require('../Model/ReservationFlight.class.php');
 require('../Model/ReservationFlightRepository.class.php');
-require('../Model/ArrivalAirport.class.php');
-require('../Model/ArrivalAirportRepository.class.php');
-require('../Model/DepartureAirport.class.php');
-require('../Model/DepartureAirportRepository.class.php');
+require('../Model/Airport.class.php');
+require('../Model/AirportRepository.class.php');
 require('FlightsListView.class.php');
 require('ReservationFlightsListView.class.php');
 
@@ -24,9 +23,15 @@ $reservationFlight = ReservationFlightRepository::getList(
     ]
 );
 
+if(!empty($reservationFlight)){
+    $idflight = $reservationFlight[0]->getFlightId();
+} else {
+    $idflight = '';
+}
+
 $flight = FlightRepository::getList(
     [
-        "id" => $reservationFlight[0]->getFlightId(), 
+        "id" => $idflight, 
         "min_date" => '', 
         "max_date" => '', 
         "departure_airport_id" => '',
@@ -46,9 +51,7 @@ $searchRightsToAccess = ReservationRepository::getList(
     ]
 );
 
-if(empty($searchRightsToAccess)){
-    header('location:home.php');
-}
+Security::isloggedIn($searchRightsToAccess);
 
 ?>
 
@@ -70,6 +73,11 @@ if(empty($searchRightsToAccess)){
 ReservationFlightsListView::render($reservationFlight, $flight[0], $searchRightsToAccess[0]);
 
 ?>
+
+<?php include_once('footer.php'); ?>
+
+</body>
+</html>
 
 
 

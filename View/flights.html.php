@@ -1,15 +1,15 @@
 <?php foreach ($flights as $flight): ?>
     <?php
-    $searchDepartureAirport = DepartureAirportRepository::getList(
+    $searchDepartureAirport = AirportRepository::getList(
         [
         "id" => $flight->getDepartureAirportId(), 
-        "departure_airport_name" => '',
+        "airport_name" => '',
         ]
     );
-    $searchArrivalAirport = ArrivalAirportRepository::getList(
+    $searchArrivalAirport = AirportRepository::getList(
         [
         "id" => $flight->getArrivalAirportId(), 
-        "arrival_airport_name" => '',
+        "airport_name" => '',
         ]
     );
     ?>

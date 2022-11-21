@@ -6,26 +6,17 @@ require('../Security/Security.class.php');
 require('../Connection/Database.class.php');
 require('../Model/User.class.php');
 require('../Model/UserRepository.class.php');
-require('../Model/ArrivalAirport.class.php');
-require('../Model/ArrivalAirportRepository.class.php');
-require('../Model/DepartureAirport.class.php');
-require('../Model/DepartureAirportRepository.class.php');
+require('../Model/Airport.class.php');
+require('../Model/AirportRepository.class.php');
 require('../Model/Flight.class.php');
 require('../Model/FlightRepository.class.php');
 
 Security::isloggedIn($_SESSION);
 
-$departures = DepartureAirportRepository::getList(
+$airports = AirportRepository::getList(
     [
         "id" => '', 
-        "departure_airport_name" => '',
-    ]
-);
-
-$arrivals = ArrivalAirportRepository::getList(
-    [
-        "id" => '', 
-        "arrival_airport_name" => '',
+        "airport_name" => '',
     ]
 );
 
@@ -86,9 +77,9 @@ exit();
                         <label for="add-flight-select"></label>
                         <select name="departure_airport_id" id="add-flight-select" class="form-group mb-1">
                             <option value="">Aéroport de départ</option> 
-                            <?php foreach($departures as $departure): ?>
-                                <option value="<?php echo $departure->getId(); ?>" <?php if(!empty($_POST['departure']) && $_POST['departure'] == $departure->getId()) echo "selected"; ?>>
-                                    <?php echo $departure->getName(); ?>
+                            <?php foreach($airports as $airport): ?>
+                                <option value="<?php echo $airport->getId(); ?>" <?php if(!empty($_POST['departure']) && $_POST['departure'] == $airport->getId()) echo "selected"; ?>>
+                                    <?php echo $airport->getName(); ?>
                                 </option> 
                             <?php endforeach; ?>
                         </select>
@@ -97,9 +88,9 @@ exit();
                         <label for="add-flight-select"></label>
                         <select name="arrival_airport_id" id="add-flight-select" class="form-group mb-1">
                             <option value="">Aéroport d'arrivée</option> 
-                            <?php foreach($arrivals as $arrival): ?>
-                                <option value="<?php echo $arrival->getId(); ?>" <?php if(!empty($_POST['arrival']) && $_POST['arrival'] == $arrival->getId()) echo "selected"; ?>>
-                                    <?php echo $arrival->getName(); ?>
+                            <?php foreach($airports as $airport): ?>
+                                <option value="<?php echo $airport->getId(); ?>" <?php if(!empty($_POST['arrival']) && $_POST['arrival'] == $airport->getId()) echo "selected"; ?>>
+                                    <?php echo $airport->getName(); ?>
                                 </option> 
                             <?php endforeach; ?>
                         </select>

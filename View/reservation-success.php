@@ -21,7 +21,7 @@ $reservationList = ReservationRepository::getList(
     ]
 );
 
-$lastReservation[] = end($reservationList);
+$lastReservation[] = $reservationList[0];
 
 ?>
 

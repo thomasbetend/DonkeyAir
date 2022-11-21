@@ -9,10 +9,8 @@ require('../Model/Reservation.class.php');
 require('../Model/ReservationRepository.class.php');
 require('../Security/Security.class.php');
 require('FlightsListView.class.php');
-require('../Model/ArrivalAirport.class.php');
-require('../Model/ArrivalAirportRepository.class.php');
-require('../Model/DepartureAirport.class.php');
-require('../Model/DepartureAirportRepository.class.php');
+require('../Model/Airport.class.php');
+require('../Model/AirportRepository.class.php');
 
 Security::isloggedInAdmin($_SESSION);
 

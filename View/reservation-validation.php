@@ -7,10 +7,8 @@ require('../Model/Flight.class.php');
 require('../Model/FlightRepository.class.php');
 require('../Model/Reservation.class.php');
 require('../Model/ReservationRepository.class.php');
-require('../Model/ArrivalAirport.class.php');
-require('../Model/ArrivalAirportRepository.class.php');
-require('../Model/DepartureAirport.class.php');
-require('../Model/DepartureAirportRepository.class.php');
+require('../Model/Airport.class.php');
+require('../Model/AirportRepository.class.php');
 require('../Security/Security.class.php');
 require('../Security/ErrorRepository.class.php');
 require('FlightsListView.class.php');
@@ -36,16 +34,16 @@ ErrorRepository::noMoreSeats($searchFlight[0]);
 
 /* --------- */
 
-$searchDepartureAirport = DepartureAirportRepository::getList(
+$searchDepartureAirport = AirportRepository::getList(
     [
     "id" => $searchFlight[0]->getDepartureAirportId(), 
-    "departure_airport_name" => '',
+    "airport_name" => '',
     ]
 );
-$searchArrivalAirport = ArrivalAirportRepository::getList(
+$searchArrivalAirport = AirportRepository::getList(
     [
     "id" => $searchFlight[0]->getArrivalAirportId(), 
-    "arrival_airport_name" => '',
+    "airport_name" => '',
     ]
 );
 
@@ -93,7 +91,7 @@ if($_POST){
             ]
         );
 
-        $lastreservation = end($reservations);
+        $lastreservation = $reservations[0];
 
         Database::insertReservationFlight(
             [

@@ -37,6 +37,8 @@ class ReservationRepository
             $params[':nb_passengers'] = $data["nb_passengers"];  
         }
 
+        $sql .= ' ORDER BY id_reservation DESC';
+
         $pdo = Database::getConnection();
         $stmt = $pdo->prepare($sql);
         foreach($params as $key=>$param){
