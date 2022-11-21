@@ -30,8 +30,8 @@ Session::creation();
         <li class="nav-item text-white welcome-nav-bar">
           <p class="pt-4">Bienvenue <?php echo ucwords($_SESSION['login']); ?></p>
         </li>
-        <li class="nav-item text-white welcome-nav-bar">
-          <a class="nav-link" href="./cart.php"><i class="fa-solid fa-cart-shopping"></i></a>
+        <li class="nav-item text-white cart">
+          <a class="nav-link cart" href="./cart.php"><i class="fa-solid fa-cart-shopping"></i></a>
         </li>
       <?php else: ?>
         <li class="nav-item text-white">

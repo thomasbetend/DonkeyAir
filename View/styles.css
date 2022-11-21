@@ -58,10 +58,21 @@ h4 {
 
 .welcome-nav-bar {
     display: flex;
+    align-items: center;
     flex-direction: column;
     justify-content: center;
     max-height: 32px;
     padding-left: 10px;
+}
+
+.cart {
+    position: absolute;
+  right: 0;
+  display: flex;
+  gap: 20px;
+  flex-direction: row;
+  margin-right: 2%;
+  
 }
 
 /* index */
