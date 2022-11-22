@@ -70,8 +70,8 @@ if($_POST){
         </div>
 
         <form method="POST" class="text-center mt-2 small" id="">
-            <div class="form-group index-search-form">  
-                <select name="departure" id="index-select">
+            <div class="form-group index-search-form select-form">  
+                <select name="departure" id="index-select" class="select-form">
                     <option value="">Aéroport de départ</option> 
                     <?php foreach($airports as $airport): ?>
                         <option value="<?php echo $airport->getId(); ?>" <?php if(!empty($_POST['departure']) && $_POST['departure'] == $airport->getId()) echo "selected"; ?>>
@@ -79,7 +79,7 @@ if($_POST){
                         </option> 
                     <?php endforeach; ?>
                 </select>
-                <select name="arrival" id="index-select">
+                <select name="arrival" id="index-select" class="select-form">
                     <option value="">Aéroport d'arrivée</option> 
                     <?php foreach($airports as $airport): ?>
                         <option value="<?php echo $airport->getId(); ?>" <?php if(!empty($_POST['arrival']) && $_POST['arrival'] == $airport->getId()) echo "selected"; ?>>
@@ -88,10 +88,10 @@ if($_POST){
                     <?php endforeach; ?>
                 </select>
                 <span class="between-dates"><span>
-                <input type="date" id="final_date" name="final_date" class="index-search-date" value="<?php if(!empty($_POST['final_date'])){echo $_POST['final_date'];} ?>" placeholder="Date de départ" onfocus="(this.type='date')" onblur="(this.type='date')"></input>
+                <input type="date" id="final_date" name="final_date" class="select-form index-search-date" value="<?php if(!empty($_POST['final_date'])){echo $_POST['final_date'];} ?>" placeholder="Date de départ" onfocus="(this.type='date')" onblur="(this.type='date')"></input>
             </div> 
             <div class="button-search">
-                <button type="submit" class="btn btn-primary small mt-3 mb-3 pl-4" id="buttonSearch">Recherchez un vol</button>
+                <button type="submit" class="btn btn-primary small mt-3 mb-3 pl-4 select-form" id="buttonSearch">Recherchez un vol</button>
             </div>
         </form>
     </div>

@@ -81,6 +81,12 @@ h4 {
     background-color: rgb(225, 225, 225);
 }
 
+.select-form {
+    display: block;
+    flex-direction: column;
+    margin-left: 40%;    
+}
+
 .index-search {
     border: none;
     border-radius: 5px;
