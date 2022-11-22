@@ -242,6 +242,10 @@ input[type="date"] {
         width: 95% !important;
     }
 
+    .w-50{
+        width: 95% !important;
+    }
+
     .card-flight {
         flex-direction: column !important;
         align-items: center;

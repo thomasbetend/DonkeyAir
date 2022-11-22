@@ -4,7 +4,7 @@
 
 require('../Connection/Database.class.php');
 require('../Model/User.class.php');
-require('../Model/UserRepository.class.php');
+require('../Repositories/UserRepository.class.php');
 
 ?>
 
@@ -54,8 +54,8 @@ require('../Model/UserRepository.class.php');
         </div>
 
         <div class="container w-50">
-            <div class=""></div>
-                <form action="" method="post" class="">
+            <div class="form-login">
+                <form action="" method="post">
                     <div class="form-group">
                         <label for="user_email"></label>
                         <input type="email" id="email" name="user_email" class="form-control connection-field" placeholder="Email *" value="<?php if(!empty($_POST['user_email'])) echo $_POST['user_email']; ?>">

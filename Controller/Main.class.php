@@ -2,9 +2,10 @@
 
 class Main 
 {
-    public static function start() 
+    public static function home() 
     {
         header('location:./View/home.php');
         exit;
     }
+
 }

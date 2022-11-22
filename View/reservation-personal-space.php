@@ -3,7 +3,7 @@
 <?php
 
 require('../Connection/Database.class.php');
-require('../Model/ReservationRepository.class.php');
+require('../Repositories/ReservationRepository.class.php');
 require('../Model/Reservation.class.php');
 require('../Security/Security.class.php');
 require('ReservationsListView.class.php');
