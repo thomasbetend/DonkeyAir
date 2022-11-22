@@ -1,19 +1,4 @@
-<?php include_once('header.php'); ?>
-
 <?php
-
-require('../Connection/Database.class.php');
-require('../Model/Flight.class.php');
-require('../Repositories/FlightRepository.class.php');
-require('../Model/User.class.php');
-require('../Repositories/UserRepository.class.php');
-require('../Model/Reservation.class.php');
-require('../Repositories/ReservationRepository.class.php');
-require('../Model/Airport.class.php');
-require('../Repositories/AirportRepository.class.php');
-require('FlightsListView.class.php');
-require('PromosListView.class.php');
-require('../Security/ErrorRepository.class.php');
 
 $airports = AirportRepository::getList(
     [
@@ -122,7 +107,6 @@ if($_POST){
     ?>
 <?php endif; ?>
 
-<?php include_once('footer.php'); ?>
 
 <script type="text/javascript">
     window.onload = () => {

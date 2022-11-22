@@ -11,7 +11,7 @@ class ErrorRepository
     public static function noMoreSeats($flight): void
     {
         if($flight->getNbSeats() < 1){
-            header("location:reservation-full.php");
+            header("location:/vol-complet");
             exit;
         }
     }

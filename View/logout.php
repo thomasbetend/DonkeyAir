@@ -1,5 +1,5 @@
 <?php
-
-require('header.php');
-
+Session::creation();
 Session::destroy();
+
+header("location:../accueil");

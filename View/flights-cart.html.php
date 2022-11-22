@@ -34,7 +34,7 @@
                         <h4 class="hours-search-results"><?php echo $price; ?> €</h4>
                             <p><?php echo $nb_passengers; ?> passagers</p>
                             <div class="btn-group">
-                                <a type="button" class="btn btn-sm btn-secondary detail-reservation" href="cart-supp.php?id=<?php echo $flight->getId(); ?>">Supprimez ce vol</a>
+                                <a type="button" class="btn btn-sm btn-secondary detail-reservation" href="/panier-suppression/<?php echo $flight->getId(); ?>">Supprimez ce vol</a>
                             </div>
                     </div>
                 </div>

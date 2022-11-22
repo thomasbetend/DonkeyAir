@@ -60,6 +60,10 @@ class FlightRepository
             $params[':name'] = $data['name'];  
         }
 
+    /*  $length = 20;
+        $start = ($_GET["page"] - 1) * $length;
+        $sql .= " LIMIT " . $start . ", " . $length; */
+
         $pdo = Database::getConnection();
         $stmt = $pdo->prepare($sql);
         foreach($params as $key=>$param){

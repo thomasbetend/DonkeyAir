@@ -12,6 +12,7 @@ class Session
         $_SESSION['id'] = $user->getId();
 
         $_SESSION['cart'] = array(); 
+        $_SESSION['cart_price'] = 0;
     }
 
     public static function loginAdmin(User $admin) {
@@ -25,7 +26,6 @@ class Session
         $_SESSION = array();
         session_destroy();
         unset($_SESSION);
-        header('location: home.php');
     }
 
 }

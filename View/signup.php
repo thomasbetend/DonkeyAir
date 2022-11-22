@@ -2,12 +2,6 @@
 
 <?php
 
-require('../Connection/Database.class.php');
-require('../Security/ErrorRepository.class.php');
-
-require('../Model/User.class.php');
-require('../Repositories/UserRepository.class.php');
-
 if($_POST){
 
     $errorMessage = [];
@@ -74,7 +68,7 @@ if($_POST){
         Session::login($user[0]);
 
 
-        header('location:home.php');
+        header('location:../accueil');
         exit;
     }
 }
@@ -120,7 +114,7 @@ if($_POST){
                         <button type="submit" class="btn btn-primary mt-2">Inscription</button>
                     </div>
                 </form>
-                <p class="mt-4 text-secondary"><a href="login.php">Déjà inscrit ? Connectez-vous.</a></p>
+                <p class="mt-4 text-secondary"><a href="./connexion">Déjà inscrit ? Connectez-vous.</a></p>
             </div>
         </div>
     </div>

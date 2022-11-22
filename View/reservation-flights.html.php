@@ -1,39 +1,3 @@
-<?php foreach ($reservationFlights as $reservationFlight): ?>
-    <?php
-
-    if(!empty($reservationFlight)){
-    $idflight = $reservationFlight->getFlightId();
-    } else {
-    $idflight = "";
-    }
-
-    $flight = FlightRepository::getList(
-        [
-            "id" => $idflight, 
-            "final_date" => '', 
-            "departure_airport_id" => '',
-            "arrival_airport_id" => '',
-            "price" => '',
-            "nb_seats" => '',
-            "name" => '',
-        ]
-    );
-    
-    $searchDepartureAirport = AirportRepository::getList(
-        [
-        "id" => $flight[0]->getDepartureAirportId(), 
-        "airport_name" => '',
-        ]
-    );
-
-    $searchArrivalAirport = AirportRepository::getList(
-        [
-        "id" => $flight[0]->getArrivalAirportId(), 
-        "airport_name" => '',
-        ]
-    );
-
-    ?>
     <div class="container w-75">
         <div class="card mt-4 pt-2 pb-0 each-search-result">
             <div class="card-body">
@@ -59,4 +23,3 @@
             </div>
         </div>
     </div>
-<?php endforeach; ?>

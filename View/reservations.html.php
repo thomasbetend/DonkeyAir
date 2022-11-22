@@ -12,7 +12,7 @@
                 <div class="d-flex flex-column justify-content-start text-right align-items-center">
                     <h4 class="hours-search-results"><?php echo $reservation->getPrice(); ?> €</h4>
                     <div class="btn-group">
-                        <a type="button" class="btn btn-sm btn-primary detail-reservation" href="reservation-details.php?id=<?php echo $reservation->getId(); ?>">
+                        <a type="button" class="btn btn-sm btn-primary detail-reservation" href="/reservation-details/<?php echo $reservation->getId(); ?>">
                             Détails
                         </a>
                     </div>

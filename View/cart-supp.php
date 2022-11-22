@@ -13,5 +13,5 @@ foreach($_SESSION['cart'] as $key=>$element){
 }
 $_SESSION['cart_price'] = 0;
 
-header('location:cart.php');
+header('location:/cart');
 exit;

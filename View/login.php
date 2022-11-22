@@ -2,10 +2,6 @@
 
 <?php
 
-require('../Connection/Database.class.php');
-require('../Model/User.class.php');
-require('../Repositories/UserRepository.class.php');
-
 ?>
 
 
@@ -32,7 +28,7 @@ require('../Repositories/UserRepository.class.php');
                     if($_POST['user_email'] === 'admin@gmail.com'){
                         Session::loginAdmin($user);
                     }
-                    header('location:home.php');
+                    header('location:./accueil');
                     exit;
                 } else {
                     $errorMessage['incorrect'] = "Renseignements incorrects";
@@ -75,7 +71,7 @@ require('../Repositories/UserRepository.class.php');
                     <div>
                         <button type="submit" class="btn btn-primary mt-2">Connexion</button>
                     </div>
-                    <p class="mt-4 text-secondary"><a href="signup.php">Pas encore inscrit ? Créez un compte.</a></p>
+                    <p class="mt-4 text-secondary"><a href="./inscription">Pas encore inscrit ? Créez un compte.</a></p>
                 </form>
             </div>
         </div>
