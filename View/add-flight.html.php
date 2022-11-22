@@ -1,96 +1,4 @@
-<?php include_once('header.php'); ?>
 
-<?php 
-
-require('../Security/Security.class.php');
-require('../Security/ErrorRepository.class.php');
-require('../Connection/Database.class.php');
-require('../Model/User.class.php');
-require('../Repositories/UserRepository.class.php');
-require('../Model/Airport.class.php');
-require('../Repositories/AirportRepository.class.php');
-require('../Model/Flight.class.php');
-require('../Repositories/FlightRepository.class.php');
-
-Security::isloggedIn($_SESSION);
-
-$airports = AirportRepository::getList(
-    [
-        "id" => '', 
-        "airport_name" => '',
-    ]
-);
-
-if($_POST) {
-
-    $errorMessage = [];
-
-    if(empty($_POST['departure_date']) || empty($_POST['departure_hour']) || empty($_POST['arrival_date']) || empty($_POST['arrival_hour']) || empty($_POST['departure_airport_id']) || empty($_POST['arrival_airport_id']) || empty($_POST['price']) || empty($_POST['nb_seats']) || empty($_POST['flight_name'])){
-        $errorMessage['fields'] = true; 
-    }
-
-    if(floatval($_POST['price']) < 0){
-        $errorMessage['price'] = true; 
-    }
-
-    if(intval($_POST['nb_seats']) < 1){
-        $errorMessage['nb_seats'] = true; 
-    }
-
-    if(($_POST['departure_date'] . ' ' . $_POST['departure_hour']. ':00') >= $_POST['arrival_date'] . ' ' . $_POST['arrival_hour']. ':00'){
-        $errorMessage['time'] = true; 
-    }
-
-    $flightNameAlreadyExisting = FlightRepository::getList(
-        [
-            "id" => "",
-            "final_date" => "",
-            "departure_airport_id" => "",
-            "arrival_airport_id" => "",
-            "price" => "",
-            "nb_seats" => "",
-            "name" => $_POST['flight_name'],
-        ]
-        );
-    
-    if(!empty($flightNameAlreadyExisting)){
-        $errorMessage['flight_name'] = true; 
-    }
-
-    if(empty($errorMessage)){
-
-        Database::insertFlight(
-            [
-                "departure_date" => $_POST['departure_date'] . ' ' . $_POST['departure_hour']. ':00',
-                "arrival_date" => $_POST['arrival_date'] . ' ' . $_POST['arrival_hour']. ':00', 
-                "departure_airport_id" => intval($_POST['departure_airport_id']),
-                "arrival_airport_id" => intval($_POST['arrival_airport_id']),
-                "price" => $_POST['price'],
-                "nb_seats" => intval($_POST['nb_seats']),
-                "name" => $_POST['flight_name'],
-            ]
-        );
-
-        $totlaFlightsList = FlightRepository::getList(
-            [
-                "id" => '', 
-                "final_date" => '', 
-                "departure_airport_id" => '',
-                "arrival_airport_id" => '',
-                "price" => '',
-                "nb_seats" => '',
-                "name" => '',
-            ]
-            );
-
-        $lastAddedFlight = end($totlaFlightsList);
-
-        header('location:add-flight-success.php?id=' . $lastAddedFlight->getId());
-        exit();
-
-    }
-}
-?>
 
 <main role="main" class="bg-grey-light">
     <div class="py-5 text-center container top-section">
@@ -165,8 +73,6 @@ if($_POST) {
                 </form>
         </div>
 </main>
-
-<?php include_once('footer.php'); ?>
 
 <script type="text/javascript">
     window.onload = () => {

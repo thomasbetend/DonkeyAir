@@ -90,7 +90,7 @@ if('/reservation-acceptee' == $uri){
 }
 
 if('/ajouter-vol' == $uri){
-    FlighstController::add();
+    FlightsController::add();
 }
 
 if('/vol-ajoute' == $uri){
