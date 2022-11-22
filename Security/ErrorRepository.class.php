@@ -36,5 +36,8 @@ class ErrorRepository
             elseif(!empty($errorMessage['mail_incorrect'])){
                 echo "Mail incorrect";
             }
+            elseif(!empty($errorMessage['flight_name'])){
+                echo "Nom de vol déjà utilisé";
+            }
     }
 }

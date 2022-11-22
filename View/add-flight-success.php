@@ -4,13 +4,13 @@
 
 require('../Connection/Database.class.php');
 require('../Model/Flight.class.php');
-require('../Model/FlightRepository.class.php');
+require('../Repositories/FlightRepository.class.php');
 require('../Model/Reservation.class.php');
-require('../Model/ReservationRepository.class.php');
+require('../Repositories/ReservationRepository.class.php');
 require('../Security/Security.class.php');
 require('FlightsListView.class.php');
 require('../Model/Airport.class.php');
-require('../Model/AirportRepository.class.php');
+require('../Repositories/AirportRepository.class.php');
 
 Security::isloggedInAdmin($_SESSION);
 

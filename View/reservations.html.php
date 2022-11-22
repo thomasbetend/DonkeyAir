@@ -1,8 +1,8 @@
 <?php foreach($reservations as $reservation): ?>
     <div class="card mt-4 pt-2 pb-0 each-search-result">
         <div class="card-body">
-            <div class="d-flex flex-row justify-content-between">
-                <div class="d-flex flex-column justify-content-between">
+            <div class="d-flex flex-row justify-content-between card-flight">
+                <div class="d-flex flex-column justify-content-between card-flight-2">
                     <h4 class="hours-search-results">Réservation n° <?php echo $reservation->getId(); ?></h4>
                     <!-- <p class="text-secondary">18/12/2022</p> -->
                 </div>

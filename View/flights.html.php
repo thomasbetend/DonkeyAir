@@ -16,8 +16,8 @@
     <div class="container w-75">
         <div class="card mt-4 pt-2 pb-0 each-search-result">
             <div class="card-body">
-                <div class="d-flex flex-row justify-content-between">
-                    <div class="d-flex flex-column justify-content-between">
+                <div class="d-flex flex-row justify-content-between card-flight">
+                    <div class="d-flex flex-column justify-content-between card-flight-2">
                         <h4 class="hours-search-results">
                             <?php echo $flight->getDepartureHour()?> - <?php echo $flight->getArrivalHour()?>
                         </h4>

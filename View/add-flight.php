@@ -6,11 +6,11 @@ require('../Security/Security.class.php');
 require('../Security/ErrorRepository.class.php');
 require('../Connection/Database.class.php');
 require('../Model/User.class.php');
-require('../Model/UserRepository.class.php');
+require('../Repositories/UserRepository.class.php');
 require('../Model/Airport.class.php');
-require('../Model/AirportRepository.class.php');
+require('../Repositories/AirportRepository.class.php');
 require('../Model/Flight.class.php');
-require('../Model/FlightRepository.class.php');
+require('../Repositories/FlightRepository.class.php');
 
 Security::isloggedIn($_SESSION);
 
@@ -39,6 +39,22 @@ if($_POST) {
 
     if(($_POST['departure_date'] . ' ' . $_POST['departure_hour']. ':00') >= $_POST['arrival_date'] . ' ' . $_POST['arrival_hour']. ':00'){
         $errorMessage['time'] = true; 
+    }
+
+    $flightNameAlreadyExisting = FlightRepository::getList(
+        [
+            "id" => "",
+            "final_date" => "",
+            "departure_airport_id" => "",
+            "arrival_airport_id" => "",
+            "price" => "",
+            "nb_seats" => "",
+            "name" => $_POST['flight_name'],
+        ]
+        );
+    
+    if(!empty($flightNameAlreadyExisting)){
+        $errorMessage['flight_name'] = true; 
     }
 
     if(empty($errorMessage)){
@@ -95,8 +111,8 @@ if($_POST) {
                         <input type="number" step="0.01" id="price" name="price" placeholder="Prix *" class="form-control connection-field" value="<?php if(!empty($_POST['price'])){echo $_POST['price'];}?>">
                     </div>
                     <div class="form-group">
-                        <label for="add-flight-select"></label>
-                        <select name="departure_airport_id" id="add-flight-select" class="form-group mb-1">
+                        <label for="departure"></label>
+                        <select name="departure" id="add-flight-select" class="form-group mb-1">
                             <option value="">Aéroport de départ</option> 
                             <?php foreach($airports as $airport): ?>
                                 <option value="<?php echo $airport->getId(); ?>" <?php if(!empty($_POST['departure']) && $_POST['departure'] == $airport->getId()) echo "selected"; ?>>
@@ -106,8 +122,8 @@ if($_POST) {
                         </select>
                     </div>
                     <div class="form-group">
-                        <label for="add-flight-select"></label>
-                        <select name="arrival_airport_id" id="add-flight-select" class="form-group mb-1">
+                        <label for="arrival"></label>
+                        <select name="arrival" id="add-flight-select" class="form-group mb-1">
                             <option value="">Aéroport d'arrivée</option> 
                             <?php foreach($airports as $airport): ?>
                                 <option value="<?php echo $airport->getId(); ?>" <?php if(!empty($_POST['arrival']) && $_POST['arrival'] == $airport->getId()) echo "selected"; ?>>

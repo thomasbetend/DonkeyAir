@@ -56,14 +56,18 @@ class FlightRepository
         }
 
         if($data['name']){
-            $sql .= ' AND name = :name';
+            $sql .= ' AND name LIKE :name';
             $params[':name'] = $data['name'];  
         }
 
         $pdo = Database::getConnection();
         $stmt = $pdo->prepare($sql);
         foreach($params as $key=>$param){
-            $stmt->bindValue($key, $param, PDO::PARAM_STR);
+            if($key === ":name"){
+                $stmt->bindValue($key, "%" . $param . "%", PDO::PARAM_STR);
+            } else {
+                $stmt->bindValue($key, $param, PDO::PARAM_STR);
+            }
         }
         $stmt->execute();
 

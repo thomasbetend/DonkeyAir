@@ -72,23 +72,22 @@ if($_POST){
 
         <form method="POST" class="text-center mt-2 small" id="">
             <div class="form-group index-search-form">  
-                <select name="departure" id="index-select">
-                    <option value="">Aéroport de départ</option> 
+                <select name="departure" id="index-select" class="index-select">
+                    <option value="">Départ</option> 
                     <?php foreach($airports as $airport): ?>
                         <option value="<?php echo $airport->getId(); ?>" <?php if(!empty($_POST['departure']) && $_POST['departure'] == $airport->getId()) echo "selected"; ?>>
                             <?php echo $airport->getName(); ?>
                         </option> 
                     <?php endforeach; ?>
                 </select>
-                <select name="arrival" id="index-select">
-                    <option value="">Aéroport d'arrivée</option> 
+                <select name="arrival" id="index-select" class="index-select">
+                    <option value="">Arrivée</option> 
                     <?php foreach($airports as $airport): ?>
                         <option value="<?php echo $airport->getId(); ?>" <?php if(!empty($_POST['arrival']) && $_POST['arrival'] == $airport->getId()) echo "selected"; ?>>
                             <?php echo $airport->getName(); ?>
                         </option> 
                     <?php endforeach; ?>
                 </select>
-                <span class="between-dates"><span>
                 <input type="date" id="final_date" name="final_date" class="index-search-date" value="<?php if(!empty($_POST['final_date'])){echo $_POST['final_date'];} ?>" placeholder="Date de départ" onfocus="(this.type='date')" onblur="(this.type='date')"></input>
             </div> 
             <div class="button-search">
