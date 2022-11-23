@@ -92,11 +92,6 @@ if('/panier-suppression' === '/' . $split[1]){
     CartController::delete($split[2]);
 }
 
-if('/calendrier' === $uri){
-    Security::isloggedIn($_SESSION);
-    CalendarController::calendar();
-}
-
 if('/vol-complet' == $uri){
     Security::isloggedIn($_SESSION);
     ReservationsController::full();
@@ -110,6 +105,11 @@ if('/ajouter-vol' == $uri){
 if('/vol-ajoute' == '/'.$split[1]){
     Security::isloggedInAdmin($_SESSION);
     FlightsController::addSuccess($split[2]);
+}
+
+if('/calendrier' === $uri){
+    Security::isloggedIn($_SESSION);
+    CalendarController::calendar();
 }
 
 if('/date' == '/' . $split[1]){

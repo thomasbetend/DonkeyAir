@@ -44,7 +44,8 @@ class ReservationsController
         $searchFlight = FlightRepository::getList(
             [
                 "id" => $id, 
-                "final_date" => '', 
+                "around_date" => '',
+                "precise_date" => '', 
                 "departure_airport_id" => '',
                 "arrival_airport_id" => '',
                 "price" => '',
@@ -158,7 +159,8 @@ class ReservationsController
             $flight = FlightRepository::getList(
                 [
                     "id" => $idflight, 
-                    "final_date" => '', 
+                    "around_date" => '',
+                    "precise_date" => '', 
                     "departure_airport_id" => '',
                     "arrival_airport_id" => '',
                     "price" => '',

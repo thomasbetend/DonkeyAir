@@ -16,7 +16,8 @@ class HomeController
             $flights = FlightRepository::getList(
                 [
                     "id" => '', 
-                    "final_date" => $_POST['final_date'], 
+                    "around_date" => $_POST['around_date'],
+                    "precise_date" => '',
                     "departure_airport_id" => intval($_POST['departure']),
                     "arrival_airport_id" => intval($_POST['arrival']),
                     "price" => '',

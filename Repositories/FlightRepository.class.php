@@ -5,7 +5,8 @@ class FlightRepository
     public static function getList(
         array $data = [
             "id" => '', 
-            "final_date" => '',
+            "around_date" => '',
+            "precise_date" => '',
             "departure_airport_id" => '',
             "arrival_airport_id" => '',
             "price" => '',
@@ -26,13 +27,18 @@ class FlightRepository
             $params[':id'] = $data['id']; 
         }
 
-        if($data['final_date']){
-            $min_date = date('Y-m-d', strtotime($data['final_date']. ' - 2 days'));
-            $max_date = date('Y-m-d', strtotime($data['final_date']. ' + 2 days'));
+        if($data['around_date']){
+            $min_date = date('Y-m-d', strtotime($data['around_date']. ' - 2 days'));
+            $max_date = date('Y-m-d', strtotime($data['around_date']. ' + 2 days'));
 
             $sql .= ' AND departure_date BETWEEN :min_date AND :max_date';
             $params[':min_date'] = $min_date;  
             $params[':max_date'] = $max_date;  
+        }
+
+        if($data['precise_date']){
+            $sql .= ' AND departure_date LIKE :precise_date';
+            $params[':precise_date'] = $data['precise_date'];  
         }
 
         if($data['price']){
@@ -67,7 +73,7 @@ class FlightRepository
         $pdo = Database::getConnection();
         $stmt = $pdo->prepare($sql);
         foreach($params as $key=>$param){
-            if($key === ":name"){
+            if(($key === ":name") || ($key === ":precise_date")){
                 $stmt->bindValue($key, "%" . $param . "%", PDO::PARAM_STR);
             } else {
                 $stmt->bindValue($key, $param, PDO::PARAM_STR);
