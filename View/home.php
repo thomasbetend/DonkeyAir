@@ -1,56 +1,8 @@
-<?php
-
-$airports = AirportRepository::getList(
-    [
-        "id" => '', 
-        "airport_name" => '',
-    ]
-);
-
-if($_POST){
-
-    $flights = FlightRepository::getList(
-        [
-            "id" => '', 
-            "final_date" => $_POST['final_date'], 
-            "departure_airport_id" => intval($_POST['departure']),
-            "arrival_airport_id" => intval($_POST['arrival']),
-            "price" => '',
-            "nb_seats" => '',
-            "name" => '',
-        ]
-    );
-
-    /* checking if airport chosen in selects are in database */
-
-    $airportSelectExisting = [
-        AirportRepository::getList(
-            [
-                "id" => intval($_POST['departure']),
-                "airport_name" => "",
-            ]
-        ),
-        AirportRepository::getList(
-            [
-                "id" => intval($_POST['arrival']),
-                "airport_name" => "",
-            ]
-            ),
-    ];
-
-    if(empty($airportSelectExisting)){
-        ErrorRepository::toErrorPage();
-    }
-
-}
-
-?>
-
 <main role="main" class="bg-grey-light">
     <div class="py-5 text-center container top-section">
         <div class="row py-lg-1">
             <div class="col-lg-6 col-md-8 mx-auto">
-                <h1 class="title-index-1">DonkeyAir</h1>
+                <!-- <h1 class="title-index-1">DonkeyAir</h1> -->
                 <img class="logo" src="/_medias/LogoDkAir.png"> 
                 <h4 class="text-center mt-2 mb6">Évadez-vous dans les airs</h4>
             </div>
@@ -77,7 +29,7 @@ if($_POST){
                 <input type="date" id="final_date" name="final_date" class="index-search-date" value="<?php if(!empty($_POST['final_date'])){echo $_POST['final_date'];} ?>" placeholder="Date de départ" onfocus="(this.type='date')" onblur="(this.type='date')"></input>
             </div> 
             <div class="button-search">
-                <button type="submit" class="btn btn-primary small mt-3 mb-3 pl-4" id="buttonSearch">Recherchez un vol</button>
+                <button type="submit" class="btn btn-primary small mt-4 mb-3 pl-4" id="buttonSearch">Recherchez un vol</button>
             </div>
         </form>
     </div>
@@ -88,8 +40,6 @@ if($_POST){
         <div class="container">
             <div class="row">
                 <?php
-
-                $promos = [$promo1 = "", $promo2 = "", $promo3 = ""];
 
                 $promo1 = new Promos ('Berlin', 8, 210, '../_medias/berlin-header.png');
 
