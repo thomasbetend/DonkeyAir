@@ -6,7 +6,7 @@ class Security
     public static function isloggedIn($session): void
     {
         if(empty($session)){
-            header("location:index.php");
+            header("location:/accueil");
             exit;
         }
     }
@@ -14,7 +14,7 @@ class Security
     public static function isloggedInAdmin($session): void
     {
         if(empty($session['admin'])){
-            header("location:home.php");
+            header("location:/accueil");
             exit;
         }
     }

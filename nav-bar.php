@@ -31,7 +31,7 @@ Session::creation();
         <li class="nav-item text-white cart">
           <a class="nav-link cart" href="/panier"><i class="fa-solid fa-cart-shopping"></i></a>
           <?php if(!empty($_SESSION['cart'])): ?>
-            <p class="circle"><?php echo count($_SESSION['cart_flight'])?></p>
+            <p class="circle"><?php echo count($_SESSION['cart'])?></p>
           <?php endif; ?>
         </li>
         <li class="nav-item text-white welcome-nav-bar">

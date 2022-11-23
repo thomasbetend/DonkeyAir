@@ -19,6 +19,9 @@ class Session
         $_SESSION['login'] = $admin->getFirstname() . " " . $admin->getLastname();
         $_SESSION['admin'] = "Admin";
         $_SESSION['id'] = $admin->getId();
+
+        $_SESSION['cart'] = array(); 
+        $_SESSION['cart_price'] = 0;
     }
 
     public static function destroy()

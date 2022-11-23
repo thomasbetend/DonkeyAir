@@ -37,7 +37,7 @@
                         <?php else: ?>
                             <p><?php echo $flight->getNbSeats(); ?> places disponibles</p>
                             <div class="btn-group">
-                                <a type="button" class="btn btn-sm btn-primary detail-reservation" href="reservation-validation/<?php echo $flight->getId(); ?>">Réservez</a>
+                                <a type="button" class="btn btn-sm btn-primary detail-reservation" href="/reservation-validation/<?php echo $flight->getId(); ?>">Réservez</a>
                             </div>
                         <?php endif; ?>
                     </div>

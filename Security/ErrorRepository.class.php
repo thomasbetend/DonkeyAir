@@ -39,5 +39,8 @@ class ErrorRepository
             elseif(!empty($errorMessage['flight_name'])){
                 echo "Nom de vol déjà utilisé";
             }
+            elseif(!empty($errorMessage['same_airport'])){
+                echo "Les deux aéroports doivent être différents";
+            }
     }
 }

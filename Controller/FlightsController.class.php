@@ -19,7 +19,7 @@ class FlightsController
 
     public static function add()
     {
-        Security::isloggedIn($_SESSION);
+        Security::isloggedInAdmin($_SESSION);
 
         $airports = AirportRepository::getList(
             [
@@ -32,8 +32,12 @@ class FlightsController
 
             $errorMessage = [];
 
-            if(empty($_POST['departure_date']) || empty($_POST['departure_hour']) || empty($_POST['arrival_date']) || empty($_POST['arrival_hour']) || empty($_POST['departure_airport_id']) || empty($_POST['arrival_airport_id']) || empty($_POST['price']) || empty($_POST['nb_seats']) || empty($_POST['flight_name'])){
+            if(empty($_POST['departure_date']) || empty($_POST['departure_hour']) || empty($_POST['arrival_date']) || empty($_POST['arrival_hour']) || empty($_POST['departure']) || empty($_POST['arrival']) || empty($_POST['price']) || empty($_POST['nb_seats']) || empty($_POST['flight_name'])){
                 $errorMessage['fields'] = true; 
+            }
+
+            if($_POST['departure'] === $_POST['arrival']){
+                $errorMessage['same_airport'] = true;
             }
 
             if(floatval($_POST['price']) < 0){
@@ -70,8 +74,8 @@ class FlightsController
                     [
                         "departure_date" => $_POST['departure_date'] . ' ' . $_POST['departure_hour']. ':00',
                         "arrival_date" => $_POST['arrival_date'] . ' ' . $_POST['arrival_hour']. ':00', 
-                        "departure_airport_id" => intval($_POST['departure_airport_id']),
-                        "arrival_airport_id" => intval($_POST['arrival_airport_id']),
+                        "departure_airport_id" => intval($_POST['departure']),
+                        "arrival_airport_id" => intval($_POST['arrival']),
                         "price" => $_POST['price'],
                         "nb_seats" => intval($_POST['nb_seats']),
                         "name" => $_POST['flight_name'],
@@ -101,14 +105,14 @@ class FlightsController
         include('./View/add-flight.html.php');
     }
 
-    public static function addSuccess()
+    public static function addSuccess($id)
     {
 
-        Security::isloggedInAdmin($_SESSION);
+    Security::isloggedInAdmin($_SESSION);
 
     $flight = FlightRepository::getList(
         [
-            "id" => $_GET['id'], 
+            "id" => $id, 
             "final_date" => '', 
             "departure_airport_id" => '',
             "arrival_airport_id" => '',
@@ -118,7 +122,13 @@ class FlightsController
         ]
     );
 
-?>
         include('./View/add-flight-success.html.php');
+    }
+
+    public static function getDateFlights($day, $month, $year)
+    {   
+
+        include('./View/date-flight.html.php');
+        
     }
 }

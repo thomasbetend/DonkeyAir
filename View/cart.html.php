@@ -14,9 +14,9 @@
 
 <?php if(!empty($_SESSION['cart_price']) && $_SESSION['cart_price'] !== 0): ?>
     <div class="container w-50 text-center">
-        <form method="POST">
+        <form>
             <div>
-                <button type="submit" class="btn btn-primary mt-3 mb-2">Validez votre réservation</button>
+                <a type="submit" class="btn btn-primary mt-3 mb-2" href="/panier/valide">Validez votre réservation</a>
             </div>
         </form>
         <a href="/accueil" class="text-center mt-1 mb-3" >Ajouter un autre vol</a>

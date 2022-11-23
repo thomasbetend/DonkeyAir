@@ -5,9 +5,27 @@ class CartController
 
     public static function getList(){
 
+        include("./View/cart.html.php");
 
-        if($_POST){
+        foreach($_SESSION['cart'] as $element){
 
+            $flight = FlightRepository::getList([
+                "id" => $element['flight'], 
+                "final_date" => '',
+                "departure_airport_id" => '',
+                "arrival_airport_id" => '',
+                "price" => '',
+                "nb_seats" => '',
+                "name" => '',
+            ]);
+
+            FlightsListView::renderCart($flight, $element['price'], $element['nb_passengers']);
+
+        }
+    }
+
+    public static function validate()
+    {
             /* insert into table reservation */
         
             Database::insertReservation(
@@ -68,27 +86,8 @@ class CartController
             $_SESSION['cart'] = array();
             $_SESSION['cart_price'] = 0;
         
-            header('location:/reservation-acceptee.php');
+            header('location:/reservation-details/' . $lastreservation->getId());
             exit;
-        }
-
-        include("./View/cart.html.php");
-
-        foreach($_SESSION['cart'] as $element){
-
-            $flight = FlightRepository::getList([
-                "id" => $element['flight'], 
-                "final_date" => '',
-                "departure_airport_id" => '',
-                "arrival_airport_id" => '',
-                "price" => '',
-                "nb_seats" => '',
-                "name" => '',
-            ]);
-
-            FlightsListView::renderCart($flight, $element['price'], $element['nb_passengers']);
-
-        }
     }
 
     public static function delete($id)

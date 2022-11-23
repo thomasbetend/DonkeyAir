@@ -142,14 +142,14 @@ function CalendarControl() {
           } else {
             document.querySelector(
               ".calendar .calendar-body"
-            ).innerHTML += `<div class="number-item" data-num=${count}><a class="dateNumber" href="#">${count++}</a></div>`;
+            ).innerHTML += `<div class="number-item" data-num=${count}><a class="dateNumber" href="/date/${count}/${calendarControl.calMonthName[calendar.getMonth()]}/${calendar.getFullYear()}">${count++}</a></div>`;
           }
         }
         //remaining dates after month dates
         for (let j = 0; j < prevDateCount + 1; j++) {
           document.querySelector(
             ".calendar .calendar-body"
-          ).innerHTML += `<div class="number-item" data-num=${count}><a class="dateNumber" href="#">${count++}</a></div>`;
+          ).innerHTML += `<div class="number-item" data-num=${count}><a class="dateNumber" href="/date/${count}/${calendarControl.calMonthName[calendar.getMonth()]}/${calendar.getFullYear()}">${count++}</a></div>`;
         }
         calendarControl.highlightToday();
         calendarControl.plotPrevMonthDates(prevMonthDatesArray);

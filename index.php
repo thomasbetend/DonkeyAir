@@ -36,11 +36,12 @@ $split= explode("/", $uri);
 
 //var_dump($split); die;
 
-if ('/accueil' === $uri) {
+if ('/accueil' === $uri || '/index.php' === $uri) {
     Main::home();
 }
 
 if ('/reservations' === $uri) {
+    Security::isloggedIn($_SESSION);
     ReservationsController::getList();
 }
 
@@ -58,6 +59,7 @@ if ('/inscription' === $uri) {
 }
 
 if ('/reservation-validation' === '/'.$split[1]) {
+    Security::isloggedIn($_SESSION);
     ReservationsController::getValidation($split[2]);
 }
 
@@ -65,15 +67,23 @@ if ('/panier' === $uri) {
     CartController::getList();
 }
 
+if ('/panier/valide' === $uri) {
+    Security::isloggedIn($_SESSION);
+    CartController::validate();
+}
+
 if('/panier-suppression' === '/'.$split[1]){
+    Security::isloggedIn($_SESSION);
     CartController::delete($split[2]);
 }
 
 if('/reservation-details' === '/'.$split[1]){
+    Security::isloggedIn($_SESSION);
     ReservationsController::getDetails($split[2]);
 }
 
 if('/calendrier' === $uri){
+    Security::isloggedIn($_SESSION);
     Main::calendar();
 }
 
@@ -82,19 +92,28 @@ if('/reservation-impossible' == $uri){
 }
 
 if('/vol-complet' == $uri){
+    Security::isloggedIn($_SESSION);
     ReservationsController::full();
 }
 
 if('/reservation-acceptee' == $uri){
+    Security::isloggedIn($_SESSION);
     ReservationsController::success();
 }
 
 if('/ajouter-vol' == $uri){
+    Security::isloggedInAdmin($_SESSION);
     FlightsController::add();
 }
 
-if('/vol-ajoute' == $uri){
-    FlightsController::addSucess();
+if('/vol-ajoute' == '/'.$split[1]){
+    Security::isloggedInAdmin($_SESSION);
+    FlightsController::addSuccess($split[2]);
+}
+
+if('/date' == '/'.$split[1]){
+    Security::isloggedIn($_SESSION);
+    FlightsController::getDateFlights($split[2], $split['3'], $split['4']);
 }
 
 include_once('./footer.php');
