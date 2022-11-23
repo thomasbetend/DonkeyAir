@@ -127,7 +127,7 @@ class FlightsController
 
     public static function getDateFlights($day, $month, $year)
     {   
-        echo "youhou" . DateTime::createFromFormat("Y-m-d H:i:s", $day . "-" . $month . "-" . $year);
+        echo "youhou" . DateTime::createFromFormat("Y-m-d H:i:s", $day . " " . $month . " " . $year);
         include('./View/date-flight.html.php');     
     }
 }
