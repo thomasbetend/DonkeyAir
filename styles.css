@@ -255,6 +255,7 @@ input[type="date"] {
     overflow: hidden;
     font-weight: normal;
     border-radius: var(--calendar-border-radius);
+    min-height: 453px;
 }
 
 .calendar-inner {
