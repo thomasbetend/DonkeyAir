@@ -46,6 +46,7 @@ class CartController
                     "user_id" => $_SESSION['id'], 
                     "price" => '',
                     "date" => '',
+                    "page" => '',
                 ]
             );
         

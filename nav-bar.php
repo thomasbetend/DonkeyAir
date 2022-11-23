@@ -23,7 +23,7 @@ Session::creation();
       <?php endif ?>
       <?php if(!empty($_SESSION['login'])): ?>
         <li class="nav-item active">
-          <a class="nav-link" href="/reservations">Réservations</a>
+          <a class="nav-link" href="/reservations/1">Réservations</a>
         </li>
         <li class="nav-item text-white">
           <a class="nav-link" href="/deconnexion">Déconnexion</a>

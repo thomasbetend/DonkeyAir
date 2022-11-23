@@ -8,6 +8,7 @@ class ReservationRepository
             "user_id" => '', 
             "price" => '', 
             "date" => '',
+            "page" => '',
         ]): array 
     {
         $sql = 'SELECT *
@@ -38,6 +39,12 @@ class ReservationRepository
         }
 
         $sql .= ' ORDER BY id_reservation DESC';
+
+        if($data["page"]){
+            $length = 10;
+            $start = ($data["page"] - 1) * $length;
+            $sql .= " LIMIT " . $start . ", " . $length; 
+        }
 
         $pdo = Database::getConnection();
         $stmt = $pdo->prepare($sql);

@@ -2,20 +2,39 @@
 
 class ReservationsController
 {
-    public static function getList(): void
+    public static function getList($id): void
     {
         Security::isloggedIn($_SESSION);
         
+        $searchReservationsTotal= ReservationRepository::getList(
+            [
+                "id" => '', 
+                "user_id" => $_SESSION['id'], 
+                "price" => '', 
+                "date" => '',
+                "page" => '',
+            ]
+        );
+
+        include("./View/reservation-personal-space.html.php");
+
+
         $searchReservations= ReservationRepository::getList(
             [
                 "id" => '', 
                 "user_id" => $_SESSION['id'], 
                 "price" => '', 
                 "date" => '',
+                "page" => $id,
             ]
         );
 
-        include("./View/reservation-personal-space.php");
+        ReservationsListView::render($searchReservations);
+
+        ?> 
+        </div>
+        <?php
+
     }
 
     public static function getValidation($id): void 
@@ -120,6 +139,7 @@ class ReservationsController
                     "user_id" => $_SESSION['id'],
                     "price" =>"",
                     "date" => "",
+                    "page" => "",
             ]
         );
         
@@ -188,6 +208,7 @@ class ReservationsController
                 "user_id" => $_SESSION['id'],
                 "price" =>"",
                 "date" => "",
+                "page" => "",
             ]
         );
 

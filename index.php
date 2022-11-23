@@ -41,9 +41,9 @@ if ('/accueil' === $uri || '/index.php' === $uri) {
     Main::home();
 }
 
-if ('/reservations' === $uri) {
+if ('/reservations' === '/' . $split[1]) {
     Security::isloggedIn($_SESSION);
-    ReservationsController::getList();
+    ReservationsController::getList($split[2]);
 }
 
 if ('/connexion' === $uri) {
@@ -59,7 +59,7 @@ if ('/inscription' === $uri) {
     UserController::getSignup();
 }
 
-if ('/reservation-validation' === '/'.$split[1]) {
+if ('/reservation-validation' === '/' . $split[1]) {
     Security::isloggedIn($_SESSION);
     ReservationsController::getValidation($split[2]);
 }
@@ -73,12 +73,12 @@ if ('/panier/valide' === $uri) {
     CartController::validate();
 }
 
-if('/panier-suppression' === '/'.$split[1]){
+if('/panier-suppression' === '/' . $split[1]){
     Security::isloggedIn($_SESSION);
     CartController::delete($split[2]);
 }
 
-if('/reservation-details' === '/'.$split[1]){
+if('/reservation-details' === '/' . $split[1]){
     Security::isloggedIn($_SESSION);
     ReservationsController::getDetails($split[2]);
 }
@@ -112,7 +112,7 @@ if('/vol-ajoute' == '/'.$split[1]){
     FlightsController::addSuccess($split[2]);
 }
 
-if('/date' == '/'.$split[1]){
+if('/date' == '/' . $split[1]){
     Security::isloggedIn($_SESSION);
     FlightsController::getDateFlights($split[2], $split['3'], $split['4']);
 }
