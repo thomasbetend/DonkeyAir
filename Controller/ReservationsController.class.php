@@ -19,6 +19,10 @@ class ReservationsController
         include("./View/reservation-personal-space.html.php");
 
 
+        for($i = 1; $i<=ceil(count($searchReservationsTotal)/10); $i++){ ?>
+                <a href="/reservations/<?php echo $i ?>"><?php echo $i ?></a>
+        <?php } 
+
         $searchReservations= ReservationRepository::getList(
             [
                 "id" => '', 
@@ -32,7 +36,9 @@ class ReservationsController
         ReservationsListView::render($searchReservations);
 
         ?> 
+            </div>
         </div>
+        
         <?php
 
     }

@@ -1,5 +1,7 @@
 <?php
 
+use FlightRepository as GlobalFlightRepository;
+
 class FlightRepository 
 {   
     public static function getList(
@@ -88,4 +90,5 @@ class FlightRepository
 
         return $flights;
     }
+
 }

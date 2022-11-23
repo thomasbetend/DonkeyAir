@@ -4,7 +4,7 @@ class ErrorRepository
 {
     public static function toErrorPage(): void
     {
-        header("location:error-page.php");
+        header("location:/erreur");
         exit;
     }
 

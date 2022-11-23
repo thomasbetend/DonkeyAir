@@ -14,6 +14,20 @@
     //check the console for date click event
 //Fixed day highlight
 //Added previous month and next month view
+function testIfFlightExists(day, month, year) {
+  var exist = false;
+
+  fetch('/flight-test-date/' + day + '/' + month + '/' + year)
+    .then(function(response) {
+      return response.json();
+    })
+    .then(function(response) {
+      if(response.exist === "true")
+        document.getElementById(day + '-' + month + '-' + year).classList.add('display-color');
+    });
+
+    return exist;
+}
 
 function CalendarControl() {
     const calendar = new Date();
@@ -140,16 +154,27 @@ function CalendarControl() {
             ).innerHTML += `<div class="prev-dates"></div>`;
             prevMonthDatesArray.push(calendarControl.prevMonthLastDate--);
           } else {
+
+            var content = `<div id="${count}-${calendarControl.calMonthName[calendar.getMonth()]}-${calendar.getFullYear()}" class="number-item" data-num=${count}><a class="dateNumber" href="/date/${count}/${calendarControl.calMonthName[calendar.getMonth()]}/${calendar.getFullYear()}">${count++}</a></div>`;
+            
+            console.log("1 :" + content);
+
+            console.log("1 : " + count + " " + calendarControl.calMonthName[calendar.getMonth()] + " " + calendar.getFullYear() + " " + testIfFlightExists(count, calendarControl.calMonthName[calendar.getMonth()], calendar.getFullYear()));
             document.querySelector(
               ".calendar .calendar-body"
-            ).innerHTML += `<div class="number-item" data-num=${count}><a class="dateNumber" href="/date/${count}/${calendarControl.calMonthName[calendar.getMonth()]}/${calendar.getFullYear()}">${count++}</a></div>`;
+            ).innerHTML += content;
           }
         }
         //remaining dates after month dates
         for (let j = 0; j < prevDateCount + 1; j++) {
+          
+          var content = `<div id="${count}-${calendarControl.calMonthName[calendar.getMonth()]}-${calendar.getFullYear()}" class="number-item" data-num=${count}><a class="dateNumber" href="/date/${count}/${calendarControl.calMonthName[calendar.getMonth()]}/${calendar.getFullYear()}">${count++}</a></div>`;
+
+          console.log("2 :" + content);
+
           document.querySelector(
             ".calendar .calendar-body"
-          ).innerHTML += `<div class="number-item" data-num=${count}><a class="dateNumber" href="/date/${count}/${calendarControl.calMonthName[calendar.getMonth()]}/${calendar.getFullYear()}">${count++}</a></div>`;
+          ).innerHTML += content;
         }
         calendarControl.highlightToday();
         calendarControl.plotPrevMonthDates(prevMonthDatesArray);
