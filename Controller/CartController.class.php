@@ -31,7 +31,7 @@ class CartController
             Database::insertReservation(
                 [
                 "user_id" => $_SESSION['id'],
-                "price" => $_SESSION['cart_price'],
+                "price" => $_SESSION['cart_price_total'],
                 "date" => date("Y-m-d"),
                 ]
             );
@@ -85,7 +85,7 @@ class CartController
             /* empty the cart */
         
             $_SESSION['cart'] = array();
-            $_SESSION['cart_price'] = 0;
+            $_SESSION['cart_price_total'] = 0;
         
             header('location:/reservation-details/' . $lastreservation->getId());
             exit;
@@ -98,11 +98,11 @@ class CartController
 
         foreach($_SESSION['cart'] as $key=>$element){
             if($element['flight'] === intval($id)){
+                $_SESSION['cart_price_total'] -= $_SESSION['cart'][$key]['price'];
                 unset($_SESSION['cart'][$key]);
             }
         }
 
-        $_SESSION['cart_price'] = 0;
 
         header('location:/panier');
         exit;

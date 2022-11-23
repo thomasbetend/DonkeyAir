@@ -109,7 +109,7 @@ class ReservationsController
                     'price' => $searchFlight[0]->getPrice() * intval($_POST['nb_passengers']),
                 ];
         
-                $_SESSION['cart_price'] += $searchFlight[0]->getPrice() * intval($_POST['nb_passengers']);
+                $_SESSION['cart_price_total'] += $searchFlight[0]->getPrice() * intval($_POST['nb_passengers']);
         
                 header('location:/panier');
                 exit;
