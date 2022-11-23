@@ -88,7 +88,7 @@ if($_POST){
                         </option> 
                     <?php endforeach; ?>
                 </select>
-                <input type="date" id="final_date" name="final_date" class="index-search-date" value="<?php if(!empty($_POST['final_date'])){echo $_POST['final_date'];} ?>" placeholder="Date de départ" onfocus="(this.type='date')" onblur="(this.type='date')"></input>
+                <input type="date" id="final_date" name="final_date" class="index-search-date" value="<?php if(!empty($_POST['final_date'])){echo $_POST['final_date'];} ?>" placeholder="Date de départ"></input>
             </div> 
             <div class="button-search">
                 <button type="submit" class="btn btn-primary small mt-3 mb-3 pl-4" id="buttonSearch">Recherchez un vol</button>
