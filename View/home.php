@@ -14,6 +14,7 @@ require('../Repositories/AirportRepository.class.php');
 require('FlightsListView.class.php');
 require('PromosListView.class.php');
 require('../Security/ErrorRepository.class.php');
+require('../Model/Promo.class.php');
 
 $airports = AirportRepository::getList(
     [
@@ -104,7 +105,14 @@ if($_POST){
             <div class="row">
                 <?php
 
-                $promos = [$promo1 = "", $promo2 = "", $promo3 = ""];
+                            
+                $promo1 = new Promo ('Berlin', 8, 210, '../_medias/berlin-header.png');
+
+                $promo2 = new Promo ('Londres', 7, 300, '../_medias/london-header.png');
+
+                $promo3 = new Promo ('New-York', 10, 550, '../_medias/NYC-header.png');
+
+                $promos = [$promo1, $promo2, $promo3];
                 PromosListView::render($promos);
 
                 ?>
