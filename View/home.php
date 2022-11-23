@@ -51,6 +51,7 @@ if($_POST){
         <div class="row py-lg-1">
             <div class="col-lg-6 col-md-8 mx-auto">
                 <h1 class="title-index-1">DonkeyAir</h1>
+                <img class="logo" src="/_medias/LogoDkAir.png"> 
                 <h4 class="text-center mt-2 mb6">Évadez-vous dans les airs</h4>
             </div>
         </div>
@@ -89,6 +90,14 @@ if($_POST){
                 <?php
 
                 $promos = [$promo1 = "", $promo2 = "", $promo3 = ""];
+
+                $promo1 = new Promos ('Berlin', 8, 210, '../_medias/berlin-header.png');
+
+                $promo2 = new Promos ('Londres', 7, 300, '../_medias/london-header.png');
+
+                $promo3 = new Promos ('New-York', 10, 550, '../_medias/NYC-header.png');
+
+                $promos = [$promo1, $promo2, $promo3];
                 PromosListView::render($promos);
 
                 ?>

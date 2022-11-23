@@ -12,6 +12,7 @@ require('./Model/User.class.php');
 require('./Model/Reservation.class.php');
 require('./Model/Airport.class.php');
 require('./Model/ReservationFlight.class.php');
+require('./Model/Promos.class.php');
 
 require('./Repositories/AirportRepository.class.php');
 require('./Repositories/ReservationFlightRepository.class.php');
