@@ -1,10 +1,19 @@
 /* general */
 @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@100;200;300;400;500;600;700&display=swap');
 
+@font-face {
+    font-family: 'SourceSansPro-SemiBold';
+    src: url('Fonts/SourceSansPro-SemiBold.ttf') format('truetype');
+    
+    font-weight: normal;
+    font-style: normal;
+}
+
 :root {
     --color1 : rgb(248, 33, 58);
     --color2 : rgb(170, 13, 13);
     --font1 : 'Bowlby One';
+    --font2 : 'SourceSansPro-SemiBold';
 
     --calendar-bg-color: #262829;
     --calendar-font-color: #FFF;
@@ -65,7 +74,8 @@ h4 {
 }
 
 .navbar-DonkeyAir .navbar-brand {
-    font-family: var(--font1);
+    font-family: var(--font2);
+    font-weight: 900;
     font-size: 1.1rem;
     opacity: 70%;;
 }
