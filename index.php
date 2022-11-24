@@ -11,12 +11,14 @@ require('./Model/Reservation.class.php');
 require('./Model/Airport.class.php');
 require('./Model/ReservationFlight.class.php');
 require('./Model/Promos.class.php');
+require('./Model/UserFlight.class.php');
 
 require('./Repositories/AirportRepository.class.php');
 require('./Repositories/ReservationFlightRepository.class.php');
 require('./Repositories/ReservationRepository.class.php');
 require('./Repositories/UserRepository.class.php');
 require('./Repositories/FlightRepository.class.php');
+require('./Repositories/UserFlightRepository.class.php');
 
 require('./View/FlightsListView.class.php');
 require('./View/PromosListView.class.php');

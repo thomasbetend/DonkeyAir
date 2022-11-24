@@ -10,7 +10,7 @@ class UserFlight
     public static function createdFromSqlRow (array $row): self
     {
         $userFlight = new self();
-        $userFlight->id = $row['id_reservation_flight'];
+        $userFlight->id = $row['id_user_flight'];
         $userFlight->user_id = $row['user_id'];
         $userFlight->flight_id = $row['flight_id'];
         $userFlight->insurance = $row['insurance'];

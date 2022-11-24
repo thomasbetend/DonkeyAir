@@ -166,7 +166,16 @@ class ReservationsController
             } else {
             $idflight = "";
             }
-        
+
+            $userFlight = UserFlightRepository::getList(
+                [
+                    "id" => "",
+                    "user_id" => $_SESSION['id'],
+                    "flight_id" => $idflight,
+                    "insurance" => true,
+                ]
+            );
+
             $flight = FlightRepository::getList(
                 [
                     "id" => $idflight, 
