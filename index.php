@@ -66,7 +66,6 @@ elseif ('/reservations' === '/' . $split[1]) {
 }
 
 elseif ('/reservation-validation' === '/' . $split[1]) {
-    Security::isloggedIn($_SESSION);
 
     if (!preg_match("/^[0-9]+$/", $split[2])){
         echo "<h4 class='text-center mt-4'>erreur</h4>";

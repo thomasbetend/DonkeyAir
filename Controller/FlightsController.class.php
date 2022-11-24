@@ -135,22 +135,26 @@ class FlightsController
         $newDate = $date->format("Y-m-d");
         $today = date("Y-m-d");
 
-        $flights = FlightRepository::getList(
-            [
-                "id" => '', 
-                "around_date" => '',
-                "precise_date" => $newDate,
-                "departure_airport_id" => '',
-                "arrival_airport_id" => '',
-                "price" => '',
-                "nb_seats" => '',
-                "name" => '',
-            ]
-        );
-        
+        if($newDate < $today){
+            $flights = [];
+        } else {
+            $flights = FlightRepository::getList(
+                [
+                    "id" => '', 
+                    "around_date" => '',
+                    "precise_date" => $newDate,
+                    "departure_airport_id" => '',
+                    "arrival_airport_id" => '',
+                    "price" => '',
+                    "nb_seats" => '',
+                    "name" => '',
+                ]
+            );
+        }
+
         include('./View/date-flight.html.php'); 
         
-        if(empty($flights) || ($newDate < $today)){
+        if(empty($flights)){
             echo "<h4 class='text-center mt-4'>Pas de vols ce jour</h4>";
         } else {
             FlightsListView::render($flights);

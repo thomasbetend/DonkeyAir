@@ -68,9 +68,7 @@ class FlightRepository
             $params[':name'] = $data['name'];  
         }
 
-    /*  $length = 20;
-        $start = ($_GET["page"] - 1) * $length;
-        $sql .= " LIMIT " . $start . ", " . $length; */
+        $sql .= " ORDER BY departure_date";
 
         $pdo = Database::getConnection();
         $stmt = $pdo->prepare($sql);
