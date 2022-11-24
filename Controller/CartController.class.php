@@ -20,7 +20,7 @@ class CartController
                 "name" => '',
             ]);
 
-            FlightsListView::renderCart($flight, $element['price'], $element['nb_passengers']);
+            FlightsListView::renderCart($flight, $element['price'], $element['nb_passengers'], $element['insurance']);
 
         }
     }
@@ -38,50 +38,61 @@ class CartController
             );
         
             foreach($_SESSION['cart'] as $element){
-        
-            /* insert into table reservation_flight */
-        
-            $reservations = ReservationRepository::getList(
-                [
-                    "id" => '',
-                    "user_id" => $_SESSION['id'], 
-                    "price" => '',
-                    "date" => '',
-                    "page" => '',
-                ]
-            );
-        
-            $lastreservation = $reservations[0];
-        
-            Database::insertReservationFlight(
-                [
-                    "flight_id" => $element['flight'],
-                    "reservation_id" => $lastreservation->getId(),
-                    "price" => $element['price'],
-                    "nb_passengers" => $element['nb_passengers'],
-                ]
-            );
-        
-            /* update table flight */
-        
-            $flightToUpdate = FlightRepository::getList([
-                "id" => $element['flight'], 
-                "around_date" => '',
-                "precise_date" => '',
-                "departure_airport_id" => '',
-                "arrival_airport_id" => '',
-                "price" => '',
-                "nb_seats" => '',
-                "name" => '',
-            ]);
-        
-            Database::update(
-                'flight',
-                [
-                    "nb_seats" => $flightToUpdate[0]->getNbSeats() - $element['nb_passengers'],
-                ],
-                $element['flight'],
+            
+                /* insert into table reservation_flight */
+            
+                $reservations = ReservationRepository::getList(
+                    [
+                        "id" => '',
+                        "user_id" => $_SESSION['id'], 
+                        "price" => '',
+                        "date" => '',
+                        "page" => '',
+                    ]
                 );
+            
+                $lastreservation = $reservations[0];
+            
+                Database::insertReservationFlight(
+                    [
+                        "flight_id" => $element['flight'],
+                        "reservation_id" => $lastreservation->getId(),
+                        "price" => $element['price'],
+                        "nb_passengers" => $element['nb_passengers'],
+                    ]
+                );
+            
+                /* update table flight */
+            
+                $flightToUpdate = FlightRepository::getList([
+                    "id" => $element['flight'], 
+                    "around_date" => '',
+                    "precise_date" => '',
+                    "departure_airport_id" => '',
+                    "arrival_airport_id" => '',
+                    "price" => '',
+                    "nb_seats" => '',
+                    "name" => '',
+                ]);
+            
+                Database::update(
+                    'flight',
+                    [
+                        "nb_seats" => $flightToUpdate[0]->getNbSeats() - $element['nb_passengers'],
+                    ],
+                    $element['flight'],
+                    );
+
+                                /* insert into table user_flight */
+            
+                Database::insertUserFlight(
+                    [
+                        "user_id" => $_SESSION['id'],
+                        "flight_id" => $element['flight'],
+                        "insurance" => $element['insurance'],
+                    ]
+                );
+                
             }
         
             /* empty the cart */

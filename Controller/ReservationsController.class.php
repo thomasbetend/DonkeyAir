@@ -105,19 +105,24 @@ class ReservationsController
         
             if(count($errorMessage) === 0){
 
-                var_dump($_POST); 
+                $insurance = 0;
+                $insuranceExists = false;
 
-        
+                if(!empty($_POST['insurance']) && ($_POST['insurance'] === 'on')){
+                    $insurance = 20;
+                    $insuranceExists = true;
+                }
                 /* incrementing cart */
         
                 $_SESSION['cart'][] = [
                     'flight' => intval($id),
                     'nb_passengers' => intval($_POST['nb_passengers']),
-                    'price' => $searchFlight[0]->getPrice() * intval($_POST['nb_passengers']),
+                    'price' => ($searchFlight[0]->getPrice() + $insurance) * intval($_POST['nb_passengers']),
+                    'insurance' => $insuranceExists,
                 ];
         
-                $_SESSION['cart_price_total'] += $searchFlight[0]->getPrice() * intval($_POST['nb_passengers']);
-        
+                $_SESSION['cart_price_total'] += ($searchFlight[0]->getPrice() + $insurance) * intval($_POST['nb_passengers']);
+                
                 header('location:/panier');
                 exit;
             }
