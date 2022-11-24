@@ -18,6 +18,7 @@
                     <div class="d-flex flex-column justify-content-start text-right align-items-center">
                         <h6 class = "text-secondary"> Prix :  <?php echo $reservationFlight->getPrice(); ?> €</h6>
                         <p> Nombre de passagers : <?php echo $reservationFlight->getNbPassengers(); ?></p>
+                        <p class="text-danger"> <?php if($userFlight[0]->getInsurance() === true) echo "Assurance annulation"; ?></p>
                     </div>
                 </div>
             </div>

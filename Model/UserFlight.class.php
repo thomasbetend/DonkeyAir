@@ -6,6 +6,7 @@ class UserFlight
     private ?int $user_id;
     private ?int $flight_id;
     private ?bool $insurance;
+    private ?int $id_reservation_flight;
 
     public static function createdFromSqlRow (array $row): self
     {
@@ -14,6 +15,7 @@ class UserFlight
         $userFlight->user_id = $row['user_id'];
         $userFlight->flight_id = $row['flight_id'];
         $userFlight->insurance = $row['insurance'];
+        $userFlight->id_reservation_flight = $row['id_reservation_flight'];
 
         return $userFlight;
     }
@@ -36,6 +38,11 @@ class UserFlight
     public function getInsurance(): bool 
     {
         return $this->insurance;
+    }
+
+    public function getIdReservationFlight(): int
+    {
+        return $this->id_reservation_flight;
     }
 
 }
