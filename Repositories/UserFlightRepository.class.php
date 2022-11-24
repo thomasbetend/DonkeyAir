@@ -8,34 +8,40 @@ class UserFlightRepository
             "user_id" => "",
             "flight_id" => "",
             "insurance" => "",
+            "id_reservation_flight" => "",
         ]): array 
     {
         $sql = 'SELECT *
                 FROM user_flight uf
-                /* INNER JOIN reservation r ON rf.reservation_id = r.id_reservation
-                INNER JOIN flight f ON rf.flight_id = f.id_flight */
+                JOIN flight f ON uf.flight_id = f.id_flight 
+                JOIN reservation_flight rf ON rf.flight_id = f.id_flight
                 WHERE 1';
 
         $params = [];
 
         if($data["id"]){
-            $sql .= ' AND id_user_flight = :id';
+            $sql .= ' AND uf.id_user_flight = :id';
             $params[':id'] = $data["id"]; 
         }
 
         if($data["user_id"]){
-            $sql .= ' AND user_id = :user_id';
+            $sql .= ' AND uf.user_id = :user_id';
             $params[':user_id'] = $data["user_id"];  
         }
 
         if($data["flight_id"]){
-            $sql .= ' AND flight_id = :flight_id';
+            $sql .= ' AND uf.flight_id = :flight_id';
             $params[':flight_id'] = $data["flight_id"];  
         }
 
         if($data["insurance"]){
-            $sql .= ' AND insurance = :insurance';
+            $sql .= ' AND uf.insurance = :insurance';
             $params[':insurance'] = $data["insurance"];  
+        }
+
+        if($data["id_reservation_flight"]){
+            $sql .= ' AND rf.id_reservation_flight = :id_reservation_flight';
+            $params[':id_reservation_flight'] = $data["id_reservation_flight"];  
         }
 
         $pdo = Database::getConnection();

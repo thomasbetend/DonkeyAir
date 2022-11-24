@@ -57,10 +57,14 @@ h4 {
 
 a {
     text-decoration: none;
-    color: white; 
+    color: var(--color1); 
    }
 
-   a:hover {
+a:hover {
+    color: black;
+}
+
+a:active {
     color: black;
 }
 

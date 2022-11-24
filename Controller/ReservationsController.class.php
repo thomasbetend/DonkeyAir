@@ -171,8 +171,9 @@ class ReservationsController
                 [
                     "id" => "",
                     "user_id" => $_SESSION['id'],
-                    "flight_id" => $idflight,
-                    "insurance" => true,
+                    "flight_id" => "",
+                    "insurance" => "",
+                    "id_reservation_flight" => $reservationFlight->getId(),
                 ]
             );
 
@@ -203,7 +204,7 @@ class ReservationsController
                 ]
             );
 
-            ReservationFlightsListView::render($flight, $searchDepartureAirport, $searchArrivalAirport, $reservationFlight);
+            ReservationFlightsListView::render($flight, $searchDepartureAirport, $searchArrivalAirport, $reservationFlight, $userFlight);
         }
 
     }
