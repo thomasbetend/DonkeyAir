@@ -74,11 +74,20 @@ h4 {
     padding-right: 4.5%;
 }
 
+
+#iconlogo{
+    margin-right: -6%;
+}
+.navbar-icon {
+    
+    width: 30%;
+   
+}
 .navbar-DonkeyAir .navbar-brand {
     font-family: var(--font2);
     font-weight: 900;
     font-size: 1.1rem;
-    opacity: 70%;;
+    opacity: 70%;
 }
 
 .welcome-nav-bar {
@@ -403,7 +412,13 @@ input[type="date"] {
     .circle {
         right: -3px;
     }
+
+    .navbar-brand{
+        display: none;
+
+    }
 }
+
 
 @media screen and (max-width:470px){
     .index-search-form {

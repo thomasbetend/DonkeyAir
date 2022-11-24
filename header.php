@@ -11,7 +11,10 @@
     <link href="https://fonts.googleapis.com/css2?family=Bowlby+One&display=swap" rel="stylesheet">
     <!-- Bootstrap core CSS -->
     <link href="../../dist/css/bootstrap.min.css" rel="stylesheet">
-
+    
+    <!-- FAV ICON -->
+    <link rel="shortcut icon" type="image/png" href="/_medias/IconDkAir.png"/>
+    
     <!-- Custom styles for this template -->
     <link href="jumbotron.css" rel="stylesheet">
     <script src="https://kit.fontawesome.com/5474cfcdca.js" crossorigin="anonymous"></script>
