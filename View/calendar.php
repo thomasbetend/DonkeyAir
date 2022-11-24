@@ -8,11 +8,12 @@ require('./View/brand.php');
             <div class="col-lg-6 col-md-8 mx-auto">
                 <h1 class="title-index-1"><?= $brand ?></h1>
                 <h4 class="text-center mt-2 mb6">Le calendrier</h4>
+                <h6 class="text-center">Disponible prochainement...</h6>
             </div>
         </div>
     </div>
 </main>
-<div class="calendar"></div>
+<div class="calendar" id="calendar"></div>
 
 <script>
     //check the console for date click event

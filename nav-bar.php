@@ -19,9 +19,6 @@ Session::creation();
 
   <div class="collapse navbar-collapse" id="navbarsExampleDefault">
     <ul class="navbar-nav mr-auto">
-      <li class="nav-item text-white">
-        <a class="nav-link" href="/calendrier">Calendrier</a>
-      </li>
       <?php if (!empty($_SESSION['admin'])) : ?>
         <li class="nav-item text-black">
           <a class="nav-link text-black" href="/ajouter-vol">Ajoutez un vol</a>
@@ -30,6 +27,9 @@ Session::creation();
       <?php if (!empty($_SESSION['login'])) : ?>
         <li class="nav-item active">
           <a class="nav-link" href="/reservations/1">Réservations</a>
+        </li>
+        <li class="nav-item text-white">
+          <a class="nav-link" href="/calendrier">Calendrier</a>
         </li>
         <li class="nav-item text-white">
           <a class="nav-link" href="/deconnexion">Déconnexion</a>
