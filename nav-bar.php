@@ -8,7 +8,7 @@ Session::creation();
 <nav class="navbar navbar-expand-md navbar-dark navbar-DonkeyAir ml-15">
 
  
-  <a id="iconlogo" href="/accueil"><img class= "navbar-icon" src="/_medias/IconDkAir.png"></img></a>
+  <a id="iconlogo" href="/accueil"><?php echo $brandPicto ?> </a>
  
 
   <a class="navbar-brand ml-5" href="/accueil">DonkeyAir</a>
