@@ -21,7 +21,7 @@
                         </p>
                         <div class="form-group2 mt-2 text-left mb-3"> 
                             <label for="insurance"></label> 
-                            <input type="checkbox" name="insurance">Assurance annulation</input>
+                            <input type="checkbox" name="insurance">  Assurance annulation (20 euros par passager)</input>
                         </div>
                     </div>
                     <div class="mt-4">

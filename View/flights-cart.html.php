@@ -33,6 +33,7 @@
                     <div class="d-flex flex-column justify-content-start text-right align-items-center">
                         <h4 class="hours-search-results"><?php echo $price; ?> €</h4>
                             <p><?php echo $nb_passengers; ?> passagers</p>
+                            <p><?php if($insurance) echo "Assurance annulation" ?></p>
                             <div class="btn-group">
                                 <a type="button" class="btn btn-sm btn-secondary detail-reservation" href="/panier-suppression/<?php echo $flight->getId(); ?>">Supprimez ce vol</a>
                             </div>

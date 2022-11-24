@@ -1,5 +1,5 @@
 <?php
-
+Database::getConnection();
 use Database as GlobalDatabase;
 
 define ('ENV', 'test');
@@ -95,6 +95,28 @@ class DataBase
         $sql = "INSERT INTO flight (" . $cols . ") VALUES (:departure_date, :arrival_date, :departure_airport_id, :arrival_airport_id, :price, :nb_seats, :name)";
 
         Database::bind($sql, $data);
+    }
+
+    public static function insertUserFlight(
+        array $data = [
+            "user_id" => "", 
+            "flight_id" => "", 
+            "insurance" => "",
+        ]): void
+    {
+        $cols = implode(", ", array_keys($data));
+
+        $sql = "INSERT INTO user_flight (" . $cols . ") VALUES (:user_id, :flight_id, :insurance)";
+
+        $stmt = (Database::getConnection())->prepare($sql);
+        foreach($data as $key=>$param){
+            if($key === "insurance"){
+                $stmt->bindValue($key, $param, PDO::PARAM_BOOL);
+            } else {
+                $stmt->bindValue($key, $param, PDO::PARAM_INT);
+            }
+        }
+        $stmt -> execute();
     }
 
     public static function update(string $table, array $data, int $id): void 
