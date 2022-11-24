@@ -1,13 +1,3 @@
-<?php include_once('header.php'); ?>
-
-<?php
-
-require('../Security/Security.class.php');
-
-Security::isloggedIn($_SESSION);
-
-?>
-
 <main role="main" class="bg-grey-light">
     <div class="py-5 text-center container top-section">
         <div class="row py-lg-1">
@@ -18,9 +8,3 @@ Security::isloggedIn($_SESSION);
         </div>
     </div>
 </main>
-
-
-<?php include_once('footer.php'); ?>
-
-</body>
-</html>

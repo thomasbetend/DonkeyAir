@@ -55,7 +55,8 @@ class FlightsController
             $flightNameAlreadyExisting = FlightRepository::getList(
                 [
                     "id" => "",
-                    "final_date" => "",
+                    "around_date" => '',
+                    "precise_date" => '',
                     "departure_airport_id" => "",
                     "arrival_airport_id" => "",
                     "price" => "",
@@ -85,7 +86,8 @@ class FlightsController
                 $totlaFlightsList = FlightRepository::getList(
                     [
                         "id" => '', 
-                        "final_date" => '', 
+                        "around_date" => '',
+                        "precise_date" => '', 
                         "departure_airport_id" => '',
                         "arrival_airport_id" => '',
                         "price" => '',
@@ -113,7 +115,8 @@ class FlightsController
     $flight = FlightRepository::getList(
         [
             "id" => $id, 
-            "final_date" => '', 
+            "around_date" => '',
+            "precise_date" => '', 
             "departure_airport_id" => '',
             "arrival_airport_id" => '',
             "price" => '',
@@ -127,7 +130,36 @@ class FlightsController
 
     public static function getDateFlights($day, $month, $year)
     {   
-        echo "youhou" . DateTime::createFromFormat("Y-m-d H:i:s", $day . " " . $month . " " . $year);
-        include('./View/date-flight.html.php');     
+        $date = DateTime::createFromFormat("d M Y", $day . " " . $month . " " . $year);
+
+        $newDate = $date->format("Y-m-d");
+        $today = date("Y-m-d");
+
+        if($newDate < $today){
+            $flights = [];
+        } else {
+            $flights = FlightRepository::getList(
+                [
+                    "id" => '', 
+                    "around_date" => '',
+                    "precise_date" => $newDate,
+                    "departure_airport_id" => '',
+                    "arrival_airport_id" => '',
+                    "price" => '',
+                    "nb_seats" => '',
+                    "name" => '',
+                ]
+            );
+        }
+
+        include('./View/date-flight.html.php'); 
+        
+        if(empty($flights)){
+            echo "<h4 class='text-center mt-4'>Pas de vols ce jour</h4>";
+        } else {
+            FlightsListView::render($flights);
+        }
+        
     }
+
 }

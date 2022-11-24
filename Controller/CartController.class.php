@@ -11,7 +11,8 @@ class CartController
 
             $flight = FlightRepository::getList([
                 "id" => $element['flight'], 
-                "final_date" => '',
+                "around_date" => '',
+                "precise_date" => '',
                 "departure_airport_id" => '',
                 "arrival_airport_id" => '',
                 "price" => '',
@@ -65,7 +66,8 @@ class CartController
         
             $flightToUpdate = FlightRepository::getList([
                 "id" => $element['flight'], 
-                "final_date" => '',
+                "around_date" => '',
+                "precise_date" => '',
                 "departure_airport_id" => '',
                 "arrival_airport_id" => '',
                 "price" => '',

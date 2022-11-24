@@ -356,7 +356,7 @@ input[type="date"] {
 }
 
 .calendar .calendar-inner .calendar-body .calendar-today {
-    background: var(--calendar-today-color);
+    background: var(--color1);
     border-radius: 4px;
 }
 
@@ -400,6 +400,10 @@ input[type="date"] {
 .calendar .calendar-inner .calendar-body .next-dates:hover {
   border: 1px solid transparent;
   pointer-events: none;
+}
+
+.display-color {
+    background-color: blue;
 }
 
 /* RESPONSIVE */

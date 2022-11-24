@@ -19,6 +19,10 @@ class ReservationsController
         include("./View/reservation-personal-space.html.php");
 
 
+        for($i = 1; $i<=ceil(count($searchReservationsTotal)/10); $i++){ ?>
+                <a href="/reservations/<?php echo $i ?>"><?php echo $i ?></a>
+        <?php } 
+
         $searchReservations= ReservationRepository::getList(
             [
                 "id" => '', 
@@ -32,7 +36,9 @@ class ReservationsController
         ReservationsListView::render($searchReservations);
 
         ?> 
+            </div>
         </div>
+        
         <?php
 
     }
@@ -44,7 +50,8 @@ class ReservationsController
         $searchFlight = FlightRepository::getList(
             [
                 "id" => $id, 
-                "final_date" => '', 
+                "around_date" => '',
+                "precise_date" => '', 
                 "departure_airport_id" => '',
                 "arrival_airport_id" => '',
                 "price" => '',
@@ -158,7 +165,8 @@ class ReservationsController
             $flight = FlightRepository::getList(
                 [
                     "id" => $idflight, 
-                    "final_date" => '', 
+                    "around_date" => '',
+                    "precise_date" => '', 
                     "departure_airport_id" => '',
                     "arrival_airport_id" => '',
                     "price" => '',
