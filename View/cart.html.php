@@ -23,10 +23,10 @@ require('./View/brand.php');
     <div class="container w-50 text-center">
         <form>
             <div>
-                <a type="submit" class="btn btn-primary mt-3 mb-2" href="/panier/valide">Validez votre réservation</a>
+                <a type="submit" class="btn btn-primary mt-3 mb-2" href="/panier/valide">Validez votre panier</a>
             </div>
         </form>
-        <a href="/accueil" class="text-center mt-1 mb-3" >Ajouter un autre vol</a>
+        <a href="/accueil" class="text-center mt-1 mb-3" >Ajoutez un autre vol</a>
     </div>
 <?php endif; ?>
 

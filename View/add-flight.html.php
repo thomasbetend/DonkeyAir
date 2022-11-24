@@ -61,7 +61,7 @@ require('./View/brand.php');
                     </div>
                     <div class="form-group mb-2">
                         <label for="nb_seats" class="text-secondary"></label>
-                        <input type="number" id="nb_seats" name="nb_seats" placeholder="Nombre de sièges *" class="form-control connection-field" value="<?php if(!empty($_POST['nb_seats'])){echo $_POST['nb_seats'];}?>">
+                        <input type="number" id="nb_seats" name="nb_seats" placeholder="Nombre de sièges *" class="form-control connection-field " value="<?php if(!empty($_POST['nb_seats'])){echo $_POST['nb_seats'];}?>">
                     </div>
                     <div class="errorMessage text-danger">
                         <?php 

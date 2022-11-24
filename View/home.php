@@ -30,7 +30,7 @@ require('./View/brand.php');
                         </option> 
                     <?php endforeach; ?>
                 </select>
-                <input type="date" id="around_date" name="around_date" class="index-search-date" value="<?php if(!empty($_POST['around_date'])){echo $_POST['around_date'];} ?>" placeholder="Date de départ" onfocus="(this.type='date')" onblur="(this.type='date')"></input>
+                <input type="date" id="around_date" name="around_date" class="index-search-date" value="<?php if(!empty($_POST['around_date'])){echo $_POST['around_date'];} else {echo "25/11/2022";} ?>" placeholder="Date de départ" onfocus="(this.type='date')" onblur="(this.type='date')"></input>
             </div> 
             <div class="button-search">
                 <button type="submit" class="btn btn-primary small mt-4 mb-3 pl-4" id="buttonSearch">Recherchez un vol</button>
