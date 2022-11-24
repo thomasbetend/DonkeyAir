@@ -1,8 +1,12 @@
+<?php
+require('./View/brand.php');
+?>
+
 <main role="main" class="bg-grey-light">
     <div class="py-5 text-center container top-section">
         <div class="row py-lg-1">
             <div class="col-lg-6 col-md-8 mx-auto">
-                <h1 class="title-index-1">DonkeyAir</h1>
+                <h1 class="title-index-1"><?= $brand ?></h1>
                 <?php if(!empty($_SESSION['cart_price_total']) && $_SESSION['cart_price_total'] !== 0): ?>
                     <h4 class="text-center mt-2 mb6">Votre réservation</h4>
                     <h5 class="text-center mt-2 mb6">Prix total : <?php echo $_SESSION['cart_price_total'] ?> €</h5>

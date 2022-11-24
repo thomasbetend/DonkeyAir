@@ -24,6 +24,7 @@ require('./View/FlightsListView.class.php');
 require('./View/PromosListView.class.php');
 require('./View/ReservationFlightsListView.class.php');
 require('./View/ReservationsListView.class.php');
+require('./View/brand.php');
 
 require('./Controller/HomeController.class.php');
 require('./Controller/ReservationsController.class.php');
