@@ -83,7 +83,7 @@ class FlightsController
                     ]
                 );
 
-                $totlaFlightsList = FlightRepository::getList(
+                $lastAddedFlight = FlightRepository::getList(
                     [
                         "id" => '', 
                         "around_date" => '',
@@ -92,13 +92,11 @@ class FlightsController
                         "arrival_airport_id" => '',
                         "price" => '',
                         "nb_seats" => '',
-                        "name" => '',
+                        "name" => $_POST['flight_name'],
                     ]
                     );
 
-                $lastAddedFlight = end($totlaFlightsList);
-
-                header('location:/vol-ajoute/' . $lastAddedFlight->getId());
+                header('location:/vol-ajoute/' . $lastAddedFlight[0]->getId());
                 exit();
 
             }

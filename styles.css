@@ -13,7 +13,7 @@
     --color1 : rgb(248, 33, 58);
     --color2 : rgb(232, 27, 27);
     --color3 : rgb(35, 76, 225);
-    --color4 : rgb(235, 136, 148);
+    --color4 : rgb(244, 171, 181);
     --font1 : 'Bowlby One';
     --font2 : 'SourceSansPro-SemiBold';
 
@@ -78,7 +78,7 @@ a:active {
 /* add-flight */
 
 #add-flight-select {
-    border: none;
+    border: solid 1px var(--color4) ;
     border-radius: 5px;
     padding-left: 15px;
     min-width: 100%;
@@ -241,6 +241,12 @@ input[type="date"] {
     padding: 15px;
     height: 40px;
     border: solid 1px var(--color4) ;
+}
+
+/* cart */
+
+.picto-page {
+    font-size: 3rem;
 }
 
 /* reservation-validation */

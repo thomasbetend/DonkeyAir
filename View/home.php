@@ -61,7 +61,7 @@ require('./View/brand.php');
 <?php else : ?>
     <?php if(empty($flights)): ?>
         <p class="mt-4 text-center text-secondary"><?php echo "Pas de résultats pour votre recherche" ?></p>
-        <a href="home.php" id="initSearch" class="text-center">Réinitialisez la recherche</a><br/>
+        <a href="/accueil" id="initSearch" class="text-center">Réinitialisez la recherche</a><br/>
     <?php endif; ?>
     <?php
     

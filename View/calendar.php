@@ -21,16 +21,16 @@ require('./View/brand.php');
 function testIfFlightExists(day, month, year) {
   var exist = false;
 
-  fetch('/flight-test-date/' + day + '/' + month + '/' + year)
-    .then(function(response) {
-      return response.json();
-    })
-    .then(function(response) {
-      if(response.exist === "true")
-        document.getElementById(day + '-' + month + '-' + year).classList.add('display-color');
-    });
+fetch('/flight-test-date/' + day + '/' + month + '/' + year)
+  .then(function(response) {
+    return response.json();
+  })
+  .then(function(response) {
+    if(response.exist === "true")
+      document.getElementById(day + '-' + month + '-' + year).classList.add('display-color');
+  });
 
-    return exist;
+  return exist;
 }
 
 function CalendarControl() {

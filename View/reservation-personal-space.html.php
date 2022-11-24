@@ -7,6 +7,7 @@ require('./View/brand.php');
         <div class="row py-lg-1">
             <div class="col-lg-6 col-md-8 mx-auto">
                 <h3 class="title-reservations-1"><?= $brand ?></h3>
+                <i class="fa-solid fa-calendar-days picto-page"></i>
                 <h4 class="title-reservations-2">Historique de vos réservations</h4>
             </div>
         </div>
